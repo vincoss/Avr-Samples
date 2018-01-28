@@ -81,8 +81,7 @@ OBJDIR = .
 
 # List C source files here. (C dependencies are automatically generated.)
 #SRC = $(TARGET).c
-#SRC =  src/$(TARGET).c
-#SRC =  $(wildcard src/*.c)
+SRC=$(wildcard src/*.c)
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
@@ -97,22 +96,6 @@ CPPSRC =
 #     it will preserve the spelling of the filenames, and gcc itself does
 #     care about how the name is spelled on its command-line.
 ASRC =
-
-# Change these to new directories where each file should be.
-
-SRCDIR   = src
-OBJDIR   = obj
-BINDIR   = bin
-
-SOURCES  := $(wildcard $(SRCDIR)/*.c)
-INCLUDES := $(wildcard $(SRCDIR)/*.h)
-OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-
-# Display output information.
-
-$(info SOURCES	[${SOURCES}])
-$(info INCLUDES [${INCLUDES}])
-$(info OBJECTS	[${OBJECTS}])
 
 
 # Optimization level, can be [0, 1, 2, 3, s]. 
@@ -132,7 +115,7 @@ DEBUG = dwarf-2
 #     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
-EXTRAINCDIRS = "src"
+EXTRAINCDIRS = "..\include"
 
 
 # Compiler flag to set the C Standard level.
@@ -179,7 +162,7 @@ CFLAGS += -Wstrict-prototypes
 #CFLAGS += -Wundef
 #CFLAGS += -Wunreachable-code
 #CFLAGS += -Wsign-compare
-CFLAGS += -Wa,-adhlns=$(<:SRCDIR/%.c=$(OBJDIR)/%.lst)
+CFLAGS += -Wa,-adhlns=$(<:%.c=$(OBJDIR)/%.lst)
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CFLAGS += $(CSTANDARD)
 
@@ -206,7 +189,7 @@ CPPFLAGS += -Wundef
 #CPPFLAGS += -Wstrict-prototypes
 #CPPFLAGS += -Wunreachable-code
 #CPPFLAGS += -Wsign-compare
-CPPFLAGS += -Wa,-adhlns=$(<:SRCDIR/%.cpp=$(OBJDIR)/%.lst)
+CPPFLAGS += -Wa,-adhlns=$(<:%.cpp=$(OBJDIR)/%.lst)
 CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #CPPFLAGS += $(CSTANDARD)
 
@@ -220,7 +203,7 @@ CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #             files -- see avr-libc docs [FIXME: not yet described there]
 #  -listing-cont-lines: Sets the maximum number of continuation lines of hex 
 #       dump that will be displayed for a given single line of source input.
-ASFLAGS = $(ADEFS) -Wa,-adhlns=$(<:SRCDIR/%.S=$(OBJDIR)/%.lst),-gstabs,--listing-cont-lines=100
+ASFLAGS = $(ADEFS) -Wa,-adhlns=$(<:%.S=$(OBJDIR)/%.lst),-gstabs,--listing-cont-lines=100
 
 
 #---------------- Library Options ----------------
@@ -392,12 +375,10 @@ MSG_CREATING_LIBRARY = Creating library:
 
 
 # Define all object files.
-#OBJ = $(SRC:%.c=$(OBJDIR)/%.o) $(CPPSRC:%.cpp=$(OBJDIR)/%.o) $(ASRC:%.S=$(OBJDIR)/%.o) 
-OBJ = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o) 
+OBJ = $(SRC:%.c=$(OBJDIR)/%.o) $(CPPSRC:%.cpp=$(OBJDIR)/%.o) $(ASRC:%.S=$(OBJDIR)/%.o) 
 
 # Define all listing files.
-#LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OBJDIR)/%.lst) 
-LST = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.lst) 
+LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OBJDIR)/%.lst) 
 
 
 # Compiler flags to generate dependency files.
@@ -567,38 +548,38 @@ extcoff: $(TARGET).elf
 
 
 # Compile: create object files from C source files.
-$(OBJDIR)/%.o : SRCDIR/%.c
+$(OBJDIR)/%.o : %.c
 	@echo
 	@echo $(MSG_COMPILING) $<
 	$(CC) -c $(ALL_CFLAGS) $< -o $@ 
 
 
 # Compile: create object files from C++ source files.
-$(OBJDIR)/%.o : SRCDIR/%.cpp
+$(OBJDIR)/%.o : %.cpp
 	@echo
 	@echo $(MSG_COMPILING_CPP) $<
 	$(CC) -c $(ALL_CPPFLAGS) $< -o $@ 
 
 
 # Compile: create assembler files from C source files.
-%.s : SRCDIR/%.c
+%.s : %.c
 	$(CC) -S $(ALL_CFLAGS) $< -o $@
 
 
 # Compile: create assembler files from C++ source files.
-%.s : SRCDIR/%.cpp
+%.s : %.cpp
 	$(CC) -S $(ALL_CPPFLAGS) $< -o $@
 
 
 # Assemble: create object files from assembler source files.
-$(OBJDIR)/%.o : SRCDIR/%.S
+$(OBJDIR)/%.o : %.S
 	@echo
 	@echo $(MSG_ASSEMBLING) $<
 	$(CC) -c $(ALL_ASFLAGS) $< -o $@
 
 
 # Create preprocessed source for use in sending a bug report.
-%.i : SRCDIR/%.c
+%.i : %.c
 	$(CC) -E -mmcu=$(MCU) -I. $(CFLAGS) $< -o $@ 
 
 
@@ -615,15 +596,12 @@ clean_list :
 	$(REMOVE) $(TARGET).map
 	$(REMOVE) $(TARGET).sym
 	$(REMOVE) $(TARGET).lss
-	$(REMOVE) $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o) 
-	$(REMOVE) $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.lst) 
-	#$(REMOVE) $(SRC:%.c=$(OBJDIR)/%.o)
-	#$(REMOVE) $(SRC:%.c=$(OBJDIR)/%.lst)
+	$(REMOVE) $(SRC:%.c=$(OBJDIR)/%.o)
+	$(REMOVE) $(SRC:%.c=$(OBJDIR)/%.lst)
 	$(REMOVE) $(SRC:.c=.s)
 	$(REMOVE) $(SRC:.c=.d)
 	$(REMOVE) $(SRC:.c=.i)
 	$(REMOVEDIR) .dep
-	$(REMOVEDIR) OBJDIR
 
 
 # Create object files directory
