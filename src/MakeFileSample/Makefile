@@ -81,7 +81,7 @@ OBJDIR = .
 
 # List C source files here. (C dependencies are automatically generated.)
 #SRC = $(TARGET).c
-SRC=$(wildcard src/*.c)
+#SRC=$(wildcard src/*.c)
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
@@ -97,6 +97,21 @@ CPPSRC =
 #     care about how the name is spelled on its command-line.
 ASRC =
 
+# Change these to new directories where each file should be.
+
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
+
+SOURCES  := $(wildcard $(SRCDIR)/*.c)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+# Display output information.
+
+$(info SOURCES	[${SOURCES}])
+$(info INCLUDES [${INCLUDES}])
+$(info OBJECTS	[${OBJECTS}])
 
 # Optimization level, can be [0, 1, 2, 3, s]. 
 #     0 = turn off optimization. s = optimize for size.
@@ -115,7 +130,7 @@ DEBUG = dwarf-2
 #     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
-EXTRAINCDIRS = "..\include"
+EXTRAINCDIRS = "src"
 
 
 # Compiler flag to set the C Standard level.
@@ -374,12 +389,14 @@ MSG_CREATING_LIBRARY = Creating library:
 
 
 
+
 # Define all object files.
-OBJ = $(SRC:%.c=$(OBJDIR)/%.o) $(CPPSRC:%.cpp=$(OBJDIR)/%.o) $(ASRC:%.S=$(OBJDIR)/%.o) 
+#OBJ = $(SRC:%.c=$(OBJDIR)/%.o) $(CPPSRC:%.cpp=$(OBJDIR)/%.o) $(ASRC:%.S=$(OBJDIR)/%.o) 
+OBJ = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o) 
 
 # Define all listing files.
-LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OBJDIR)/%.lst) 
-
+#LST = $(SRC:%.c=$(OBJDIR)/%.lst) $(CPPSRC:%.cpp=$(OBJDIR)/%.lst) $(ASRC:%.S=$(OBJDIR)/%.lst) 
+LST = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.lst) 
 
 # Compiler flags to generate dependency files.
 GENDEPFLAGS = -MMD -MP -MF .dep/$(@F).d
@@ -548,7 +565,7 @@ extcoff: $(TARGET).elf
 
 
 # Compile: create object files from C source files.
-$(OBJDIR)/%.o : %.c
+$(OBJDIR)/%.o : SRCDIR/%.c
 	@echo
 	@echo $(MSG_COMPILING) $<
 	$(CC) -c $(ALL_CFLAGS) $< -o $@ 
