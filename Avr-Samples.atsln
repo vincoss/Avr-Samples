@@ -7,6 +7,10 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "MakeFileSample", "src\MakeF
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AvrSamples", "src\AvrSamples\AvrSamples.cproj", "{355ABBEE-38D6-4028-8DFC-F592D093E720}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{A2DDAF61-48C2-4566-8F85-CEE963ECB555}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccCExecutableProject", "src\Default_GccCExecutableProject\Default_GccCExecutableProject.cproj", "{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -21,8 +25,15 @@ Global
 		{355ABBEE-38D6-4028-8DFC-F592D093E720}.Debug|AVR.Build.0 = Debug|AVR
 		{355ABBEE-38D6-4028-8DFC-F592D093E720}.Release|AVR.ActiveCfg = Release|AVR
 		{355ABBEE-38D6-4028-8DFC-F592D093E720}.Release|AVR.Build.0 = Release|AVR
+		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Debug|AVR.ActiveCfg = Debug|AVR
+		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Debug|AVR.Build.0 = Debug|AVR
+		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Release|AVR.ActiveCfg = Release|AVR
+		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373} = {A2DDAF61-48C2-4566-8F85-CEE963ECB555}
 	EndGlobalSection
 EndGlobal
