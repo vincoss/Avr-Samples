@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <ProjectGuid>{355abbee-38d6-4028-8dfc-f592d093e720}</ProjectGuid>
     <avrdevice>ATmega328P</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,18 +12,18 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>MakeFileSample</AssemblyName>
-    <Name>MakeFileSample</Name>
-    <RootNamespace>MakeFileSample</RootNamespace>
+    <AssemblyName>AvrSamples</AssemblyName>
+    <Name>AvrSamples</Name>
+    <RootNamespace>AvrSamples</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <RamSnippetAddress />
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <OverrideVtorValue />
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -40,34 +40,6 @@
   </dependencies>
 </framework-data>
     </AsfFrameworkConfig>
-    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
-    <avrtoolserialnumber />
-    <avrdeviceexpectedsignature>0x1E950F</avrdeviceexpectedsignature>
-    <custom>
-      <ToolOptions>
-        <InterfaceProperties>
-        </InterfaceProperties>
-        <InterfaceName>
-        </InterfaceName>
-      </ToolOptions>
-      <ToolType>custom</ToolType>
-      <ToolNumber>
-      </ToolNumber>
-      <ToolName>Custom Programming Tool</ToolName>
-    </custom>
-    <avrtoolinterface />
-    <com_atmel_avrdbg_tool_simulator>
-      <ToolOptions xmlns="">
-        <InterfaceProperties>
-        </InterfaceProperties>
-        <InterfaceName>
-        </InterfaceName>
-      </ToolOptions>
-      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
-      <ToolNumber xmlns="">
-      </ToolNumber>
-      <ToolName xmlns="">Simulator</ToolName>
-    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -106,8 +78,6 @@
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
     </ToolchainSettings>
-    <OutputFileName>main</OutputFileName>
-    <OutputFileExtension>.elf</OutputFileExtension>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -148,19 +118,35 @@
   <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
 </AvrGcc>
     </ToolchainSettings>
-    <OutputFileName>main</OutputFileName>
-    <OutputFileExtension>.elf</OutputFileExtension>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Utility.c">
+    <Compile Include="src\Adc.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Utility.h">
+    <Compile Include="src\Adc\AdcSamples.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\Led\BlinkingLedSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Lib\Adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Lib\Usart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Usart.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src" />
+    <Folder Include="src\Led" />
+    <Folder Include="src\Adc" />
+    <Folder Include="src\Lib" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
