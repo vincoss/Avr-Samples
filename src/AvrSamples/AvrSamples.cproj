@@ -120,33 +120,37 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
+    <Folder Include="src" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="src\Adc.c">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\Adc.c</Link>
     </Compile>
-    <Compile Include="src\Adc\AdcSamples.h">
+    <Compile Include="src\Adc.h">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\Adc.h</Link>
     </Compile>
-    <Compile Include="src\Led\BlinkingLedSamples.h">
+    <Compile Include="src\AdcSamples.h">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\AdcSamples.h</Link>
     </Compile>
-    <Compile Include="src\Lib\Adc.h">
+    <Compile Include="src\BlinkingLedSamples.h">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\BlinkingLedSamples.h</Link>
     </Compile>
-    <Compile Include="src\Lib\Usart.h">
+    <Compile Include="src\main.c">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\main.c</Link>
     </Compile>
     <Compile Include="src\Usart.c">
       <SubType>compile</SubType>
+      <Link>AvrSamples\src\Usart.c</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src" />
-    <Folder Include="src\Led" />
-    <Folder Include="src\Adc" />
-    <Folder Include="src\Lib" />
+    <Compile Include="src\Usart.h">
+      <SubType>compile</SubType>
+      <Link>AvrSamples\src\Usart.h</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
