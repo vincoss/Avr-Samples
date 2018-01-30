@@ -14,7 +14,7 @@
 #include <util/delay.h>
 #include <stdlib.h>
 #include "Adc.h"
-#include "Usart.h"
+//#include "Usart.h"
 
 /*
 
@@ -76,22 +76,22 @@ void AdcSamples_WriteToUsart(void);
 
 void AdcSamples_WriteToUsart(void)
 {
-	AdcInitialize();
-	UsartInitialize();
-
-	char buffer[5];
-
-	while (1)
-	{
-		uint16_t value = AdcRead(5);	// Read the ADC value from analog port number 0-5
-
-		itoa(value, buffer, 10);		// Convert the read value to an ascii string
-		
-		UsartWriteCharString(buffer);
-		UsartWriteChar('\n');
-
-		_delay_ms(500);
-	}
+	//AdcInitialize();
+	//UsartInitialize();
+//
+	//char buffer[5];
+//
+	//while (1)
+	//{
+		//uint16_t value = AdcRead(5);	// Read the ADC value from analog port number 0-5
+//
+		//itoa(value, buffer, 10);		// Convert the read value to an ascii string
+		//
+		//UsartWriteCharString(buffer);
+		//UsartWriteChar('\n');
+//
+		//_delay_ms(500);
+	//}
 }
 
 void AdcSamples_Led(void);
