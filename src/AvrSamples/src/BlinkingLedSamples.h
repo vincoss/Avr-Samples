@@ -14,7 +14,7 @@
 #include <util/delay.h>			// The delay functions and routines
 #include "Adc.h"
 
-#pragma region 4.1 Blinking led samples
+//#pragma region 4.1 Blinking led samples
 
 void BlinkingLedSamples_SampleOne();
 void BlinkingLedSamples_SampleTwo();
@@ -170,7 +170,7 @@ void BlinkingLedSamples_SampleEight(void)
 	}
 }
 
-#pragma endregion
+// #pragma endregion
 
 void BlinkingLedSamples_NaiveFadeLed()
 {
@@ -186,8 +186,6 @@ void BlinkingLedSamples_NaiveFadeLed()
 		PORTB &= ~(1 << ledPin);
 		_delay_ms(8);
 	}
-
-	return(0);
 }
 
 void BlinkingLedSamples_PwmFadeLed()
@@ -245,13 +243,18 @@ void BlinkingLedSamples_LightSensor()
 	{
 		value = AdcRead(AdcPort);
 
+		if(value <= 0)
+		{
+			value = 1000;
+		}
+
 		PORTB |= (1 << LED);
 
-		_delay_ms(value);
+		//B_delay_ms(value);
 
 		PORTB &= ~(1 << LED);
 
-		_delay_ms(value);
+		//_delay_ms(value);
 	}
 }
 
