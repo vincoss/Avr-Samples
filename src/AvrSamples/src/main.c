@@ -18,6 +18,10 @@
 //#include "SampleInclude.h"
 
 // Warning implicit declaration of function [-Wimplicit-function-declaration]
+// include or exclude .c files
+
+void AdcSamples_CompleteConfig_Led();
+void BlinkingLedSamples_SampleOne();
 
 int main(void)
 {

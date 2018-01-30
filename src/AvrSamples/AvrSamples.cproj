@@ -139,6 +139,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Include" />
+    <Folder Include="Samples" />
     <Folder Include="Src" />
   </ItemGroup>
   <ItemGroup>
@@ -148,13 +149,13 @@
     <Compile Include="Include\Usart.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\AdcSamples.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\BlinkingLedSamples.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Src\Adc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\AdcSamples.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\BlinkingLedSamples.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Src\main.c">

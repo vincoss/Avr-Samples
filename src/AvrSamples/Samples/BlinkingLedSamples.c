@@ -121,7 +121,11 @@ void BlinkingLedSamples_SampleFive()
 	}
 }
 
-#define F_CPU 16000000UL    // F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU
+#ifndef F_CPU
+# define F_CPU 16000000UL // Says to the compiler which is our clock frequency, permits the delay functions to be very accurate
+#endif
+
+//#define F_CPU 16000000UL    // F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU
 
 void BlinkingLedSamples_SampleSix()
 {
