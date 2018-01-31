@@ -9,6 +9,9 @@
 #ifndef BLINKINGLEDSAMPLES_H_
 #define BLINKINGLEDSAMPLES_H_
 
+#ifndef F_CPU
+# define F_CPU 16000000UL
+#endif
 
 #include <avr/io.h>				// This is our usual include
 #include <util/delay.h>			// The delay functions and routines

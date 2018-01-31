@@ -2,14 +2,12 @@
  * Usart.h
  *
  * Created: 29/01/2018 10:09:45 PM
- *  Author: Ferdinand
+ *  Author: Ferdinand Lukasak
  */ 
 
 
 #ifndef USART_H_
 #define USART_H_
-
-
 
 // NOTE: For more information see specification document. RS-232
 
