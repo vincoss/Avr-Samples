@@ -6,9 +6,6 @@
  */ 
 
 
-#ifndef ADCSAMPLES_H_
-#define ADCSAMPLES_H_
-
 #ifndef F_CPU
 # define F_CPU 16000000UL
 #endif
@@ -29,7 +26,8 @@ Ref: https://hekilledmywire.wordpress.com/2011/03/16/using-the-adc-tutorial-part
 Now you are thinking, why would I want to reduce the maximum voltage of my ADC? Well this as a lot of uses,
 but lets explain some things first. Using the default reference voltage of 5v and this voltage is converted to a 10 bits value,
 the resolution of each bit is 5v/1023 = 4.88mV for each consecutive value, but imagine that you have an analogic accelerometer,
-those are almost always 3.3v part, so if you used the 5v reference you would have 5 – 3.3 = 1.7v of unused values and also a reduced resolution,
+those are almost always 3.3v part, so if you used the 5v reference you would have 5 – 3.3 = 1.7v of unused values 
+and also a reduced resolution,
 now lets see what is the resolution if you used an 3.3v reference voltage 3.3/1023 = 3.22mV for each consecutive value,
 so its a gain in resolution and you would be able to used the full range of the ADC.
 
@@ -62,15 +60,15 @@ void AdcSamples_CompleteConfig_Led()
 
 	while (1)
 	{
-		value = ADCW; // Read the ADC value, really that's just it
+		value = ADCW; // Read the ADC value
 
 		if (value > 512)
 		{
-			PORTB |= (1 << PB5); //If ADC value is above 512 turn led on
+			PORTB |= (1 << PB5); // If ADC value is above 512 turn led on
 		}
 		else
 		{
-			PORTB &= ~(1 << PB5); //Else turn led off
+			PORTB &= ~(1 << PB5); // Else turn led off
 		}
 	}
 }
@@ -122,6 +120,3 @@ void AdcSamples_Led(void)
 		}
 	}
 }
-
-
-#endif /* ADCSAMPLES_H_ */

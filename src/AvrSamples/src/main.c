@@ -1,40 +1,20 @@
 /*
- * AvrSamples.c
+ * main.c
  *
  * Created: 29/01/2018 9:59:07 PM
- * Author : Ferdinand
+ * Author : Ferdinand 
+ 
+	 Copy main.hex into Arduino board use this command
+	 1. Open command prompt
+	 2. cd {SolutionDir}\debug
+	 3. avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex
  */ 
-
-
-#ifndef F_CPU
-# define F_CPU 16000000UL
-#endif
 
 #include "Adc.h"
 #include "Usart.h"
 
-//
-//#include "BlinkingLedSamples.h"
-//#include "SampleInclude.h"
-
-// Warning implicit declaration of function [-Wimplicit-function-declaration]
-// include or exclude .c files
-//Warning		pointer targets in passing argument 2 of 'itoa' differ in signedness [-Wpointer-sign]	AvrSamples	C:\_Data\GitHub\Avr-Samples\src\AvrSamples\Samples\AdcSamples.c	91
-
-
-void AdcSamples_CompleteConfig_Led();
-void BlinkingLedSamples_SampleOne();
 
 int main(void)
 {
-	AdcInitialize();
-	UsartInitialize();
-	AdcSamples_CompleteConfig_Led();
-	BlinkingLedSamples_SampleOne();
-	
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
 }
 

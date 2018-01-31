@@ -1,15 +1,13 @@
 /*
- * BlinkingLedSamples.h
+ * BlinkingLedSamples.c
  *
  * Created: 29/01/2018 10:06:57 PM
  *  Author: Ferdinand Lukasak
  */ 
 
 
-#ifndef BLINKINGLEDSAMPLES_H_
-#define BLINKINGLEDSAMPLES_H_
-
 #ifndef F_CPU
+// F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU.
 # define F_CPU 16000000UL
 #endif
 
@@ -17,51 +15,56 @@
 #include <util/delay.h>			// The delay functions and routines
 #include "Adc.h"
 
-//#pragma region 4.1 Blinking led samples
-
-void BlinkingLedSamples_SampleOne();
-void BlinkingLedSamples_SampleTwo();
-void BlinkingLedSamples_SampleThree();
-void BlinkingLedSamples_SampleFour();
-void BlinkingLedSamples_SampleFive();
-void BlinkingLedSamples_SampleSix();
+void BlinkingLedSamples_SampleOne(void);
+void BlinkingLedSamples_SampleTwo(void);
+void BlinkingLedSamples_SampleThree(void);
+void BlinkingLedSamples_SampleFour(void);
+void BlinkingLedSamples_SampleFive(void);
+void BlinkingLedSamples_SampleSix(void);
 void BlinkingLedSamples_SampleSeven(void);
 void BlinkingLedSamples_SampleEight(void);
+void BlinkingLedSamples_NaiveFadeLed(void);
+void BlinkingLedSamples_PwmFadeLed(void);
+void BlinkingLedSamples_LightSensor(void);
+void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void);
 
+/*
 
-// The Arduino UNO has 3 ports
+	 The Arduino UNO has 3 ports
 
-// The PORT register controls whether the pin is HIGH or LOW.
-// PORTB B(digital pin 8 to 13) The two high bits (6 & 7) map to the crystal pins and are not usable
-// PORTC C(analog input pins) Pins 6 & 7 are only accessible on the Arduino Mini
-// PORTD D(digital pins 0 to 7)
+	 The PORT register controls whether the pin is HIGH or LOW.
+	 PORTB B(digital pin 8 to 13) The two high bits (6 & 7) map to the crystal pins and are not usable
+	 PORTC C(analog input pins) Pins 6 & 7 are only accessible on the Arduino Mini
+	 PORTD D(digital pins 0 to 7)
 
-// The DDR register, determines whether the pin is an INPUT or OUTPUT.
-// The PORT register controls whether the pin is HIGH or LOW
-// The PIN register reads the state of INPUT pins
+	 The DDR register, determines whether the pin is an INPUT or OUTPUT.
+	 The PORT register controls whether the pin is HIGH or LOW
+	 The PIN register reads the state of INPUT pins
 
-// PB5
-// P = Pin
-// B = port digital pins 8 to 13
-// 5 = decimal value (convert decima 32 or binary 100000)
+	 PB5
+	 P = Pin
+	 B = port digital pins 8 to 13
+	 5 = decimal value (convert decimal 32 or binary 100000)
+ 
+ */
 
 #define ledPinSampleOne PB5 // Set pin 13 to output. Press F12 key see definition and assigned value.
 
-void BlinkingLedSamples_SampleOne()
+void BlinkingLedSamples_SampleOne(void)
 {
 	DDRB |= (1 << ledPinSampleOne); // pinMode(LED, OUTPUT); // sets the gitital pin as putput
 
 	while (1)
 	{
 		PORTB |= (1 << ledPinSampleOne); // digitalWrite(LED, ON); // turns the LED on
-		_delay_ms(100);
+		_delay_ms(1000);
 
 		PORTB &= ~(1 << ledPinSampleOne); // digitalWrite(LED, OFF); // turns the LED off
 		_delay_ms(500);
 	}
 }
 
-void BlinkingLedSamples_SampleTwo()
+void BlinkingLedSamples_SampleTwo(void)
 {
 	int ledPin = 5; // pin 13
 
@@ -73,11 +76,11 @@ void BlinkingLedSamples_SampleTwo()
 		_delay_ms(1000);
 
 		PORTB &= ~(1 << ledPin); // digitalWrite LOW
-		_delay_ms(100);
+		_delay_ms(2000);
 	}
 }
 
-void BlinkingLedSamples_SampleThree()
+void BlinkingLedSamples_SampleThree(void)
 {
 	int ledPin = 32; // Just set with decimal value 32 or 00100000 in binary, pin 13
 
@@ -93,11 +96,11 @@ void BlinkingLedSamples_SampleThree()
 	}
 }
 
-void BlinkingLedSamples_SampleFour()
+void BlinkingLedSamples_SampleFour(void)
 {
 	int ledPin = 0b111111; // Sets Arduino port B pins -,-,13,12,11,10,9,8 as outputs or decimal 63
 
-	DDRB = ledPin; // sets the gitital pin as output
+	DDRB = ledPin; // sets the digital pin as output
 
 	while (1)
 	{
@@ -109,7 +112,7 @@ void BlinkingLedSamples_SampleFour()
 	}
 }
 
-void BlinkingLedSamples_SampleFive()
+void BlinkingLedSamples_SampleFive(void)
 {
 	DDRB |= (1 << PB5); // Define digital pin13/PORTB5 as an output so we can blink our led
 
@@ -119,18 +122,13 @@ void BlinkingLedSamples_SampleFive()
 	{
 		PORTB |= (1 << PB5);	// Turn led on, this is the led included in the arduino(digital pin 13), Decimal: 32 Binary: 00100000
 		_delay_ms(1000);		// Wait 1 second
+		
 		PORTB &= ~(1 << PB5);	//Turn led off
 		_delay_ms(1000);		// Wait 1 second
 	}
 }
 
-#ifndef F_CPU
-# define F_CPU 16000000UL // Says to the compiler which is our clock frequency, permits the delay functions to be very accurate
-#endif
-
-//#define F_CPU 16000000UL    // F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU
-
-void BlinkingLedSamples_SampleSix()
+void BlinkingLedSamples_SampleSix(void)
 {
 	int pin = PB5;				// <avr/io.h>
 
@@ -140,16 +138,17 @@ void BlinkingLedSamples_SampleSix()
 	{
 		PORTB |= (1 << pin);    // Turn led on, this is the led included in the arduino(digital pin 13)
 		_delay_ms(2000);		// Wait 2 seconds
+		
 		PORTB &= ~(1 << pin);   // Turn led off
 		_delay_ms(2000);		// Wait 2 seconds
 	}
 }
 
-void BlinkingLedSamples_SampleSeven()
+void BlinkingLedSamples_SampleSeven(void)
 {
 	int ledPin = 63; // 00111111 Sets Arduino port B pins -,-,13,12,11,10,9,8 as outputs
 
-	DDRB = ledPin; // WRITE
+	DDRB = ledPin; // Output
 
 	while (1)
 	{
@@ -177,11 +176,9 @@ void BlinkingLedSamples_SampleEight(void)
 	}
 }
 
-// #pragma endregion
-
-void BlinkingLedSamples_NaiveFadeLed()
+void BlinkingLedSamples_NaiveFadeLed(void)
 {
-	int8_t ledPin = PB3;// 9
+	uint8_t ledPin = PB3; // 9
 
 	DDRB |= (1 << ledPin); // output
 
@@ -195,7 +192,7 @@ void BlinkingLedSamples_NaiveFadeLed()
 	}
 }
 
-void BlinkingLedSamples_PwmFadeLed()
+void BlinkingLedSamples_PwmFadeLed(void)
 {
 	// Waveform Generation Mode - Fast PWM
 	TCCR0A |= (1 << WGM00) | (1 << WGM01);
@@ -219,7 +216,7 @@ void BlinkingLedSamples_PwmFadeLed()
 			OCR0A = brightness;
 
 			// delay so as to make the user "see" the change in brightness
-			_delay_ms(10);
+			_delay_ms(5);
 		}
 
 		// decreasing brightness
@@ -229,22 +226,22 @@ void BlinkingLedSamples_PwmFadeLed()
 			OCR0A = brightness;
 
 			// delay so as to make the user "see" the change in brightness
-			_delay_ms(10);
+			_delay_ms(5);
 		}
 	}
 }
 
-void BlinkingLedSamples_LightSensor()
+void BlinkingLedSamples_LightSensor(void)
 {
 	AdcInitialize();
 
 	const int LED = PB5;
 	const int AdcPort = 1; // To read light sensor value
 
-	DDRB |= (1 << LED);
-	PORTB &= ~(1 << LED);
+	DDRB |= (1 << LED);	// output
+	PORTB &= ~(1 << LED); // low
 
-	int value = 0; // store analog value
+	int value = 0; // store analog value 0-1023
 
 	while (1)
 	{
@@ -255,17 +252,20 @@ void BlinkingLedSamples_LightSensor()
 			value = 1000;
 		}
 
-		PORTB |= (1 << LED);
-
-		//B_delay_ms(value);
-
-		PORTB &= ~(1 << LED);
-
-		//_delay_ms(value);
+		if(value >= 512)
+		{
+			PORTB |= (1 << LED);
+			_delay_ms(1000);
+		}
+		else
+		{
+			PORTB &= ~(1 << LED);
+			_delay_ms(1000);
+		}
 	}
 }
 
-void BlinkingLedSamples_LightSensorAnalogWriteAndAdc()
+void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void)
 {
 	// Configure PWM timer
 
@@ -294,23 +294,3 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc()
 		OCR0A = (value / 4); // set brightness max 255 so divide by 4
 	}
 }
-
-// TODO:
-void BlinkingLedSamples_RgbLedPwm()
-{
-	// Configure PWM timer
-
-	// Waveform Generation Mode - Fast PWM
-	TCCR0A |= (1 << WGM00) | (1 << WGM01);
-
-	// Compare Match Output Mode
-	TCCR0A |= (1 << COM0A1) | (1 << COM0A0);
-
-	// Set prescaler to (no prescaling)
-	TCCR0B |= (1 << CS00);
-
-	AdcInitialize();
-}
-
-
-#endif /* BLINKINGLEDSAMPLES_H_ */
