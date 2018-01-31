@@ -19,6 +19,8 @@
 
 // Warning implicit declaration of function [-Wimplicit-function-declaration]
 // include or exclude .c files
+//Warning		pointer targets in passing argument 2 of 'itoa' differ in signedness [-Wpointer-sign]	AvrSamples	C:\_Data\GitHub\Avr-Samples\src\AvrSamples\Samples\AdcSamples.c	91
+
 
 void AdcSamples_CompleteConfig_Led();
 void BlinkingLedSamples_SampleOne();

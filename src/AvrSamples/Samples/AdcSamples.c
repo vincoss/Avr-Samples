@@ -17,7 +17,7 @@
 #include <util/delay.h>
 #include <stdlib.h>
 #include "Adc.h"
-//#include "Usart.h"
+#include "Usart.h"
 
 /*
 
@@ -45,7 +45,7 @@ void AdcSamples_CompleteConfig_Led()
 	// Set it to low, just to be safe
 	PORTB &= ~(1 << PB5);
 
-	// Set up the ADC use Port C / A0
+	// Setup the ADC use Port C / A0
 	ADCSRA |= ((1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0)); // Prescaler at 128 so we have an 125Khz clock source
 	ADMUX |= (1 << REFS0);	// Analog port Port 0
 	ADMUX &= ~(1 << REFS1); // Avcc(+5v) as voltage reference
@@ -79,22 +79,22 @@ void AdcSamples_WriteToUsart(void);
 
 void AdcSamples_WriteToUsart(void)
 {
-	//AdcInitialize();
-	//UsartInitialize();
-//
-	//char buffer[5];
-//
-	//while (1)
-	//{
-		//uint16_t value = AdcRead(5);	// Read the ADC value from analog port number 0-5
-//
-		//itoa(value, buffer, 10);		// Convert the read value to an ascii string
-		//
-		//UsartWriteCharString(buffer);
-		//UsartWriteChar('\n');
-//
-		//_delay_ms(500);
-	//}
+	AdcInitialize();
+	UsartInitialize();
+
+	unsigned char buffer[5];
+
+	while (1)
+	{
+		uint16_t value = AdcRead(5);	// Read the ADC value from analog port number 0-5
+
+		itoa(value, buffer, 10);		// Convert the read value to an ascii string
+		
+		UsartWriteCharString(buffer);
+		UsartWriteChar('\n');
+
+		_delay_ms(500);
+	}
 }
 
 void AdcSamples_Led(void);
