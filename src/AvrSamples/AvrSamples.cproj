@@ -155,6 +155,9 @@
     <Compile Include="Samples\BlinkingLedSamples.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\UsartSamples.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Src\Adc.c">
       <SubType>compile</SubType>
     </Compile>

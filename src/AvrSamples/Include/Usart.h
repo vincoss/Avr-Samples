@@ -22,6 +22,6 @@
 void UsartInitialize(void);
 void UsartWriteChar(unsigned char data);
 unsigned char UsartReadChar(void);
-void UsartWriteCharString(unsigned char* StringPtr);
+void UsartWriteCharString(const unsigned char* stringPtr);
 
 #endif /* USART_H_ */

@@ -16,5 +16,6 @@
 
 int main(void)
 {
+	Usart_InterrupSample();
 }
 

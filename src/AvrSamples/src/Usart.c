@@ -33,7 +33,7 @@ unsigned char UsartReadChar(void)
 	return UDR0; // return 8-bit data
 }
 
-void UsartWriteCharString(unsigned char* stringPtr)
+void UsartWriteCharString(const unsigned char* stringPtr)
 {
 	// Here we check if there is still more chars to send, this is done checking the actual char and see if it is different from the null '\n' char
 	while (*stringPtr != 0x00)
