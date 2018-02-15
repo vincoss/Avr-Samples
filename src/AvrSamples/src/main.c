@@ -14,6 +14,7 @@
 #include "Usart.h"
 #include <avr/delay.h>
 #include "ConvertSamples.h"
+#include "MallocMemorySamples.h"
 
 //
 //uint8_t ConvertUInt8(const char * str);
@@ -25,19 +26,12 @@ int main(void)
 {
 	UsartInitialize();
 	
-	while(1)
-	{
-		ConvertSamples_To_LongDouble_FromString();
-		
-		//uint8_t result = ConvertUInt8("255");
-		//char * str = ToString(result, "%hhu");
-		////Convert(result);
-		//
-		//UsartWriteCharString(str);
-		//UsartWriteChar('\n');
-	//
-		_delay_ms(1000);
-	}
+	MallocMemorySamples_Sample();
+	
+	//while(1)
+	//{
+		//_delay_ms(1000);
+	//}
 }
 
 //

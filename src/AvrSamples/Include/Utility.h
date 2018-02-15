@@ -66,7 +66,7 @@ char * IntToString(long long int value, const char * format)
 	}
 
 	int length = snprintf(NULL, 0, format, value);
-	char * str = malloc(length + 1);
+	char * str = malloc(length + 1); // TODO: get rid of this just pass char array 
 	snprintf(str, length + 1, format, value);
 	return str;
 }
@@ -87,7 +87,7 @@ char * FloatToString(long double value, const char * format)
 	}
 
 	int length = snprintf(NULL, 0, format, value);
-	char * str = malloc(length + 1);
+	char * str = malloc(length + 1); // TODO: get rid of this just pass char array 
 	snprintf(str, length + 1, format, value);
 	return str;
 }
