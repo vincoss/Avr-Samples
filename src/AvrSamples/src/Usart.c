@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include "Usart.h"
 
-
+//228 external cloclk
 void UsartInitialize(void)
 {
 	// Load upper 8- bits of the baud rate value into the high byte of the UBRR register

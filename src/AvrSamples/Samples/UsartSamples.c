@@ -88,3 +88,5 @@ ISR(USART_RX_vect)
 	ReceivedByte = UDR0; // Fetch the received byte value into the variable "ByteReceived"
 	UDR0 = ReceivedByte; // Echo
 }
+
+// TODO: Add sample for Usart and SPI (The USART can also be used in Master SPI mode.) page 254 in spec file

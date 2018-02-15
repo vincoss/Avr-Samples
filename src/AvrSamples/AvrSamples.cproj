@@ -121,11 +121,13 @@
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
   <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.general.UseVprintfLibrary>True</avrgcc.linker.general.UseVprintfLibrary>
   <avrgcc.linker.libraries.Libraries>
     <ListValues>
       <Value>libm</Value>
     </ListValues>
   </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,-u,vfscanf -lprintf_flt -lscanf_flt</avrgcc.linker.miscellaneous.LinkerFlags>
   <avrgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
@@ -136,6 +138,10 @@
     </ToolchainSettings>
     <OutputFileName>main</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
+    <UsesExternalMakeFile>False</UsesExternalMakeFile>
+    <OutputDirectory />
+    <BuildTarget>all</BuildTarget>
+    <CleanTarget>clean</CleanTarget>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Include" />
@@ -146,7 +152,13 @@
     <Compile Include="Include\Adc.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\ConvertSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Include\Usart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\Utility.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\AdcSamples.c">
