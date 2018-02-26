@@ -54,7 +54,7 @@ int IsNullOrEmpty(const char * str)
 	signed long			%li
 	unsigned long		%lu
 	long long			%lli
-	unsinged long long	%llu
+	unsigned long long	%llu
 
 	NOTE: call free(str) to deallocate the used memory.
 */
@@ -70,6 +70,17 @@ char * IntToString(long long int value, const char * format)
 	snprintf(str, length + 1, format, value);
 	return str;
 }
+
+char * IntToStringNew(long long int  value, const char * format, char * buffer, int length)
+{
+	if (strlen((format)) <= 0)
+	{
+		return "";
+	}
+	snprintf(buffer, length, format, value);
+	return buffer;
+}
+
 
 /*
 	Formats

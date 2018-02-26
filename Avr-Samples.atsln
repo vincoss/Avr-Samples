@@ -5,11 +5,18 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "MakeFileSample", "src\MakeFileSample\MakeFileSample.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AvrSamples", "src\AvrSamples\AvrSamples.cproj", "{355ABBEE-38D6-4028-8DFC-F592D093E720}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ATmega328P-Samples", "src\AvrSamples\ATmega328P-Samples.cproj", "{355ABBEE-38D6-4028-8DFC-F592D093E720}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{A2DDAF61-48C2-4566-8F85-CEE963ECB555}"
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccCExecutableProject", "src\Default_GccCExecutableProject\Default_GccCExecutableProject.cproj", "{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{27A3A8FD-40F5-44C7-A0D1-6419879FBAD2}"
+	ProjectSection(SolutionItems) = preProject
+		Avrdude.txt = Avrdude.txt
+	EndProjectSection
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtTiny85-Samples", "src\AtTiny85-Samples\AtTiny85-Samples.cproj", "{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +36,10 @@ Global
 		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Debug|AVR.Build.0 = Debug|AVR
 		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Release|AVR.ActiveCfg = Release|AVR
 		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}.Release|AVR.Build.0 = Release|AVR
+		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Debug|AVR.Build.0 = Debug|AVR
+		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Release|AVR.ActiveCfg = Release|AVR
+		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

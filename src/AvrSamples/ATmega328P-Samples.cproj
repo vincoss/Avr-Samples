@@ -13,7 +13,7 @@
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>AvrSamples</AssemblyName>
-    <Name>AvrSamples</Name>
+    <Name>ATmega328P-Samples</Name>
     <RootNamespace>AvrSamples</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
@@ -114,6 +114,7 @@
           <ListValues>
             <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
             <Value>%24(ProjectDir)\Include</Value>
+            <Value>%24(ProjectDir)\samples</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -170,7 +171,13 @@
     <Compile Include="Samples\BlinkingLedSamples.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\Timer1_Sample1.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\UsartSamples.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\UtilitySamples.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Src\Adc.c">
