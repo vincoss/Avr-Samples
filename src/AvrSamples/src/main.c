@@ -17,16 +17,23 @@
 
 // Samples
 #include "AdcSamples.h"
+#include "UsartSamples.h"
 #include "BlinkingLedSamples.h"
-#include "UtilitySamples.h"
 #include "MemorySamples.h"
-#include "Timer1_Sample1.h"
-//#include "TimeSample.h"
+//#include "Timer1_Sample1.h"
+#include "TimeSample.h"
+#include "UtilitySamples.h"
 
 
 int main(void)
 {
-	UsartInitialize();
+	 // TODO: ISR duplicated figure out how to call it to use multiple methods
 	
-	Timer1_Sample1_Main();
+	//while(1)
+	//{
+		//
+		//_delay_ms(1000);
+	//}
+	
+	return 0;
 }

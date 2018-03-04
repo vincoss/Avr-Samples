@@ -1,3 +1,14 @@
+/*
+ * UsartSamples.h
+ *
+ * Created: 14/02/2018 7:46:39 AM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+
+#ifndef USART_SAMPLES_H_
+#define USART_SAMPLES_H_
+
 #include <avr/io.h>	
 #include <avr/interrupt.h>
 #include <util/delay.h>	
@@ -90,3 +101,5 @@ ISR(USART_RX_vect)
 }
 
 // TODO: Add sample for Usart and SPI (The USART can also be used in Master SPI mode.) page 254 in spec file
+
+#endif

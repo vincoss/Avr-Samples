@@ -174,7 +174,7 @@
     <Compile Include="Samples\TimeSample.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\UsartSamples.c">
+    <Compile Include="Samples\UsartSamples.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\UtilitySamples.h">

@@ -5,14 +5,19 @@
  *  Author: Ferdinand Lukasak
  */ 
 
+/*
+	Example time implementation with Timer1. This can be used for non blocking delay instead of delay.h implementation.
+	
+	Tick every:				1ms
+	CPU clock frequency:	100Hz
+	Prescaler:				1
+	Write to USART every	1 second			
+*/
 
-#ifndef TIMESAMPLE_H_
-#define TIMESAMPLE_H_
+#ifndef TIME_SAMPLE_H_
+#define TIME_SAMPLE_H_
 
 #include <avr/interrupt.h>
-#include "Usart.h"
-#include <avr/delay.h>
-
 
 #pragma region Timer implementation
 
@@ -61,41 +66,24 @@ ISR(TIMER1_COMPA_vect)
 
 void TimeSample_Main(void)
 {
-	TimeSample_Initialize(); // Init time
+	TimeSample_Initialize(); // Initialize time
 	UsartInitialize();
 	
 	int ledPin = 5; // pin 13
 	DDRB |= (1 << ledPin); // sets the digital pin as output
 	
-	const int milliseconds = 1000;
+	const int milliseconds = 1000; // Second ticks
 	volatile unsigned long long int ticks = TimeSample_GetTickCount(); // Get ticks count (millisecond)
-	
-	char buffer[5];
 	
 	while(1)
 	{
 		if((TimeSample_GetTickCount() - ticks) >= milliseconds)
 		{
-			PORTB |= (1 << ledPin); // digitalWrite HIGH
-			UsartWriteCharString("on");
+			PORTB ^= (1 << ledPin); // On/Off
 			
 			ticks = TimeSample_GetTickCount();
 		}
-		else
-		{
-			PORTB &= ~(1 << ledPin); // digitalWrite LOW
-			UsartWriteCharString("off");
-		}
-		
-		//_delay_ms(1000);
 	}
 }
 
-#endif /* TIMESAMPLE_H_ */
-
-/*
-	
-	previous = 0
-	// less than 
-
-*/
+#endif /* TIME_SAMPLE_H_ */
