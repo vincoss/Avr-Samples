@@ -5,6 +5,8 @@
  *  Author: Ferdinand Lukasak
  */ 
 
+#ifndef BLINKING_LED_SAMPLES_H_
+#define BLINKING_LED_SAMPLES_H_
 
 #ifndef F_CPU
 // F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU.
@@ -294,3 +296,5 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void)
 		OCR0A = (value / 4); // set brightness max 255 so divide by 4
 	}
 }
+
+#endif

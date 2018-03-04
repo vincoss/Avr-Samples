@@ -60,7 +60,7 @@ int IsNullOrEmpty(const char * str)
 
 	NOTE: call free(str) to deallocate the used memory.
 */
-char * IntToString(long long int value, const char * format)
+char * IntToStringMalloc(long long int value, const char * format)
 {
 	if (strlen((format)) <= 0)
 	{
@@ -73,12 +73,13 @@ char * IntToString(long long int value, const char * format)
 	return str;
 }
 
-char * IntToStringNew(long long int value, const char * format, char * buffer, int length)
+char * IntToString(long long int value, const char * format, char * buffer, int length)
 {
 	if (strlen((format)) <= 0)
 	{
 		return "";
 	}
+	memset(buffer, 0, length); // Clear
 	snprintf(buffer, length, format, value);
 	return buffer;
 }
@@ -91,7 +92,7 @@ char * IntToStringNew(long long int value, const char * format, char * buffer, i
 
 	NOTE: call free(str) to deallocate the used memory.
 */
-char * FloatToString(long double value, const char * format)
+char * FloatToStringMalloc(long double value, const char * format)
 {
 	if (strlen((format)) <= 0)
 	{
@@ -102,6 +103,17 @@ char * FloatToString(long double value, const char * format)
 	char * str = malloc(length + 1); // TODO: get rid of this just pass char array 
 	snprintf(str, length + 1, format, value);
 	return str;
+}
+
+char * FloatToString(long double value, const char * format, char * buffer, int length)
+{
+	if (strlen((format)) <= 0)
+	{
+		return "";
+	}
+	memset(buffer, 0, length); // Clear
+	snprintf(buffer, length, format, value);
+	return buffer;
 }
 
 uint8_t ConvertToUInt8(const unsigned char * str)

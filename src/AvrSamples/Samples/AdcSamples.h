@@ -5,6 +5,8 @@
  *  Author: Ferdinand Lukasak
  */ 
 
+#ifndef ADC_SAMPLES_H_
+#define ADC_SAMPLES_H_
 
 #ifndef F_CPU
 # define F_CPU 16000000UL
@@ -120,3 +122,5 @@ void AdcSamples_Led(void)
 		}
 	}
 }
+
+#endif

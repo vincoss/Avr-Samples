@@ -159,13 +159,10 @@
     <Compile Include="Include\Utility.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\AdcSamples.c">
+    <Compile Include="Samples\AdcSamples.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\BlinkingLedSamples.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\ConvertSamples.h">
+    <Compile Include="Samples\BlinkingLedSamples.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\MemorySamples.h">
@@ -180,7 +177,7 @@
     <Compile Include="Samples\UsartSamples.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\UtilitySamples.c">
+    <Compile Include="Samples\UtilitySamples.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Src\Adc.c">

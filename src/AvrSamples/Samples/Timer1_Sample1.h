@@ -18,6 +18,10 @@
 #ifndef TIMER1_SAMPLE1_H_
 #define TIMER1_SAMPLE1_H_
 
+#ifndef F_CPU
+# define F_CPU 16000000UL
+#endif
+
 #include <avr/interrupt.h>
 
 volatile unsigned long long int Timer1_Sample1_Count;
@@ -27,10 +31,15 @@ void Timer1_Sample1_Initialize(void);
 
 void Timer1_Sample1_Main()
 {
-	if(Timer1_Sample1_Count >= 1000)
+	Timer1_Sample1_Initialize();
+	
+	while(1)
 	{
-		UsartWriteCharString("A");
-		Timer1_Sample1_Count = 0;
+		if(Timer1_Sample1_Count >= 1000)
+		{
+			UsartWriteCharString("Second");
+			Timer1_Sample1_Count = 0;
+		}
 	}
 }
 

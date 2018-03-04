@@ -14,18 +14,19 @@
 #include "Adc.h"
 #include "Usart.h"
 #include <avr/delay.h>
-#include "ConvertSamples.h"
+
+// Samples
+#include "AdcSamples.h"
+#include "BlinkingLedSamples.h"
+#include "UtilitySamples.h"
 #include "MemorySamples.h"
-//b#include "Timer1_Sample1.h"
+#include "Timer1_Sample1.h"
 //#include "TimeSample.h"
 
 
 int main(void)
 {
-	MemorySamples_Main();
+	UsartInitialize();
 	
-	//while(1)
-	//{
-		////_delay_ms(1000);
-	//}
+	Timer1_Sample1_Main();
 }
