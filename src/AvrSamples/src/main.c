@@ -15,14 +15,17 @@
 #include "Usart.h"
 #include <avr/delay.h>
 #include "ConvertSamples.h"
-#include "MallocMemorySamples.h"
-#include "Timer1_Sample1.h"
+#include "MemorySamples.h"
+//b#include "Timer1_Sample1.h"
+//#include "TimeSample.h"
 
 
 int main(void)
 {
-	while(1)
-	{
-		//_delay_ms(1000);
-	}
+	MemorySamples_Main();
+	
+	//while(1)
+	//{
+		////_delay_ms(1000);
+	//}
 }

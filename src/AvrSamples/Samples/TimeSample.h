@@ -9,41 +9,27 @@
 #ifndef TIMESAMPLE_H_
 #define TIMESAMPLE_H_
 
-void TimeSample_Main()
-{
-	TimeSample_Initialize(); // Init time
-	
-	unsigned long long int ticks = TimeSample_GetTickCount(); // Get ticks count (millisecond) 
-	
-	while(1)
-	{
-		if(ticks >= 1000)
-		{
-			// on
-		}
-		else
-		{
-			// off
-		}
-	}
-}
+#include <avr/interrupt.h>
+#include "Usart.h"
+#include <avr/delay.h>
+
 
 #pragma region Timer implementation
 
-volatile unsigned long long int TimeSample_TickCount;
+volatile unsigned long long int TimeSample_Ticks;
 
 void TimeSample_Initialize(void);
 unsigned long long int TimeSample_GetTickCount(void);
 
 unsigned long long int TimeSample_GetTickCount(void)
 {
-	return TimeSample_TickCount;
+	return TimeSample_Ticks;
 }
 
 void TimeSample_Initialize(void)
 {
 	// Reset ticks
-	TimeSample_TickCount = 0;
+	TimeSample_Ticks = 0;
 	
 	cli();	// Disable global interrupts
 
@@ -68,9 +54,48 @@ void TimeSample_Initialize(void)
 // ISR is fired whenever a match occurs
 ISR(TIMER1_COMPA_vect)
 {
-	TimeSample_TickCount++;
+	TimeSample_Ticks++;
 }
 
 #pragma endregion
 
+void TimeSample_Main(void)
+{
+	TimeSample_Initialize(); // Init time
+	UsartInitialize();
+	
+	int ledPin = 5; // pin 13
+	DDRB |= (1 << ledPin); // sets the digital pin as output
+	
+	const int milliseconds = 1000;
+	volatile unsigned long long int ticks = TimeSample_GetTickCount(); // Get ticks count (millisecond)
+	
+	char buffer[5];
+	
+	while(1)
+	{
+		if((TimeSample_GetTickCount() - ticks) >= milliseconds)
+		{
+			PORTB |= (1 << ledPin); // digitalWrite HIGH
+			UsartWriteCharString("on");
+			
+			ticks = TimeSample_GetTickCount();
+		}
+		else
+		{
+			PORTB &= ~(1 << ledPin); // digitalWrite LOW
+			UsartWriteCharString("off");
+		}
+		
+		//_delay_ms(1000);
+	}
+}
+
 #endif /* TIMESAMPLE_H_ */
+
+/*
+	
+	previous = 0
+	// less than 
+
+*/

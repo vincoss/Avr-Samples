@@ -12,7 +12,9 @@
 #define UTILITY_OFF 0
 #define UTILITY_ON	1
 
-uint8_t UtilityIsBitSet(uint8_t value, uint8_t bitindex) // TODO: Also by ref 
+// TODO: test all methods
+
+uint8_t UtilityIsBitSet(uint8_t value, uint8_t bitindex)
 {
 	return ((value & (1 << bitindex)) != 0) ? 1 : 0;
 }
@@ -71,7 +73,7 @@ char * IntToString(long long int value, const char * format)
 	return str;
 }
 
-char * IntToStringNew(long long int  value, const char * format, char * buffer, int length)
+char * IntToStringNew(long long int value, const char * format, char * buffer, int length)
 {
 	if (strlen((format)) <= 0)
 	{
@@ -80,7 +82,6 @@ char * IntToStringNew(long long int  value, const char * format, char * buffer, 
 	snprintf(buffer, length, format, value);
 	return buffer;
 }
-
 
 /*
 	Formats

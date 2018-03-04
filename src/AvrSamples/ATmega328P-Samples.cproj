@@ -153,12 +153,6 @@
     <Compile Include="Include\Adc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\ConvertSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\MallocMemorySamples.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Include\Usart.h">
       <SubType>compile</SubType>
     </Compile>
@@ -171,7 +165,16 @@
     <Compile Include="Samples\BlinkingLedSamples.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\ConvertSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\MemorySamples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\Timer1_Sample1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TimeSample.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\UsartSamples.c">
