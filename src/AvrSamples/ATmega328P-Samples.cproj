@@ -168,6 +168,12 @@
     <Compile Include="Samples\MemorySamples.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\SN74HC595_Samples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\SpiSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\Timer1_Sample1.h">
       <SubType>compile</SubType>
     </Compile>
