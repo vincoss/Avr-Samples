@@ -20,7 +20,7 @@
 #include "UsartSamples.h"
 #include "BlinkingLedSamples.h"
 #include "MemorySamples.h"
-//#include "Timer1_Sample1.h"
+//#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 #include "TimeSample.h"
 #include "UtilitySamples.h"
 

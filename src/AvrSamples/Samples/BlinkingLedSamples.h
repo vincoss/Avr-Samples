@@ -9,8 +9,11 @@
 #define BLINKING_LED_SAMPLES_H_
 
 #ifndef F_CPU
-// F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay, must be declared above delay so delay knows what is the value of F_CPU.
-# define F_CPU 16000000UL
+/*
+	F_CPU tells the compiler that our crystal is an 16Mhz one so it can generate an accurate delay,
+	must be declared above delay so delay knows what is the value of F_CPU.
+*/
+#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>				// This is our usual include
@@ -32,21 +35,21 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void);
 
 /*
 
-	 The Arduino UNO has 3 ports
+	The Arduino UNO has 3 ports
 
-	 The PORT register controls whether the pin is HIGH or LOW.
-	 PORTB B(digital pin 8 to 13) The two high bits (6 & 7) map to the crystal pins and are not usable
-	 PORTC C(analog input pins) Pins 6 & 7 are only accessible on the Arduino Mini
-	 PORTD D(digital pins 0 to 7)
+	The PORT register controls whether the pin is HIGH or LOW.
+	PORTB B(digital pin 8 to 13) The two high bits (6 & 7) map to the crystal pins and are not usable
+	PORTC C(analog input pins) Pins 6 & 7 are only accessible on the Arduino Mini
+	PORTD D(digital pins 0 to 7)
 
-	 The DDR register, determines whether the pin is an INPUT or OUTPUT.
-	 The PORT register controls whether the pin is HIGH or LOW
-	 The PIN register reads the state of INPUT pins
+	The DDR register, determines whether the pin is an INPUT or OUTPUT.
+	The PORT register controls whether the pin is HIGH or LOW
+	The PIN register reads the state of INPUT pins
 
-	 PB5
-	 P = Pin
-	 B = port digital pins 8 to 13
-	 5 = decimal value (convert decimal 32 or binary 100000)
+	PB5
+	P = Pin
+	B = port digital pins 8 to 13
+	5 = decimal value (convert decimal 32 or binary 100000)
  
  */
 
@@ -54,7 +57,7 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void);
 
 void BlinkingLedSamples_SampleOne(void)
 {
-	DDRB |= (1 << ledPinSampleOne); // pinMode(LED, OUTPUT); // sets the gitital pin as putput
+	DDRB |= (1 << ledPinSampleOne); // pinMode(LED, OUTPUT); // sets the gitital pin as output
 
 	while (1)
 	{
@@ -86,7 +89,7 @@ void BlinkingLedSamples_SampleThree(void)
 {
 	int ledPin = 32; // Just set with decimal value 32 or 00100000 in binary, pin 13
 
-	DDRB = ledPin; // sets the gitital pin as output. See don't need to use bit shift operator
+	DDRB = ledPin; // sets the digital pin as output. See don't need to use bit shift operator
 
 	while (1)
 	{
@@ -100,7 +103,7 @@ void BlinkingLedSamples_SampleThree(void)
 
 void BlinkingLedSamples_SampleFour(void)
 {
-	int ledPin = 0b111111; // Sets Arduino port B pins -,-,13,12,11,10,9,8 as outputs or decimal 63
+	int ledPin = 0b111111; // Sets Arduino port B pins -,-,13,12,11,10,9,8 as outputs or decimal 63 with binary value
 
 	DDRB = ledPin; // sets the digital pin as output
 
@@ -180,6 +183,7 @@ void BlinkingLedSamples_SampleEight(void)
 
 void BlinkingLedSamples_NaiveFadeLed(void)
 {
+	// Fade led with fast delay
 	uint8_t ledPin = PB3; // 9
 
 	DDRB |= (1 << ledPin); // output

@@ -9,7 +9,7 @@
 	Example time implementation with Timer1. This can be used for non blocking delay instead of delay.h implementation.
 	
 	Tick every:				1ms
-	CPU clock frequency:	100Hz
+	CPU clock frequency:	1000Hz
 	Prescaler:				1
 	Write to USART every	1 second			
 */
