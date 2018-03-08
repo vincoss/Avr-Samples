@@ -29,11 +29,10 @@ int main(void)
 {
 	 // TODO: ISR duplicated figure out how to call it to use multiple methods
 	
-	//while(1)
-	//{
-		//
-		//_delay_ms(1000);
-	//}
+	while(1)
+	{
+		_delay_ms(1000);
+	}
 	
 	return 0;
 }
