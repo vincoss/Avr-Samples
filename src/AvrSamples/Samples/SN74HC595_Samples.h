@@ -5,6 +5,8 @@
  *  Author: Ferdinand Lukasak
  */ 
 
+// TODO: review https://github.com/johnnyb/Shifty
+
 
 #ifndef SN74HC595_SAMPLES_H_
 #define SN74HC595_SAMPLES_H_
