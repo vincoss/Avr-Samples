@@ -117,48 +117,48 @@ uint8_t ConvertToUInt8(const char * str)
 	TOOD: Not tested
 */
 
-///*
-//Formats
-//float			%f, %g, %e, %a
-//double			%lf, %lg, %le, %la
-//long double		%Lf, %Lg, %Le, %La
-//*/
-//char * FloatToString(long double value, const char * format, char * buffer, int length)
-//{
-//	if (IsNullOrEmpty(format) == 1)
-//	{
-//		return "";
-//	}
-//	memset(buffer, 0, length); // Clear
-//	snprintf(buffer, length, format, value);
-//	return buffer;
-//}
-//
-//
-//float ConvertToFloat(const char * str)
-//{
-//	if (IsNullOrEmpty(str) == 1)
-//	{
-//		return 0;
-//	}
-//
-//	//return atof(str);
-//	float v;
-//	sscanf(str, "%f", &v);
-//	return v;
-//}
-//
-//double ConvertToDouble(const char * str)
-//{
-//	if (IsNullOrEmpty(str) == 1)
-//	{
-//		return 0;
-//	}
-//
-//	double v;
-//	sscanf(str, "%lf", &v);
-//	return v;
-//}
+/*
+Formats
+float			%f, %g, %e, %a
+double			%lf, %lg, %le, %la
+long double		%Lf, %Lg, %Le, %La
+*/
+char * FloatToString(long double value, const char * format, char * buffer, int length)
+{
+	if (IsNullOrEmpty(format) == 1)
+	{
+		return "";
+	}
+	memset(buffer, 0, length); // Clear
+	snprintf(buffer, length, format, value);
+	return buffer;
+}
+
+
+float ConvertToFloat(const char * str)
+{
+	if (IsNullOrEmpty(str) == 1)
+	{
+		return 0;
+	}
+
+	//return atof(str);
+	float v;
+	sscanf(str, "%f", &v);
+	return v;
+}
+
+double ConvertToDouble(const char * str)
+{
+	if (IsNullOrEmpty(str) == 1)
+	{
+		return 0;
+	}
+
+	double v;
+	sscanf(str, "%lf", &v);
+	return v;
+}
 
 
 

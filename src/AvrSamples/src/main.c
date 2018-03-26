@@ -28,32 +28,13 @@
 #include "SN74HC595_Samples.h"
 #include <inttypes.h>
 
-char * IntToStringTemp(long long int value, const char * format, char * buffer, int length)
-{
-	memset(buffer, 0, length); // Clear
-	
-	snprintf(buffer, length, format, value);
-	return buffer;
-}
 
 int main(void)
 {
 	UsartInitialize();
 	
-	char buffer[18];
-	char * str = IntToStringTemp(9223372036854775807, "%lld", buffer, sizeof(buffer)); // 64 bit
-	//char * str = IntToStringTemp(2147483647, "%li", buffer, sizeof(buffer)); // 32 bit
-	
-	/*
-		86400000
-		172800000
-		8640000000
-		2147483647
-	*/
-	
 	while(1)
 	{
-		UsartWriteCharString(str);
 		_delay_ms(1000);
 	}
 	
