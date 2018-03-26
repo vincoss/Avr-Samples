@@ -40,7 +40,7 @@ void SpiSamples_MasterSlave()
 	// SET SCK, MOSI and SS/Latch as output
 	DDRB = (1 << PB5) | (1 << PB3) | (1 << PB2);
 
-	//Set control pins low
+	// Set control pins low
 	PORTB &= ~(PB5 | PB3 | PB2);
 
 	SET_SS_CS_LOW; // If multiple slaves/servants are used then SS must be high, if only since slave is then keep it low.
@@ -53,8 +53,7 @@ void SpiSamples_MasterSlave()
 		
 	data = SpiSamples_WriteReadBasic(data); // Write data
 	
-	SET_SS_CS_HIGH;
-	SET_SS_CS_LOW; // TODO: ???
+	SET_SS_CS_HIGH; // Synchronize by pulling high
 
 	while (1) 
 	{
@@ -72,6 +71,9 @@ uint8_t SpiSamples_WriteReadBasic(uint8_t dataOut)
 
 volatile int _counter;
 
+// TODO: does not work, need to use two boards Master/Slave and then have an interrupt on the slave
+#include "Utility.h"
+
 void SpiSamples_MasterSlaveWithInterrupt()
 {
 	_counter = 0;
@@ -82,7 +84,7 @@ void SpiSamples_MasterSlaveWithInterrupt()
 	// Set control pins low
 	PORTB &= ~(PB5 | PB3 | PB2);		
 
-	SET_SS_CS_HIGH; // Deactivate slave (Must be high when not transfering)
+	SET_SS_CS_HIGH; // Deactivate slave (Must be high when not transferring)
 
 	SPCR = ((1 << SPE) |	// SPI Enable
 		(0 << SPIE) |       // SPI Interupt Enable
@@ -95,26 +97,29 @@ void SpiSamples_MasterSlaveWithInterrupt()
 	sei(); // Enable global interrupt
 
 	uint8_t i = 0;
+	char buffer[10];
 
 	while (1)
 	{
-		SET_SS_CS_LOW;
+		//SET_SS_CS_LOW;
 		
 		if (i == 8)
 		{
 			i = 0;
 		}
+		
+		IntToString(_counter, "%d", buffer, sizeof(buffer));
+		UsartWriteCharString(buffer);
 
 		SpiSamples_WriteRead(i);
 
 		i++;
-
+		
 		_delay_ms(500);
 	}
-
 }
 
-ISR(SPI_STC_vect)
+ISR (SPI_STC_vect)
 {
 	_counter++;
 }
@@ -127,9 +132,9 @@ uint8_t SpiSamples_WriteRead(uint8_t dataout)
 
 	while (!(SPSR & (1 << SPIF))); // Wait for completion
 
-	SET_SS_CS_HIGH; // Deactivate slave
-	
 	dataout =  SPDR; // Clear SPIF flag, value is not required
+
+	SET_SS_CS_HIGH; // Deactivate slave
 	
 	return dataout;
 }

@@ -18,9 +18,9 @@
 
 #define SHIFT_REGISTER	DDRB
 #define SHIFT_PORT		PORTB
-#define DATA			(1<<PB3)	//MOSI (SI)
-#define LATCH			(1<<PB2)	//SS   (RCK)
-#define CLOCK			(1<<PB5)	//SCK  (SCK)
+#define DATA			(1<<PB3)	// MOSI (SI)	PIN 14
+#define LATCH			(1<<PB2)	// SS   (RCK)	PIN 12
+#define CLOCK			(1<<PB5)	// SCK  (SCK)	PIN 11
 
 void SN74HC595_IoInitialize(void)
 {

@@ -82,6 +82,8 @@ void TimeSample_Main(void)
 			PORTB ^= (1 << ledPin); // On/Off
 			
 			ticks = TimeSample_GetTickCount();
+			UsartWriteCharString("Hi");
+		    UsartWriteChar('\n');
 		}
 	}
 }

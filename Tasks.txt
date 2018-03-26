@@ -1,0 +1,7 @@
+
+# task
+complete SPI
+add a sample for slave & master & interrupt
+complete output shift register
+complete input shift register
+read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
