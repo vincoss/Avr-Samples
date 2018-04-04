@@ -32,11 +32,12 @@
 int main(void)
 {
 	UsartInitialize();
+	SpiSamples_MasterSlaveWithInterrupt();
 	
-	while(1)
-	{
-		_delay_ms(1000);
-	}
+	//while(1)
+	//{
+		//_delay_ms(1000);
+	//}
 	
 	return 0;
 }

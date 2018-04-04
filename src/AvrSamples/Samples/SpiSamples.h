@@ -43,14 +43,13 @@ void SpiSamples_MasterSlave()
 	// Set control pins low
 	PORTB &= ~(PB5 | PB3 | PB2);
 
-	SET_SS_CS_LOW; // If multiple slaves/servants are used then SS must be high, if only since slave is then keep it low.
-
 	// Enable SPI, Set Master, clock F_CPU/16
 	SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR0);
 
-	char buffer[5];
 	uint8_t data = 0b00000111; // Set first three bits high
-		
+
+	SET_SS_CS_LOW; // If multiple slaves/servants are used then SS must be high, if only since slave is then keep it low.
+	
 	data = SpiSamples_WriteReadBasic(data); // Write data
 	
 	SET_SS_CS_HIGH; // Synchronize by pulling high
@@ -86,36 +85,35 @@ void SpiSamples_MasterSlaveWithInterrupt()
 
 	SET_SS_CS_HIGH; // Deactivate slave (Must be high when not transferring)
 
-	SPCR = ((1 << SPE) |	// SPI Enable
-		(0 << SPIE) |       // SPI Interupt Enable
-		(0 << DORD) |       // Data Order (0:MSB first / 1:LSB first)
-		(1 << MSTR) |       // Master/Slave select   
-		(1 << SPR0) |		// Clock F_CPU/16
-		(0 << CPOL) |		// Clock Polarity (0:SCK low / 1:SCK hi when idle)
-		(0 << CPHA));       // Clock Phase (0:leading / 1:trailing edge sampling)
+	SPCR = ((1 << SPE)  |	// SPI Enable
+			(0 << SPIE) |   // SPI Interupt Enable
+			(0 << DORD) |   // Data Order (0:MSB first / 1:LSB first)
+			(1 << MSTR) |   // Master/Slave select   
+			(1 << SPR0)	|	// Clock F_CPU/16
+			(0 << CPOL) |	// Clock Polarity (0:SCK low / 1:SCK hi when idle)
+			(0 << CPHA));   // Clock Phase (0:leading / 1:trailing edge sampling)
 
 	sei(); // Enable global interrupt
 
 	uint8_t i = 0;
-	char buffer[10];
+	char buffer[8];
 
 	while (1)
 	{
-		//SET_SS_CS_LOW;
-		
-		if (i == 8)
+		if (i == 256)
 		{
 			i = 0;
 		}
 		
+		SpiSamples_WriteRead(i);
+		
 		IntToString(_counter, "%d", buffer, sizeof(buffer));
 		UsartWriteCharString(buffer);
-
-		SpiSamples_WriteRead(i);
+		UsartWriteChar('\n');
 
 		i++;
 		
-		_delay_ms(500);
+		_delay_ms(50);
 	}
 }
 
@@ -128,15 +126,17 @@ uint8_t SpiSamples_WriteRead(uint8_t dataout)
 {
 	SET_SS_CS_LOW; // Activate slave
 
+	uint8_t dataIn;
+	
 	SPDR = dataout; // Set data to send
 
 	while (!(SPSR & (1 << SPIF))); // Wait for completion
 
-	dataout =  SPDR; // Clear SPIF flag, value is not required
-
-	SET_SS_CS_HIGH; // Deactivate slave
+	dataIn =  SPDR; // Clear SPIF flag, value is not required
 	
-	return dataout;
+	SET_SS_CS_HIGH; // Deactivate slave
+
+	return dataIn;
 }
 
 #endif /* SPISAMPLES_H_ */
