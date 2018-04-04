@@ -168,18 +168,6 @@
     <Compile Include="Samples\MemorySamples.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\SN74HC595_DaiseyChain.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595_NoSpi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595_Spi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595_ReadWriteExample.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Samples\SN74HC595_Samples.h">
       <SubType>compile</SubType>
     </Compile>
