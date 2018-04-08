@@ -22,6 +22,16 @@ void UtilitySamples_To_uint8_t_FromString(void)
 	UsartWriteChar('\n');
 }
 
+void UtilitySamples_To_uint32_t_FromString(void)
+{
+	char buffer[8];
+	unsigned long long int result = ConvertToUnsignedInt64("?4294967295?");
+	char * str = UnsignedIntToString(result, "%lu", buffer, sizeof(buffer));
+	
+	UsartWriteCharString(str);
+	UsartWriteChar('\n');
+}
+
 void UtilitySamples_To_Float_FromString(void)
 {
 	char buffer[8];
