@@ -40,7 +40,7 @@ uint8_t SN74HC595_SpiSend(uint8_t data)
 
 void SN74HC595_Samples_One(void)
 {
-	SN74HC595_IoInitialize();
+	SN74HC595_IoInitialize(); // This needs to be called before SPI initialize
 	SN74HC595_SpiInitialize();
 
 	uint8_t binary_counter = 0;

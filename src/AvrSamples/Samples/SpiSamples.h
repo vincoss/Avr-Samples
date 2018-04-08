@@ -72,6 +72,7 @@ volatile int _counter;
 
 // TODO: does not work, need to use two boards Master/Slave and then have an interrupt on the slave
 #include "Utility.h"
+// Try to set to low the watch to interrupt
 
 void SpiSamples_MasterSlaveWithInterrupt()
 {
@@ -92,6 +93,8 @@ void SpiSamples_MasterSlaveWithInterrupt()
 			(1 << SPR0)	|	// Clock F_CPU/16
 			(0 << CPOL) |	// Clock Polarity (0:SCK low / 1:SCK hi when idle)
 			(0 << CPHA));   // Clock Phase (0:leading / 1:trailing edge sampling)
+
+	// TODO: In here set Speed and Interrupt, should be separate confiugration after SPI is enabled.
 
 	sei(); // Enable global interrupt
 

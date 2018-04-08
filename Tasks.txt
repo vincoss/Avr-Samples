@@ -1,4 +1,5 @@
 
 # task
 // TODO: review https://github.com/johnnyb/Shifty
-read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
+get source for it - read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
+-- SPI read example
