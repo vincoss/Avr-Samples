@@ -25,7 +25,7 @@ void UtilitySamples_To_uint8_t_FromString(void)
 void UtilitySamples_To_int32_t_FromString(void)
 {
 	char buffer[12];
-	unsigned long long int result = ConvertToInt32("2147483647");
+	long long int result = ConvertToInt32("2147483647");
 	char * str = IntToString(result, "%ld", buffer, sizeof(buffer));
 	
 	UsartWriteCharString(str);
@@ -35,7 +35,7 @@ void UtilitySamples_To_int32_t_FromString(void)
 void UtilitySamples_To_uint32_t_FromString(void)
 {
 	char buffer[12];
-	unsigned long long int result = ConvertToUnsignedInt64("4294967295?");
+	unsigned long long int result = ConvertToUnsignedInt32("4294967295");
 	char * str = UnsignedIntToString(result, "%lu", buffer, sizeof(buffer));
 	
 	UsartWriteCharString(str);

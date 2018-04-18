@@ -29,27 +29,14 @@
 #include <inttypes.h>
 
 
-char * IntToStringLocal(long long int value, const char * format, char * buffer, int length)
-{
-	if (IsNullOrEmpty(format) == 1)
-	{
-		return "";
-	}
-	memset(buffer, 0, length); // Clear
-	snprintf(buffer, length, format, value);
-	return buffer;
-}
 
 int main(void)
 {
 	UsartInitialize();
 	
-	char buffer[8];
-	
 	while(1)
 	{
-		//IntToStringLocal(255, "%ld", buffer, sizeof(buffer));
-		UsartWriteCharString(IntToStringLocal(255, "%ld", buffer, sizeof(buffer)));
+		UtilitySamples_To_Double_FromString();
 		
 		_delay_ms(1000);
 	}

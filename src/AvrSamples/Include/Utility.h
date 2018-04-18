@@ -79,31 +79,19 @@ char * UnsignedIntToString(unsigned long long int value, const char * format, ch
 	return buffer;
 }
 
-int ConvertToInt32(const char * str)
+long long int ConvertToInt32(const char * str)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
 		return 0;
 	}
 
-	long int v;
+	long long int v;
 	sscanf(str, "%ld", &v);
 	return v;
 }
 
-unsigned int ConvertToUnsignedInt32(const char * str)
-{
-	if (IsNullOrEmpty(str) == 1)
-	{
-		return 0;
-	}
-
-	unsigned long int v;
-	sscanf(str, "%lu", &v);
-	return v;
-}
-
-unsigned long long int ConvertToUnsignedInt64(const char * str)
+unsigned long long int ConvertToUnsignedInt32(const char * str)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
@@ -114,6 +102,18 @@ unsigned long long int ConvertToUnsignedInt64(const char * str)
 	sscanf(str, "%lu", &v);
 	return v;
 }
+
+//unsigned long long int ConvertToUnsignedInt64(const char * str)
+//{
+	//if (IsNullOrEmpty(str) == 1)
+	//{
+		//return 0;
+	//}
+//
+	//unsigned long long int v;
+	//sscanf(str, "%lu", &v);
+	//return v;
+//}
 
 uint8_t ConvertToUInt8(const char * str)
 {
