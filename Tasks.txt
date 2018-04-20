@@ -6,5 +6,3 @@ get source for it - read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR
 
 update utility methods, add unit tests and print into usart
 
-// ?32U: 4294967295?
-// 32: 2147483647

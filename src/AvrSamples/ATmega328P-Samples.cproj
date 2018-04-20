@@ -147,10 +147,16 @@
   <ItemGroup>
     <Folder Include="Include" />
     <Folder Include="Samples" />
-    <Folder Include="Src" />
+    <Folder Include="Src\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Include\Adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MinUnit.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\UnitTests.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\Usart.h">
@@ -190,6 +196,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Src\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Src\UnitTests.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Src\Usart.c">
