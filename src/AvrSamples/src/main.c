@@ -27,7 +27,7 @@
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
 #include <inttypes.h>
-
+#include "UnitTests.h"
 
 
 int main(void)
@@ -36,10 +36,19 @@ int main(void)
 	
 	while(1)
 	{
-		UtilitySamples_To_Double_FromString();
+		UnitTestsRun();
+		//UtilitySamples_To_Double_FromString();
 		
-		_delay_ms(1000);
+		_delay_ms(3000);
 	}
 	
 	return 0;
+}
+
+// Platform specific, MinUnit.h implementation.
+
+void MinUnitLogMessage(const char * str)
+{
+	UsartWriteCharString(str);
+	UsartWriteChar('\n');
 }

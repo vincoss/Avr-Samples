@@ -10,4 +10,4 @@ AVR Samples.
 ATmeaga328
 ATiny85
 
-Led, SPI, Shift register, Usart, Adccmd
+Led, SPI, Shift register, Usart, Adc

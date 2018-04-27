@@ -8,15 +8,25 @@
 #ifndef MIN_UNIT_H_
 #define MIN_UNIT_H_ 1
 
-void MinUnitInitialize(void);
-void UnitTestsRunAll();
+void MinUnitSetup(void);
+void MinUnitTestInitialize(void);
+void MinUnitRunAll(void);
+void MinUnitLogMessage(const char * str);//printf("%s\n", message);
 
 #define MinUnitAssert(message, test) do { if (!(test)) return message; } while (0)
-#define MinUnitRun(test) do { MinUnitInitialize(); char * message = test(); MinUnitTestsRun++;  if (message) { printf("%s\n", message); MinUnitTestsFail++; }else {MinUnitTestsSuccess++; }} while (0)
+#define MinUnitRun(test) do { MinUnitTestInitialize(); char * message = test(); MinUnitTestsRun++;  if (message) { MinUnitLogMessage(message); MinUnitTestsFail++; }else {MinUnitTestsSuccess++; }} while (0)
 
 extern int MinUnitTestsRun;
 extern int MinUnitTestsSuccess;
 extern int MinUnitTestsFail;
+
+void MinUnitSetup(void)
+{
+	MinUnitTestsRun = 0;	
+	MinUnitTestsSuccess = 0;
+	MinUnitTestsFail = 0;
+}
+
 
 /*
 	EXAMPLE

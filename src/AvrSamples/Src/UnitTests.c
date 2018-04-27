@@ -16,18 +16,24 @@ int MinUnitTestsRun = 0;
 int MinUnitTestsSuccess = 0;
 int MinUnitTestsFail = 0;
 
-// Call form main.c
+// Call form main.c.
 int UnitTestsRun(void)
 {
-	UnitTestsRunAll();
+	MinUnitSetup();		// Basic setup, reset the counters
+	
+	MinUnitRunAll();	// Run the tests
 
-	printf("Tests failed: %d, passed: %d, of tests: %d", MinUnitTestsFail, MinUnitTestsSuccess, MinUnitTestsRun);
-
+	char buffer[100];
+	snprintf(buffer, sizeof(buffer), "Tests failed: %d, passed: %d, of tests: %d", 
+	MinUnitTestsFail, MinUnitTestsSuccess, MinUnitTestsRun);
+	
+	MinUnitLogMessage(buffer); // Print message
+	
 	return MinUnitTestsRun - MinUnitTestsSuccess;
 }
 
 // Initialize or reset values, called for each test
-void MinUnitInitialize(void)
+void MinUnitTestInitialize(void)
 {
 }
 
@@ -91,7 +97,9 @@ char * IntToStringAndConvertToInt32Test()
 	IntToString(expected, format, buffer, sizeof(buffer));
 	int actual = ConvertToInt32(buffer);
 
-	MinUnitAssert("Error:, IntToStringAndConvertToInt32Test", expected == actual);
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, IntToStringAndConvertToInt32Test %ld == %ld, result: %d", expected, actual, expected == actual);
+	MinUnitAssert(buffer, expected == actual);
 
 	return 0;
 }
@@ -128,15 +136,15 @@ char * ConvertToUInt8Test()
 
 
 // Register all tests in here
-void UnitTestsRunAll()
+void MinUnitRunAll()
 {
 	// Utility.h
-	//MinUnitRun(UtilityIsBitSetTest);
-	//MinUnitRun(UtilitySetBitAsUsedTest);
-	//MinUnitRun(UtilitySetBitAsUnUsedTest);
-	//MinUnitRun(UtilityFlipBitTest);
-	//MinUnitRun(IsNullOrEmptyTest);
-	//MinUnitRun(IntToStringAndConvertToInt32Test);
-	//MinUnitRun(UnsignedIntToStringUnsignedAndConvertToInt32Test);
-	//MinUnitRun(ConvertToUInt8Test);
+	MinUnitRun(UtilityIsBitSetTest);
+	MinUnitRun(UtilitySetBitAsUsedTest);
+	MinUnitRun(UtilitySetBitAsUnUsedTest);
+	MinUnitRun(UtilityFlipBitTest);
+	MinUnitRun(IsNullOrEmptyTest);
+	MinUnitRun(IntToStringAndConvertToInt32Test);
+	MinUnitRun(UnsignedIntToStringUnsignedAndConvertToInt32Test);
+	MinUnitRun(ConvertToUInt8Test);
 }
