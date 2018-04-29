@@ -8,8 +8,8 @@
 #ifndef MIN_UNIT_H_
 #define MIN_UNIT_H_ 1
 
-void MinUnitSetup(void);
-void MinUnitTestInitialize(void);
+void MinUnitSetup(void); // For all tests
+void MinUnitTestInitialize(void);	//  Initialize or reset values, called for each test
 void MinUnitRunAll(void);
 void MinUnitLogMessage(const char * str);//printf("%s\n", message);
 

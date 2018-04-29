@@ -45,7 +45,7 @@ int main(void)
 	return 0;
 }
 
-// Platform specific, MinUnit.h implementation.
+// Platform specific, MinUnit.h implementation. Write test output to USART
 void MinUnitLogMessage(const char * str)
 {
 	UsartWriteCharString(str);
