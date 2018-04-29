@@ -46,7 +46,6 @@ int main(void)
 }
 
 // Platform specific, MinUnit.h implementation.
-
 void MinUnitLogMessage(const char * str)
 {
 	UsartWriteCharString(str);
