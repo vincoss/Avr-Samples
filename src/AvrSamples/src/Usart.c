@@ -47,8 +47,8 @@ void UsartWriteCharString(const unsigned char* stringPtr)
 }
 
 // TODO: refactor into Usart.c one initialize just Usart no interrupt and second with interrupt
-void GaboUsartInterruptInitialize(void)
+void UsartInterruptInitialize(void)
 {
-	UCSR0B |= (1 << RXEN0) | (1 << RXCIE0); // Enable the USART Recieve Complete interrupt ( USART_RX )
+	UCSR0B |= (1 << RXEN0) | (1 << RXCIE0); // Enable the USART Receive Complete interrupt ( USART_RX )
 	sei(); // Enable the Global Interrupt Enable flag so that interrupts can be processed
 }

@@ -8,8 +8,10 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "MinUnit.h"
 #include "UnitTests.h"
+#include "Utility.h"
 
 
 // These are required.
@@ -40,86 +42,87 @@ void MinUnitTestInitialize(void)
 
 #pragma region Utility.h tests
 
-char * UtilityIsBitSetTest()
+void UtilityIsBitSetTest()
 {
 	uint8_t value = 0b00000010;
 
-	MinUnitAssert("Error:, UtilityIsBitSetTest data true", UtilityIsBitSet(value, 1) == 1);
-	MinUnitAssert("Error:, UtilityIsBitSetTest data false", UtilityIsBitSet(value, 0) == 0);
-
-	return 0;
+	MinUnitAssert(UtilityIsBitSet(value, 1) == 1, "Error:, UtilityIsBitSetTest data true");
+	MinUnitAssert(UtilityIsBitSet(value, 0) == 0, "Error:, UtilityIsBitSetTest data false");
 }
 
-char * UtilitySetBitAsUsedTest()
+void UtilitySetBitAsUsedTest()
 {
 	uint8_t value = 0b00000000;
 	UtilitySetBitAsUsed(&value, 1);
 
-	MinUnitAssert("Error:, UtilitySetBitAsUsedTest", UtilityIsBitSet(value, 1) == 1);
-
-	return 0;
+	MinUnitAssert(UtilityIsBitSet(value, 1) == 1, "Error:, UtilitySetBitAsUsedTest");
 }
 
-char * UtilitySetBitAsUnUsedTest()
+void UtilitySetBitAsUnUsedTest()
 {
 	uint8_t value = 0b00000010;
 	UtilitySetBitAsUnUsed(&value, 1);
 
-	MinUnitAssert("Error:, UtilitySetBitAsUnUsedTest", UtilityIsBitSet(value, 1) == 0);
-
-	return 0;
+	MinUnitAssert(UtilityIsBitSet(value, 1) == 0, "Error:, UtilitySetBitAsUnUsedTest");
 }
 
-char * UtilityFlipBitTest()
+void UtilityFlipBitTest()
 {
 	uint8_t value = 0b00000000;
 	UtilityFlipBit(&value, 1);
 
-	MinUnitAssert("Error:, UtilityFlipBitTest", UtilityIsBitSet(value, 1) == 1);
-
-	return 0;
+	MinUnitAssert(UtilityIsBitSet(value, 1) == 1, "Error:, UtilityFlipBitTest");
 }
 
-char * IsNullOrEmptyTest()
+void IsNullOrEmptyTest()
 {
-	MinUnitAssert("Error:, IsNullOrEmptyTest null", IsNullOrEmpty(NULL) == 1);
-	MinUnitAssert("Error:, IsNullOrEmptyTest empty", IsNullOrEmpty("") == 1);
-	MinUnitAssert("Error:, IsNullOrEmptyTest not empty", IsNullOrEmpty("test") == 0);
-
-	return 0;
+	MinUnitAssert(IsNullOrEmpty(NULL) == 1, "Error:, IsNullOrEmptyTest null");
+	MinUnitAssert(IsNullOrEmpty("") == 1, "Error:, IsNullOrEmptyTest empty");
+	MinUnitAssert(IsNullOrEmpty("test") == 0, "Error:, IsNullOrEmptyTest not empty");
 }
 
-char * IntToStringAndConvertToInt32Test()
+void IntToStringAndConvertToInt32Test()
 {
-	char buffer[12];
-	int expected = INT32_MAX;
+	char buffer[11];
+	int  expected = INT32_MAX;
 	char * format = "%ld";
 
-	IntToString(expected, format, buffer, sizeof(buffer));
+	int returnValue = IntToString(expected, format, buffer, sizeof(buffer));
 	int actual = ConvertToInt32(buffer);
 
 	char messageBuffer[100];
 	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, IntToStringAndConvertToInt32Test %ld == %ld, result: %d", expected, actual, expected == actual);
-	MinUnitAssert(buffer, expected == actual);
-
-	return 0;
+	MinUnitAssert(expected == actual, messageBuffer);
 }
 
-char * UnsignedIntToStringUnsignedAndConvertToInt32Test()
+void IntToStringAndConvertToInt64Test()
 {
-	char buffer[12];
+	char buffer[20];
+	long long int  expected = INT64_MAX;
+	long long int actual = -1;
+	char * format = "%lld";
+
+	int returnValue = IntToString(expected, format, buffer, sizeof(buffer));
+	actual = ConvertToInt(buffer, format);
+
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, IntToStringAndConvertToInt64Test %lld == %lld, result: %d", expected, actual, expected == actual);
+	MinUnitAssert(expected == actual, messageBuffer);
+}
+
+void UnsignedIntToStringUnsignedAndConvertToInt32Test()
+{
+	char buffer[11];
 	unsigned int expected = UINT32_MAX;
 	char * format = "%lu";
 
 	UnsignedIntToString(expected, format, buffer, sizeof(buffer));
 	unsigned int actual = ConvertToUnsignedInt32(buffer);
 
-	MinUnitAssert("Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test", expected == actual);
-
-	return 0;
+	MinUnitAssert(expected == actual, "Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test");
 }
 
-char * ConvertToUInt8Test()
+void ConvertToUInt8Test()
 {
 	char buffer[8];
 	int expected = UINT8_MAX;
@@ -128,13 +131,40 @@ char * ConvertToUInt8Test()
 	UnsignedIntToString(expected, format, buffer, sizeof(buffer));
 	uint8_t actual = ConvertToUInt8(buffer);
 
-	MinUnitAssert("Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test", expected == actual);
+	MinUnitAssert(expected == actual, "Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test");
+}
 
-	return 0;
+void ConvertToFloatTest()
+{
+	char buffer[20];
+	float  expected = 3.141592;
+	float actual = -1;
+	char * format = "%f";
+
+	int returnValue = FloatToString(expected, format, buffer, sizeof(buffer));
+	actual = ConvertToFloat(buffer, format);
+
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToFloat %f == %f, result: %d", expected, actual, expected == actual);
+	MinUnitAssert(expected == actual, messageBuffer);
+}
+
+void ConvertToDoubleTest()
+{
+	char buffer[20];
+	double  expected = 3.141592;
+	double actual = -1;
+	char * format = "%lf";
+
+	int returnValue = FloatToString(expected, format, buffer, sizeof(buffer));
+	actual = ConvertToDouble(buffer, format);
+
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToDoubleTest %lf == %lf, result: %d", expected, actual, expected == actual);
+	MinUnitAssert(expected == actual, messageBuffer);
 }
 
 #pragma endregion
-
 
 // Register all tests in here
 void MinUnitRunAll()
@@ -146,6 +176,11 @@ void MinUnitRunAll()
 	MinUnitRun(UtilityFlipBitTest);
 	MinUnitRun(IsNullOrEmptyTest);
 	MinUnitRun(IntToStringAndConvertToInt32Test);
+	MinUnitRun(IntToStringAndConvertToInt64Test);
 	MinUnitRun(UnsignedIntToStringUnsignedAndConvertToInt32Test);
 	MinUnitRun(ConvertToUInt8Test);
+
+	MinUnitRun(ConvertToFloatTest);
+	MinUnitRun(ConvertToDoubleTest);
 }
+
