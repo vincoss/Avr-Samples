@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-
 // Platform specific, MinUnit.h implementation. Write test output to USART or console
 void MinUnitLogMessage(const char * str)
 {

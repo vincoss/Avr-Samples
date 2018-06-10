@@ -163,18 +163,3 @@ double ConvertToDouble(const char * str)
 	sscanf(str, "%lf", &v);
 	return v;
 }
-
-void convertType(char* value)
-{
-	//https://codereview.stackexchange.com/questions/158519/c-program-to-convert-string-to-floating-point
-
-	int i = 0;
-	char ch;
-	double ret = 0;
-	while ((ch = value[i]) != '\0')
-	{
-		ret = ret * 10 + (ch - '0');
-		++i;
-	}
-	printf("%f", ret);//or %f..what is the control string for double?
-}

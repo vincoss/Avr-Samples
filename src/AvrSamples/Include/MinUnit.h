@@ -79,7 +79,7 @@ void MinUnitRun(void callback(void))
 
 	void SampleTest()
 	{
-		MinUnitAssert("Error:, 1 + 1 = 2", (1 + 1) == 3);
+		MinUnitAssert((1 + 1) == 3, "Error:, 1 + 1 = 2");
 	}
 
 	static void MinUnitRunAll()
