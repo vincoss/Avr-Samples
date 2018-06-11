@@ -6,9 +6,7 @@
 */
 
 
-#ifndef UTILITY_H_
-#define UTILITY_H_
-
+#include <stdio.h>
 #include <inttypes.h>
 #include "Utility.h"
 
@@ -42,22 +40,23 @@ int IsNullOrEmpty(const char * str)
 }
 
 /*
-NOTE: The snprintf and sscanf require other linker flags. '-Wl,-u,vfscanf -lprintf_flt -lscanf_flt'
+	NOTE: The snprintf and sscanf require other linker flags. '-Wl,-u,vfscanf -lprintf_flt -lscanf_flt'
 */
 
 /*
-Formats
-short				%hi
-unsigned short		%hu
-signed int			%i or %d
-unsigned int		%u
-signed long			%li
-unsigned long		%lu
+	#Formats
+	short				%hi
+	unsigned short		%hu
+	signed int			%i or %d
+	unsigned int		%u
+	signed long			%li
+	unsigned long		%lu
 
-# These formats might not work on 8 bits
-long long			%lli or %lld
-unsigned long long	%llu
+	# These formats might not work on 8 bits
+	long long			%lli or %lld
+	unsigned long long	%llu
 */
+
 int IntToString(long long int value, const char * format, char * buffer, int length)
 {
 	if (IsNullOrEmpty(format) == 1)
@@ -69,27 +68,35 @@ int IntToString(long long int value, const char * format, char * buffer, int len
 	return 0; // Success
 }
 
-char * UnsignedIntToString(unsigned long long int value, const char * format, char * buffer, int length)
+int UnsignedIntToString(unsigned long long int value, const char * format, char * buffer, int length)
 {
 	if (IsNullOrEmpty(format) == 1)
 	{
-		return "";
+		return -1; // Error
 	}
 	memset(buffer, 0, length); // Clear
 	snprintf(buffer, length, format, value);
 	return buffer;
 }
 
-long long int ConvertToInt32(const char * str)
+long long int ConvertToInt(const char * str, const char * format)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
-		return 0;
+		return -1;
 	}
-
+	if (IsNullOrEmpty(format) == 1)
+	{
+		return -1;
+	}
 	long long int v;
-	sscanf(str, "%ld", &v);
+	sscanf(str, format, &v);
 	return v;
+}
+
+long int ConvertToInt32(const char * str)
+{
+	return ConvertToInt(str, "%ld");
 }
 
 unsigned long long int ConvertToUnsignedInt32(const char * str)
@@ -104,18 +111,6 @@ unsigned long long int ConvertToUnsignedInt32(const char * str)
 	return v;
 }
 
-//unsigned long long int ConvertToUnsignedInt64(const char * str)
-//{
-//if (IsNullOrEmpty(str) == 1)
-//{
-//return 0;
-//}
-//
-//unsigned long long int v;
-//sscanf(str, "%lu", &v);
-//return v;
-//}
-
 uint8_t ConvertToUInt8(const char * str)
 {
 	if (IsNullOrEmpty(str) == 1)
@@ -129,35 +124,29 @@ uint8_t ConvertToUInt8(const char * str)
 }
 
 /*
-TOOD: Not tested
+	#Formats
+	float			%f, %g, %e, %a
+	double			%lf, %lg, %le, %la
+	long double		%Lf, %Lg, %Le, %La
 */
-
-/*
-Formats
-float			%f, %g, %e, %a
-double			%lf, %lg, %le, %la
-long double		%Lf, %Lg, %Le, %La
-*/
-char * FloatToString(long double value, const char * format, char * buffer, int length)
+int FloatToString(long double value, const char * format, char * buffer, int length)
 {
 	if (IsNullOrEmpty(format) == 1)
 	{
-		return "";
+		return -1; // Error
 	}
 	memset(buffer, 0, length); // Clear
 	snprintf(buffer, length, format, value);
-	return buffer;
+	return 0;	// Success
 }
-
 
 float ConvertToFloat(const char * str)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
-		return 0;
+		return -1;
 	}
 
-	//return atof(str);
 	float v;
 	sscanf(str, "%f", &v);
 	return v;
@@ -167,14 +156,10 @@ double ConvertToDouble(const char * str)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
-		return 0;
+		return -1;
 	}
 
 	double v;
 	sscanf(str, "%lf", &v);
 	return v;
 }
-
-
-
-#endif

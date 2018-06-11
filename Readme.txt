@@ -7,7 +7,7 @@ https://www.gnu.org/software/make/manual/make.html#Wildcard-Function
 
 AVR Samples.
 
-ATmeaga328
+ATmeaga328P
 ATiny85
 
-Led, SPI, Shift register, Usart, Adc
+Led, SPI, Shift Register, Usart, Adc
