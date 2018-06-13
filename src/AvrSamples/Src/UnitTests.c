@@ -22,7 +22,7 @@ int MinUnitTestsFail = 0;
 // Call form main.c.
 int UnitTestsRun(void)
 {
-	MinUnitSetup();		// Basic setup, reset the counters
+	MinUnitSetup();		// Basic setup, reset the tests counters
 	
 	MinUnitRunAll();	// Run the tests
 
@@ -83,7 +83,7 @@ void IsNullOrEmptyTest()
 
 void IntToStringAndConvertToInt32Test()
 {
-	char buffer[11];
+	char buffer[12];
 	long int  expected = INT32_MAX;
 	char * format = "%ld";
 
@@ -107,19 +107,23 @@ void IntToStringAndConvertToInt64Test()
 
 	char messageBuffer[100];
 	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, IntToStringAndConvertToInt64Test %lld == %lld, result: %d", expected, actual, expected == actual);
+	
 	MinUnitAssert(expected == actual, messageBuffer);
 }
 
 void UnsignedIntToStringUnsignedAndConvertToInt32Test()
 {
-	char buffer[11];
-	unsigned int expected = UINT32_MAX;
+	char buffer[12];
+	unsigned long int expected = UINT32_MAX;
 	char * format = "%lu";
 
 	UnsignedIntToString(expected, format, buffer, sizeof(buffer));
-	unsigned int actual = ConvertToUnsignedInt32(buffer);
+	unsigned long long int actual = ConvertToUnsignedInt(buffer, format);
+	
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test %lu == %lu, result: %d", expected, actual, expected == actual);
 
-	MinUnitAssert(expected == actual, "Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test");
+	MinUnitAssert(expected == actual, messageBuffer);
 }
 
 void ConvertToUInt8Test()
@@ -131,7 +135,10 @@ void ConvertToUInt8Test()
 	UnsignedIntToString(expected, format, buffer, sizeof(buffer));
 	uint8_t actual = ConvertToUInt8(buffer);
 
-	MinUnitAssert(expected == actual, "Error:, UnsignedIntToStringUnsignedAndConvertToInt32Test");
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToUInt8Test %hhu == %hhu, result: %d", expected, actual, expected == actual);
+
+	MinUnitAssert(expected == actual, messageBuffer);
 }
 
 void ConvertToFloatTest()
@@ -142,11 +149,12 @@ void ConvertToFloatTest()
 	char * format = "%f";
 
 	int returnValue = FloatToString(expected, format, buffer, sizeof(buffer));
-	actual = ConvertToFloat(buffer);
+	actual = ConvertToFloat(buffer, format);
 
 	char messageBuffer[100];
-	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToFloat %f == %f, result: %d", expected, actual, expected == actual);
-	MinUnitAssert(expected == actual, messageBuffer);
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToFloatTest %.14f == %.14f, result: %d", expected, actual, expected == actual);
+	
+	MinUnitAssert((int)(expected * 1000) == (int)(actual * 1000), messageBuffer);
 }
 
 void ConvertToDoubleTest()
@@ -161,7 +169,8 @@ void ConvertToDoubleTest()
 
 	char messageBuffer[100];
 	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToDoubleTest %lf == %lf, result: %d", expected, actual, expected == actual);
-	MinUnitAssert(expected == actual, messageBuffer);
+	
+	MinUnitAssert((int)(expected * 1000) == (int)(actual * 1000), messageBuffer);
 }
 
 #pragma endregion
@@ -177,10 +186,10 @@ void MinUnitRunAll()
 	MinUnitRun(IsNullOrEmptyTest);
 	MinUnitRun(IntToStringAndConvertToInt32Test);
 	//MinUnitRun(IntToStringAndConvertToInt64Test);
-	//MinUnitRun(UnsignedIntToStringUnsignedAndConvertToInt32Test);
-	//MinUnitRun(ConvertToUInt8Test);
-//
-	//MinUnitRun(ConvertToFloatTest);
-	//MinUnitRun(ConvertToDoubleTest);
+	MinUnitRun(UnsignedIntToStringUnsignedAndConvertToInt32Test);
+	MinUnitRun(ConvertToUInt8Test);
+
+	MinUnitRun(ConvertToFloatTest);
+	MinUnitRun(ConvertToDoubleTest);
 }
 

@@ -45,8 +45,9 @@ void UtilitySamples_To_uint32_t_FromString(void)
 void UtilitySamples_To_Float_FromString(void)
 {
 	char buffer[12];
-	float result = ConvertToFloat("-3.1415");
-	char * str = FloatToString(result, "%f", buffer, sizeof(buffer));
+	char * format = "%f";
+	float result = ConvertToFloat("-3.1415", format);
+	char * str = FloatToString(result, format, buffer, sizeof(buffer));
 	
 	UsartWriteCharString(str);
 	UsartWriteChar('\n');

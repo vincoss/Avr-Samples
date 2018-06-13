@@ -99,15 +99,18 @@ long int ConvertToInt32(const char * str)
 	return ConvertToInt(str, "%ld");
 }
 
-unsigned long long int ConvertToUnsignedInt32(const char * str)
+unsigned long long int ConvertToUnsignedInt(const char * str, const char * format)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
-		return 0;
+		return -1;
 	}
-
-	unsigned long long int v;
-	sscanf(str, "%lu", &v);
+	if (IsNullOrEmpty(format) == 1)
+	{
+		return -1;
+	}
+	unsigned long int v;
+	sscanf(str, format, &v);
 	return v;
 }
 
@@ -140,15 +143,18 @@ int FloatToString(long double value, const char * format, char * buffer, int len
 	return 0;	// Success
 }
 
-float ConvertToFloat(const char * str)
+float ConvertToFloat(const char * str, const char * format)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
 		return -1;
 	}
-
+	if (IsNullOrEmpty(format) == 1)
+	{
+		return -1; // Error
+	}
 	float v;
-	sscanf(str, "%f", &v);
+	sscanf(str, format, &v);
 	return v;
 }
 

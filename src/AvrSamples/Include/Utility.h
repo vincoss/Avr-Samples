@@ -24,10 +24,10 @@ long int ConvertToInt32(const char * str);
 long long int ConvertToInt(const char * str, const char * format);
 
 uint8_t ConvertToUInt8(const char * str);
-unsigned long long int ConvertToUnsignedInt32(const char * str);
+unsigned long long int ConvertToUnsignedInt(const char * str, const char * format);
 
 int FloatToString(long double value, const char * format, char * buffer, int length);
-float ConvertToFloat(const char * str);
+float ConvertToFloat(const char * str, const char * format);
 double ConvertToDouble(const char * str);
 
 #endif
