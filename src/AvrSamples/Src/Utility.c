@@ -158,7 +158,7 @@ float ConvertToFloat(const char * str, const char * format)
 	return v;
 }
 
-double ConvertToDouble(const char * str)
+double ConvertToDouble(const char * str, const char * format)
 {
 	if (IsNullOrEmpty(str) == 1)
 	{
@@ -166,6 +166,6 @@ double ConvertToDouble(const char * str)
 	}
 
 	double v;
-	sscanf(str, "%lf", &v);
+	sscanf(str, format, &v);
 	return v;
 }

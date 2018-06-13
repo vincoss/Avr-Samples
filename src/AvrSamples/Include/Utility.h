@@ -28,6 +28,6 @@ unsigned long long int ConvertToUnsignedInt(const char * str, const char * forma
 
 int FloatToString(long double value, const char * format, char * buffer, int length);
 float ConvertToFloat(const char * str, const char * format);
-double ConvertToDouble(const char * str);
+double ConvertToDouble(const char * str, const char * format);
 
 #endif

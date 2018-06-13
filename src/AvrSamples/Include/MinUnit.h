@@ -31,12 +31,13 @@ void MinUnitSetup(void)
 
 void MinUnitAssert(int test, const char * message)
 {
-	if (!(test))
+	if(test)
 	{
-		MinUnitLogMessage(message);
-		TestFailedAssertCount++;
-		return;
+		return; // All good
 	}
+	
+	MinUnitLogMessage(message);
+	TestFailedAssertCount++;
 }
 
 void MinUnitRun(void callback(void))

@@ -165,7 +165,7 @@ void ConvertToDoubleTest()
 	char * format = "%lf";
 
 	int returnValue = FloatToString(expected, format, buffer, sizeof(buffer));
-	actual = ConvertToDouble(buffer);
+	actual = ConvertToDouble(buffer, format);
 
 	char messageBuffer[100];
 	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToDoubleTest %lf == %lf, result: %d", expected, actual, expected == actual);

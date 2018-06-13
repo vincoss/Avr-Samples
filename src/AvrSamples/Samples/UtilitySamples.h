@@ -56,8 +56,9 @@ void UtilitySamples_To_Float_FromString(void)
 void UtilitySamples_To_Double_FromString(void)
 {
 	char buffer[12];
-	double result = ConvertToDouble("-3.1416");
-	char * str = FloatToString(result, "%lf", buffer, sizeof(buffer));
+	char * format = "%lf";
+	double result = ConvertToDouble("-3.1416", format);
+	char * str = FloatToString(result, format, buffer, sizeof(buffer));
 	
 	UsartWriteCharString(str);
 	UsartWriteChar('\n');
