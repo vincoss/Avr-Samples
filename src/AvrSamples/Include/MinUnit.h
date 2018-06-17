@@ -19,7 +19,7 @@ extern int MinUnitTestsRun;
 extern int MinUnitTestsSuccess;
 extern int MinUnitTestsFail;
 
-int TestFailedAssertCount;
+int TestFailedAssertCount;	// Increment for each test failed assert.
 
 void MinUnitSetup(void)
 {
@@ -42,10 +42,10 @@ void MinUnitAssert(int test, const char * message)
 
 void MinUnitRun(void callback(void))
 {
-	MinUnitTestInitialize();
 	MinUnitTestsRun++;  
-	TestFailedAssertCount = 0; // Reset the assert for each test, one test might multiple asserts.
-	callback();
+	TestFailedAssertCount = 0; // Reset the assert for each test, one test might have multiple asserts.
+	MinUnitTestInitialize();
+	callback(); // Run actual test
 
 	if (TestFailedAssertCount > 0)
 	{
@@ -88,7 +88,7 @@ void MinUnitRun(void callback(void))
 		MinUnitRun(SampleTest);
 	}
 
-	int UnitTestsMain()
+	int UnitTestsMain() // Call from main.c
 	{
 		MinUnitRunAll();
 

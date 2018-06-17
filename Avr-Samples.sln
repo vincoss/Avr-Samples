@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvrMakeFileSample", "src\Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvrSamplesConsole", "src\AvrSamplesConsole\AvrSamplesConsole.vcxproj", "{8F50CA31-09B4-4C25-A543-462C69217ED0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{607B58E2-FCC4-4548-9556-A47813D94D84}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Default_Makefile", "src\Default_Makefile\Default_Makefile.vcxproj", "{7978A5C5-390F-4EEE-8B1C-631B1665B234}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,9 +35,20 @@ Global
 		{8F50CA31-09B4-4C25-A543-462C69217ED0}.Release|x64.Build.0 = Release|x64
 		{8F50CA31-09B4-4C25-A543-462C69217ED0}.Release|x86.ActiveCfg = Release|Win32
 		{8F50CA31-09B4-4C25-A543-462C69217ED0}.Release|x86.Build.0 = Release|Win32
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Debug|x64.ActiveCfg = Debug|x64
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Debug|x64.Build.0 = Debug|x64
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Debug|x86.ActiveCfg = Debug|Win32
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Debug|x86.Build.0 = Debug|Win32
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Release|x64.ActiveCfg = Release|x64
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Release|x64.Build.0 = Release|x64
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Release|x86.ActiveCfg = Release|Win32
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7978A5C5-390F-4EEE-8B1C-631B1665B234} = {607B58E2-FCC4-4548-9556-A47813D94D84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3391EF4E-6BD5-4BD3-AB46-709963BEB855}

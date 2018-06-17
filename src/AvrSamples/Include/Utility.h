@@ -15,6 +15,7 @@ uint8_t UtilityIsBitSet(uint8_t address, uint8_t bitIndex);
 void UtilitySetBitAsUsed(volatile uint8_t * address, uint8_t bitIndex);
 void UtilitySetBitAsUnUsed(volatile uint8_t * address, uint8_t bitIndex);
 void UtilityFlipBit(volatile uint8_t * address, uint8_t bitIndex);
+
 int IsNullOrEmpty(const char * str);
 
 int IntToString(long long int value, const char * format, char * buffer, int length);

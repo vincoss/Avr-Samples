@@ -152,7 +152,7 @@ void ConvertToFloatTest()
 	actual = ConvertToFloat(buffer, format);
 
 	char messageBuffer[100];
-	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToFloatTest %.14f == %.14f, result: %d", expected, actual, expected == actual);
+	snprintf(messageBuffer, sizeof(messageBuffer), "Error:, ConvertToFloatTest %f == %f, result: %d", expected, actual, expected == actual);
 	
 	MinUnitAssert((int)(expected * 1000) == (int)(actual * 1000), messageBuffer);
 }
