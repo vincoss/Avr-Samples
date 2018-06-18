@@ -189,9 +189,6 @@
     <Compile Include="Samples\UsartSamples.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\UtilitySamples.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Src\Adc.c">
       <SubType>compile</SubType>
     </Compile>

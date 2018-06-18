@@ -68,7 +68,7 @@ void Usart_WriteStringItoaSample(void)
 		UsartWriteCharString(buffer);
 		UsartWriteChar('\n');
 		
-		if(count >= 1023)
+		if(count == 1024)
 		{
 			
 			count = 0;

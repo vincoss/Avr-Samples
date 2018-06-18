@@ -23,7 +23,6 @@
 #include "MemorySamples.h"
 //#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 #include "TimeSample.h"
-#include "UtilitySamples.h"
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
 #include <inttypes.h>
@@ -32,18 +31,40 @@
 
 int main(void)
 {
+	Usart_WriteCharSample();
+	
+	return 0;
+}
+
+/*
+	// Main template
+	int main(void)
+	{
+		while(1)
+		{
+			_delay_ms(1000);
+		}
+		
+		return 0;
+	}
+*/
+
+/*
+// NOTE: Uncomment to run unit tests.
+int main(void)
+{
 	UsartInitialize();
 	
 	while(1)
 	{
 		UnitTestsRun();
-		//UtilitySamples_To_Double_FromString();
 		
 		_delay_ms(3000);
 	}
 	
 	return 0;
 }
+*/
 
 // Platform specific, MinUnit.h implementation. Write test output to USART
 void MinUnitLogMessage(const char * str)
