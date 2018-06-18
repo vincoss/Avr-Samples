@@ -14,6 +14,8 @@
 #include <avr/delay.h>
 #include "Usart.h"
 
+// TODO: Review all this.
+
 #ifdef __arm__
 // should use uinstd.h to define sbrk but Due causes a conflict
 extern "C" char* sbrk(int incr);
