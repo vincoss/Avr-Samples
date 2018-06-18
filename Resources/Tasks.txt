@@ -4,10 +4,5 @@
 get source for it - read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
 -- SPI read example
 
-check 
-__avr_libc_does_not_implement_long_long_in_printf_or_scanf
-__avr_libc_does_not_implement_long_long_in_printf_or_scanf
 
 64bit at AtTiny85
-
-fix AvrMakeFileSample
