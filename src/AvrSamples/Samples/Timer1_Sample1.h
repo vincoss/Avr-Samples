@@ -32,12 +32,14 @@ void Timer1_Sample1_Initialize(void);
 void Timer1_Sample1_Main()
 {
 	Timer1_Sample1_Initialize();
+	UsartInitialize();
 	
 	while(1)
 	{
 		if(Timer1_Sample1_Count >= 1000)
 		{
-			UsartWriteCharString("Second");
+			UsartWriteCharString("Hi AVR!");
+			UsartWriteChar('\n');
 			Timer1_Sample1_Count = 0;
 		}
 	}
@@ -45,6 +47,9 @@ void Timer1_Sample1_Main()
 
 void Timer1_Sample1_Initialize(void)
 {
+	// Reset ticks
+	Timer1_Sample1_Count = 0;
+	
 	cli();	// Disable global interrupts
 
 	TCCR1A = 0;     // set entire TCCR1A register to 0

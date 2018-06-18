@@ -21,8 +21,8 @@
 #include "UsartSamples.h"
 #include "BlinkingLedSamples.h"
 #include "MemorySamples.h"
-//#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
-#include "TimeSample.h"
+#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
+//#include "TimeSample.h"
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
 #include <inttypes.h>
@@ -31,7 +31,7 @@
 
 int main(void)
 {
-	Usart_WriteCharSample();
+	Timer1_Sample1_Main();
 	
 	return 0;
 }

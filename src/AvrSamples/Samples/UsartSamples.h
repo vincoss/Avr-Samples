@@ -27,9 +27,10 @@ void Usart_WriteCharSample(void)
 	{
 		for (uint8_t i = 0; i <= INT8_MAX; i++)
 		{
+			// NOTE: This does print right characters just wait and watch what is printed.
 			UsartWriteChar(i);
 
-			_delay_ms(500);
+			_delay_ms(50);
 		}
 
 		UsartWriteChar('\r');
