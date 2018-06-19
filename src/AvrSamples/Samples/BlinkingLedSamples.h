@@ -48,7 +48,7 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void);
 
 	PB5
 	P = Pin
-	B = port digital pins 8 to 13
+	B = Port digital pins 8 to 13
 	5 = decimal value (convert decimal 32 or binary 100000)
  
  */
