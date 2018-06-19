@@ -147,10 +147,14 @@
   <ItemGroup>
     <Folder Include="Include" />
     <Folder Include="Samples" />
+    <Folder Include="Samples\Review" />
     <Folder Include="Src\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Include\Adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\Eeprom.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\MinUnit.h">
@@ -169,6 +173,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\BlinkingLedSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\EepromSamples.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\MemorySamples.h">

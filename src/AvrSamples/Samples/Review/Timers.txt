@@ -1,0 +1,93 @@
+
+### 1. Example
+
+// TIMER0,TIMER1,TIMER2 basic timer counter overflow sample with counter reset
+
+// Flash an LED every:	 6ms
+// CPU clock frequency:	 32kHz
+// Prescaler:			 1
+
+// Calculate Clock Time Period
+// Clock Time Period = 1 / Frequency
+// Clock Time Period = 1 / 32000Hz
+// Clock Time Period = 0.00003125 µs
+// Clock Time Period = 0.00003125 µs * 1000
+// Clock Time Period = 0.03125 ms
+
+// Calculate Timer Count
+// Timer Count = (Required Delay / Clock Time Period)
+// Timer Count = (6 / 0.03125)
+// Timer Count = 192 
+// Timer Count = 191 // -1 since timer count is zero based
+
+### 2. Example
+
+// AVR TIMER0,TIMER1,TIMER2 basic timer counter overflow and prescaler sample with counter reset
+
+// Flash an LED every:	 8ms
+// CPU clock frequency:	 16MHz
+// Prescaler:			 1024
+
+// Calculate frequency with prescaler
+// Frequency = Clock Frequency / Prescaler
+// Frequency = 16000000Hz / 1024
+// Frequency = 15625
+
+// Calculate Clock Time Period
+// Clock Time Period = 1 / Frequency Hz
+// Clock Time Period = 1 / 15625
+// Clock Time Period = 0.000064 µm
+// Clock Time Period = 0.000064 µm * 1000
+// Clock Time Period = 0.064 ms
+
+// Calculate Timer Count
+// Timer Count = (Required Delay / Clock Time Period)
+// Timer Count = (8 / 0.064)
+// Timer Count = 125
+
+### 3. Sample
+
+// AVR TIMER0 basic timer counter overflow and prescaler, interupt sample with counter reset
+
+// Flash an LED every:	 50ms
+// CPU clock frequency:	 16MHz
+// Prescaler:			 256
+
+// 1. Calculate frequency with prescaler
+// Frequency = Frequency Hz / Prescaler
+// Frequency = 16000000Hz / 256 
+// Frequency = 62500
+
+// 2. Calculate Clock Time Period
+// Clock Time Period = 1 / Frequency
+// Clock Time Period = 1 / 62500
+// Clock Time Period = 0.000016 µm
+// Clock Time Period = 0.000016 µm * 1000
+// Clock Time Period = 0.016 ms
+
+// 3. Calculate timer oveflow delay (Timer overflow every 4.096ms)
+// Clock oveflow delay = MAX * Clock Time Period
+// Clock oveflow delay = 256 * 0.016
+// Clock oveflow delay = 4.096 ms
+
+// Calculate number of timer overflows to reach requird delay
+// Clock overflow count =  requred delay / Clock oveflow delay
+// Clock overflow count =  50 / 4.096
+// Clock overflow count =  12.20703
+
+// Need to overflow 12 times to reach 50ms delay
+
+// Calculate time passed after 12 overflows
+// Time passed = Clock overflow count * Clock oveflow delay
+// Time passed = 12 * 4.096
+// Time passed = 49.152
+
+// Calculate the remaning delay to 50ms
+// Remaining delay = Required delay - Time passed
+// Remaining delay = 50 - 49.152
+// Remaining delay = 0.848
+
+// Calculate Timer Count
+// Formula: Timer Count = (Remaining delay / Clock Time Period)
+// Formula: Timer Count = (0.848 / 0.016)
+// Formula: Timer Count = 53

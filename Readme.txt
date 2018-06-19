@@ -9,5 +9,6 @@ AVR Samples.
 
 ATmeaga328P
 ATiny85
+SN74hc595
 
 Led, SPI, Shift Register, Usart, Adc

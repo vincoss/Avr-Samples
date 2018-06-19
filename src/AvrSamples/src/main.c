@@ -27,11 +27,12 @@
 #include "SN74HC595_Samples.h"
 #include <inttypes.h>
 #include "UnitTests.h"
+#include "EepromSamples.h"
 
 
 int main(void)
 {
-	MemorySamples_Main();
+	SampleWriteAndReadEepromValue();
 	
 	return 0;
 }
