@@ -3,12 +3,10 @@
  *
  * Created: 29/01/2018 10:08:17 PM
  *  Author: Ferdinand Lukasak
- */
-
+ */ 
 
 #ifndef BUTTON_SAMPLES_H_
 #define BUTTON_SAMPLES_H_
-
 
 #include <avr/io.h>				// This is our usual include
 #include <util/delay.h>			// The delay functions and routines
@@ -219,9 +217,9 @@ uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo)
 	}
 }
 
-uint8_t IsBitSet(unsigned address, unsigned bitIndex)
+uint8_t IsBitSet(unsigned value, unsigned bitindex)
 {
-	return ((address & (1 << bitIndex)) != 0) ? 1 : 0;
+	return ((value & (1 << bitindex)) != 0) ? 1 : 0;
 }
 
 #endif
