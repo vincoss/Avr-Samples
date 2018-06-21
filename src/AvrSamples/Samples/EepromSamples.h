@@ -13,6 +13,8 @@
 #include <util/delay.h>
 #include "Eeprom.h"
 
+// TODO: Review and clean following samples
+
 
 // Write & read value from EEPROM
 void SampleWriteAndReadEepromValue(void);
@@ -67,7 +69,7 @@ void SampleWith_EEMEM_Keyword(void)
 	}
 }
 
-/*
+
 // TODO: This method does not work. Need to figure out how to upload .eep file first.
 // Possible arduino uploader does not support it.
 // avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex -U eeprom:w:main.eep:i
@@ -83,8 +85,7 @@ void SampleWith_EEMEM_KeywordReadAndWriteValue(void);
 void SampleWith_EEMEM_KeywordReadAndWriteValue(void)
 {
 	// Read
-	uint8_t valueOut;
-	valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);
+	uint8_t valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);
 
 	// Set PB5 as output 13 and low
 	DDRB |= (1 << valueOut);
@@ -158,8 +159,8 @@ void SampleWithStruct(void)
 	uint8_t port = out.B;
 
 	// Set PB4 as output 12 and low
-	DDRB |= (1 << valueOut);
-	PORTB &= ~(1 << valueOut);
+	DDRB |= (1 << in.B);
+	PORTB &= ~(1 << in.B);
 
 	while (1)
 	{
@@ -251,5 +252,5 @@ void SampleSeven()
 uint8_t EEMEM SomeVariable = 12;
 
 #pragma endregion
-*/
+
 #endif
