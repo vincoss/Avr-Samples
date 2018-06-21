@@ -175,6 +175,9 @@
     <Compile Include="Samples\BlinkingLedSamples.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\ButtonSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\EepromSamples.h">
       <SubType>compile</SubType>
     </Compile>
