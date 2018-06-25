@@ -13,7 +13,10 @@
 #include <util/delay.h>
 #include "Eeprom.h"
 
-// TODO: Review and clean following samples
+// TODO: Review and clean following samples.
+/*
+	Add example for string and other types use each method provide in eeprom.h header
+*/
 
 
 // Write & read value from EEPROM
@@ -22,8 +25,8 @@ void SampleWriteAndReadEepromValue(void);
 void SampleWriteAndReadEepromValue(void)
 {
 	// Write
-	uint8_t valueIn = 5;
-	eeprom_update_byte((uint8_t *)46, valueIn);
+	uint8_t valueIn = 0;
+	eeprom_update_byte((uint8_t *)46, valueIn); // Will update the value if changed
 
 	// Read
 	uint8_t valueOut = eeprom_read_byte((uint8_t *)46);
@@ -49,7 +52,7 @@ void SampleWith_EEMEM_Keyword(void);
 
 void SampleWith_EEMEM_Keyword(void)
 {
-	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 5);
+	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 5); // Will update the value if changed
 	
 	// Read
 	uint8_t valueOut;
@@ -69,7 +72,6 @@ void SampleWith_EEMEM_Keyword(void)
 	}
 }
 
-
 // TODO: This method does not work. Need to figure out how to upload .eep file first.
 // Possible arduino uploader does not support it.
 // avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex -U eeprom:w:main.eep:i
@@ -78,7 +80,8 @@ void SampleWith_EEMEM_Keyword(void)
 // Upload
 // avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:w:main1.hex:i
 
-uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 4;
+// TODO: grab the .eep file with default value, then upload that into the controller and read the value.
+uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 5;
 
 void SampleWith_EEMEM_KeywordReadAndWriteValue(void);
 
@@ -135,32 +138,31 @@ void SampleWithAddressConstants(void)
 	}
 }
 
-struct Leds
+struct EepromSamplesLeds
 {
-	long A;
-	int B;
+	int PinA;
+	int PinB;
 };
 
 // Sample with struct
-void SampleWithStruct(void);
+void EepromSamples_WithStruct(void);
 
-void SampleWithStruct(void)
+void EepromSamples_WithStruct(void)
 {
-	struct Leds in;
-	struct Leds out;
+	struct EepromSamplesLeds in;
+	struct EepromSamplesLeds out;
 
-	in.A = 5;
-	in.B = 4;
+	in.PinA = 5;
+	in.PinB = 4;
 
 	eeprom_write_block((const void*)&in, (void*)0, sizeof(in));
-
-	eeprom_read_block((void*)&out, (void*)0, sizeof(out));
+	eeprom_read_block((void*)&out, (const void*)0, sizeof(out));
 	
-	uint8_t port = out.B;
+	uint8_t port = out.PinA;
 
 	// Set PB4 as output 12 and low
-	DDRB |= (1 << in.B);
-	PORTB &= ~(1 << in.B);
+	DDRB |= (1 << in.PinA);
+	PORTB &= ~(1 << in.PinA);
 
 	while (1)
 	{
@@ -174,7 +176,7 @@ void SampleWithStruct(void)
 
 #pragma region Non runable examples
 
-void SampleOne(void)
+void EepromSamples_SampleOne(void)
 {
 	// Reading single byte of the data from EEPROM
 
@@ -182,7 +184,7 @@ void SampleOne(void)
 	ByteOfData = eeprom_read_byte((uint8_t *)46);
 }
 
-void SampleTwo(void)
+void EepromSamples_SampleTwo(void)
 {
 	// Reading two bytes of the data from EEPROM
 	uint16_t WordOfData;
@@ -193,21 +195,21 @@ void SampleTwo(void)
 	// eeprom_read_dword()
 }
 
-void SampleThree(void)
+void EepromSamples_SampleThree(void)
 {
-	// Writting single byte of th data to EEPROM
+	// Writing single byte of th data to EEPROM
 
 	uint8_t ByteOfData;
 	ByteOfData = 0x12;
 	eeprom_update_byte((uint8_t *)46, ByteOfData);
 }
 
-void SampleFour(void)
+void EepromSamples_SampleFour(void)
 {
-	// Writting two bytes of the data to EEPROM
+	// Writing two bytes of the data to EEPROM
 
 	uint16_t WordOfData;
-	WordOfData = 0x1232;
+	WordOfData = 0x1232;	// 4658
 	eeprom_update_word((uint16_t *)46, WordOfData);
 
 	// Can use also these methods also, to write double words and floats
@@ -215,7 +217,7 @@ void SampleFour(void)
 	// eeprom_update_dword()
 }
 
-void SampleFive(void)
+void EepromSamples_SampleFive(void)
 {
 	// Read block of data
 
@@ -223,7 +225,7 @@ void SampleFive(void)
 	eeprom_read_block((void *)StringOfData, (const void *)12, 10);
 }
 
-void SampleSix(void)
+void EepromSamples_SampleSix(void)
 {
 	// Write block of data
 
@@ -231,23 +233,24 @@ void SampleSix(void)
 	eeprom_update_block((const void *)StringOfData, (void *)12, 10);
 }
 
-// Use of EEMEM attribute
+// Use of EEMEM attribute for automatic address assign by compiler.
 
 uint8_t EEMEM NonVolatileChar;
 uint16_t EEMEM NonVolatileInt;
 uint8_t EEMEM NonVolatileString[10];
 
-void SampleSeven()
+void EepromSamples_SampleSeven()
 {
 	uint8_t SRAMchar;
 	uint16_t SRAMint;
 	uint8_t SRAMstring[10];
+	
 	SRAMchar = eeprom_read_byte(&NonVolatileChar);
 	SRAMint = eeprom_read_word(&NonVolatileInt);
 	eeprom_read_block((void *)SRAMstring, (const void *)NonVolatileString, 10);
 }
 
-// Setting default EEPROM values. For this sample must write .eep file into EEPROM
+// Setting default EEPROM values. For this sample must write main.eep file into EEPROM
 
 uint8_t EEMEM SomeVariable = 12;
 
