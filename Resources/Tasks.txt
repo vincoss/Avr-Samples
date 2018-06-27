@@ -4,10 +4,15 @@
 get source for it - read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
 -- SPI read example
 
+See the Dallas Semiconductor app note 27 for 8051 assembler
+Jack Crenshaw's "Implementing CRCs"
 
 64bit at AtTiny85
 
+- check AVR lib .o and .a files
+
 -- Review those samples
+EepromSamples.h
 SN74HC595_Samples.h
 SpiSamples.h
 

@@ -18,7 +18,6 @@
 	Add example for string and other types use each method provide in eeprom.h header
 */
 
-
 // Write & read value from EEPROM
 void SampleWriteAndReadEepromValue(void);
 
