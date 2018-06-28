@@ -12,11 +12,19 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "Eeprom.h"
+#include "Usart.h"
 
 // TODO: Review and clean following samples.
 /*
 	Add example for string and other types use each method provide in eeprom.h header
+	add a sample to fill whole eeprom
 */
+
+/*
+	The ATmega32 contains 1024 bytes of data EEPROM memory. 
+	It is organized as a separate data space. The EEPROM data bytes are addressed linearly between 0 and 1023.
+*/
+
 
 // Write & read value from EEPROM
 void SampleWriteAndReadEepromValue(void);
@@ -254,5 +262,102 @@ void EepromSamples_SampleSeven()
 uint8_t EEMEM SomeVariable = 12;
 
 #pragma endregion
+
+
+// Read a single byte from the given address
+unsigned char EEPROM_read( unsigned int eeprom_addr ) {
+	// Spin-lock until EEPROM finishes prev write
+	while (EECR & (1<<EEPE)) ;
+	// Setup address register
+	EEAR = eeprom_addr;
+	// Start read
+	EECR |= (1<<EERE);
+	// Finishes right away
+	return EEDR;
+}
+
+// Write a single byte to the given address
+// Duplicate checking, no error checking.
+void EEPROM_write (unsigned int eeprom_addr, unsigned char eeprom_data) {
+	// Save a needless write and spinlock on busy EEPROM
+	if (eeprom_data == EEPROM_read(eeprom_addr))
+	return;
+	// Setup addr and data registers
+	EEAR = eeprom_addr;
+	EEDR = eeprom_data;
+	// Enable EEPROM write
+	EECR |= (1<<EEMPE);
+	// Start EEPROM write
+	EECR |= (1<<EEPE);
+}
+
+void EepromSamples_WriteFirstAndLastByte()
+{
+	UsartInitialize();
+	
+	unsigned int eeprom_StartAddress=0x00;
+	unsigned int eeprom_EndAddress=0x3ff;
+	
+	// Write
+	eeprom_update_byte(eeprom_StartAddress, 5);
+	eeprom_update_byte(eeprom_StartAddress, 4);
+
+	// Read
+	uint8_t firstValue = eeprom_read_byte(eeprom_StartAddress);
+	uint8_t lastValue = eeprom_read_byte(eeprom_EndAddress);
+	
+	while (1)
+	{
+		UsartWriteChar(firstValue);
+		UsartWriteChar('\n');
+		UsartWriteChar(lastValue);
+		UsartWriteChar('\n');
+
+		_delay_ms(1000);
+	}
+}
+
+void EepromSamples_WriteString()
+{
+	UsartInitialize();
+	
+	 unsigned int eeprom_address=0x00;
+	 unsigned char write_string[] = {"Hello World"}, read_string[15];
+	 
+	 while(1)
+	 {
+		 UsartWriteCharString("\n\rWrite : ");              // Print the message on UART
+		 UsartWriteCharString(write_string);                // Print the String to be written
+		 eeprom_write_byte(eeprom_address, write_string);	// Write the String at memory Location 0x00
+		 
+		 UsartWriteCharString("\tRead : ");                 // Print the message on UART
+		 eeprom_read_block((void*)&read_string, (const void*)eeprom_address, sizeof(read_string));		// Read the String from memory Location 0x00
+		 UsartWriteCharString(read_string);                 // Print the read String
+	 }
+}
+
+void EepromSamples_WriteNumbers(void)
+{
+	UsartInitialize();
+	
+	uint16_t writeNum_16 = 12345;
+	uint32_t writeNum_32 = 12345678;
+
+	uint16_t readNum_16;
+	uint32_t readNum_32;
+
+	#define num_16_address 0x00
+	#define num_32_address 0x02 // As num_16 takes two bytes, new address will start from +2 location
+	
+	eeprom_write_word((uint8_t *) num_16_address, writeNum_16);		// write 2-bytes of data(writeNum_16) at 0x00.
+	eeprom_write_dword((uint8_t *) num_32_address, writeNum_32);	// write 4-bytes of data(writeNum_32) at 0x02.
+	
+	eeprom_read_word((uint16_t *)num_16_address);	// Read 2-bytes of data from 0x00 into readNum_16
+	eeprom_read_dword((uint32_t *)num_32_address);	// Read 4-bytes of data from 0x02 into readNum_32
+	
+	//UART_Printf("num_16 = %5u    num_32=%8U",readNum_16,readNum_32);
+
+	while (1);
+}
 
 #endif

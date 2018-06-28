@@ -1,4 +1,10 @@
 
+# Next
+	Find UART_Printf("num_16 = %5u    num_32=%8U",readNum_16,readNum_32);
+	EepromSamples.h
+	Interrupt_Samples.h see BADISR_vect
+
+
 # task
 // TODO: review https://github.com/johnnyb/Shifty
 get source for it - read Atmel-2585-Setup-and-Use-of-the-SPI_ApplicationNote_AVR151.pdf
@@ -12,9 +18,10 @@ Jack Crenshaw's "Implementing CRCs"
 - check AVR lib .o and .a files
 
 -- Review those samples
-EepromSamples.h
 SN74HC595_Samples.h
 SpiSamples.h
+
+find definition for _SFR_IO8 register
 
 Fix this
 // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
