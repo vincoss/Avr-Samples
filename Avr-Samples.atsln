@@ -13,6 +13,7 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccCExecutableProje
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{27A3A8FD-40F5-44C7-A0D1-6419879FBAD2}"
 	ProjectSection(SolutionItems) = preProject
+		ASCIICodes.txt = ASCIICodes.txt
 		Resources\Avrdude.txt = Resources\Avrdude.txt
 		Resources\Tasks.txt = Resources\Tasks.txt
 	EndProjectSection

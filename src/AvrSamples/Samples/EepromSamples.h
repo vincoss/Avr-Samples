@@ -18,64 +18,63 @@
 /*
 	Add example for string and other types use each method provide in eeprom.h header
 	add a sample to fill whole eeprom
+	Check EESAVE
+	EepromSamples_WriteNumbers
 */
 
 /*
 	The ATmega32 contains 1024 bytes of data EEPROM memory. 
 	It is organized as a separate data space. The EEPROM data bytes are addressed linearly between 0 and 1023.
+	
+	#Resources:
+	https://www.avrfreaks.net/forum/tut-c-using-eeprom-memory-avr-gcc?page=all
 */
 
 
 // Write & read value from EEPROM
-void SampleWriteAndReadEepromValue(void);
+void EepromSamples_WriteAndReadEepromValue(void);
 
-void SampleWriteAndReadEepromValue(void)
+void EepromSamples_WriteAndReadEepromValue(void)
 {
+	UsartInitialize();
+	
 	// Write
-	uint8_t valueIn = 0;
+	uint8_t valueIn = 65;
 	eeprom_update_byte((uint8_t *)46, valueIn); // Will update the value if changed
 
 	// Read
 	uint8_t valueOut = eeprom_read_byte((uint8_t *)46);
 
-	// Set PB5 as output 13 and low
-	DDRB |= (1 << valueOut);
-	PORTB &= ~(1 << valueOut);
-
 	while (1)
 	{
-		PORTB |= (1 << valueOut);
+		UsartWriteChar(valueOut);
+		UsartWriteChar('\n');
+		
 		_delay_ms(1000);
-
-		PORTB &= ~(1 << valueOut);
-		_delay_ms(500);
 	}
 }
 
 uint8_t EEMEM _sampleWithEEMEM_Keyword;
 
 // Write & read value from EEPROM with EEMEM attribute
-void SampleWith_EEMEM_Keyword(void);
+void EepromSamples_With_EEMEM_Keyword(void);
 
-void SampleWith_EEMEM_Keyword(void)
+void EepromSamples_With_EEMEM_Keyword(void)
 {
-	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 5); // Will update the value if changed
+	UsartInitialize();
+	
+	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 66); // Will update the value if changed
 	
 	// Read
 	uint8_t valueOut;
 	valueOut = eeprom_read_byte(&_sampleWithEEMEM_Keyword);
 
-	// Set PB5 as output 13 and low
-	DDRB |= (1 << valueOut);
-	PORTB &= ~(1 << valueOut);
-
 	while (1)
 	{
-		PORTB |= (1 << valueOut);
+		UsartWriteChar(valueOut);
+		UsartWriteChar('\n');
+		
 		_delay_ms(1000);
-
-		PORTB &= ~(1 << valueOut);
-		_delay_ms(100);
 	}
 }
 
@@ -88,96 +87,96 @@ void SampleWith_EEMEM_Keyword(void)
 // avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:w:main1.hex:i
 
 // TODO: grab the .eep file with default value, then upload that into the controller and read the value.
-uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 5;
+uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 67;
 
-void SampleWith_EEMEM_KeywordReadAndWriteValue(void);
+void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void);
 
-void SampleWith_EEMEM_KeywordReadAndWriteValue(void)
+void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void)
 {
+	UsartInitialize();
+	
 	// Read
 	uint8_t valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);
 
-	// Set PB5 as output 13 and low
-	DDRB |= (1 << valueOut);
-	PORTB &= ~(1 << valueOut);
-
 	while (1)
 	{
-		PORTB |= (1 << valueOut);
+		UsartWriteChar(valueOut);
+		UsartWriteChar('\n');
+		
 		_delay_ms(1000);
-
-		PORTB &= ~(1 << valueOut);
-		_delay_ms(2000);
 	}
 }
 
 // Sample with constant address value
-void SampleWithAddressConstants(void);
+void EepromSamples_WithAddressConstants(void);
 
-void SampleWithAddressConstants(void)
+void EepromSamples_WithAddressConstants(void)
 {
+	UsartInitialize();
+	
 	#define ADDRESS_1 46  // This could be anything from 0 to the highest EEPROM address
 	#define ADDRESS_2 52  // This could be anything from 0 to the highest EEPROM address
 	#define ADDRESS_3 68  // This could be anything from 0 to the highest EEPROM address
 
-	uint8_t dataByte1 = 5;  // Data for address 1
-	uint8_t dataByte2 = 4;  // Data for address 2
-	uint8_t dataByte3 = 3;  // Data for address 3
+	uint8_t dataByte1 = 65;  // Data for address 1
+	uint8_t dataByte2 = 66;  // Data for address 2
+	uint8_t dataByte3 = 67;  // Data for address 3
 
 	eeprom_update_byte((uint8_t*)ADDRESS_1, dataByte1);
 	eeprom_update_byte((uint8_t*)ADDRESS_2, dataByte2);
 	eeprom_update_byte((uint8_t*)ADDRESS_3, dataByte3);
 
 	// Read
-	uint8_t valueOut = eeprom_read_byte((uint8_t *)ADDRESS_1);
-
-	// Set PB5 as output 13 and low
-	DDRB |= (1 << valueOut);
-	PORTB &= ~(1 << valueOut);
+	uint8_t valueOut1 = eeprom_read_byte((uint8_t *)ADDRESS_1);
+	uint8_t valueOut2 = eeprom_read_byte((uint8_t *)ADDRESS_2);
+	uint8_t valueOut3 = eeprom_read_byte((uint8_t *)ADDRESS_3);
 
 	while (1)
 	{
-		PORTB |= (1 << valueOut);
+		UsartWriteChar(valueOut1);
+		UsartWriteChar('\n');
+		
+		UsartWriteChar(valueOut2);
+		UsartWriteChar('\n');
+		
+		UsartWriteChar(valueOut3);
+		UsartWriteChar('\n');
+		
 		_delay_ms(1000);
-
-		PORTB &= ~(1 << valueOut);
-		_delay_ms(500);
 	}
 }
 
-struct EepromSamplesLeds
+typedef struct EepromSamplesLeds
 {
-	int PinA;
-	int PinB;
-};
+	uint8_t PinA;
+	uint8_t PinB;
+} EL;
 
 // Sample with struct
 void EepromSamples_WithStruct(void);
 
 void EepromSamples_WithStruct(void)
 {
-	struct EepromSamplesLeds in;
-	struct EepromSamplesLeds out;
-
-	in.PinA = 5;
-	in.PinB = 4;
-
-	eeprom_write_block((const void*)&in, (void*)0, sizeof(in));
-	eeprom_read_block((void*)&out, (const void*)0, sizeof(out));
+	UsartInitialize();
 	
-	uint8_t port = out.PinA;
+	EL write;
+	EL read;
+	
+	write.PinA = 65;
+	write.PinB = 66;
 
-	// Set PB4 as output 12 and low
-	DDRB |= (1 << in.PinA);
-	PORTB &= ~(1 << in.PinA);
-
+	eeprom_update_block((const void*)&write, (void*)0, sizeof(write));	// Address 0
+	eeprom_read_block((void*)&read, (const void*)0, sizeof(read));		// Address 0
+	
 	while (1)
 	{
-		PORTB |= (1 << port);
+		UsartWriteChar(read.PinA);
+		UsartWriteChar('\n');
+		
+		UsartWriteChar(read.PinB);
+		UsartWriteChar('\n');
+		
 		_delay_ms(1000);
-
-		PORTB &= ~(1 << port);
-		_delay_ms(500);
 	}
 }
 
@@ -185,7 +184,7 @@ void EepromSamples_WithStruct(void)
 
 void EepromSamples_SampleOne(void)
 {
-	// Reading single byte of the data from EEPROM
+	// Reading single byte of the data from EEPROM address 46
 
 	uint8_t ByteOfData;
 	ByteOfData = eeprom_read_byte((uint8_t *)46);
@@ -193,7 +192,7 @@ void EepromSamples_SampleOne(void)
 
 void EepromSamples_SampleTwo(void)
 {
-	// Reading two bytes of the data from EEPROM
+	// Reading two bytes of the data from EEPROM address 46
 	uint16_t WordOfData;
 	WordOfData = eeprom_read_word((uint16_t *)46);
 
@@ -204,7 +203,7 @@ void EepromSamples_SampleTwo(void)
 
 void EepromSamples_SampleThree(void)
 {
-	// Writing single byte of th data to EEPROM
+	// Writing single byte of th data to EEPROM	address 46
 
 	uint8_t ByteOfData;
 	ByteOfData = 0x12;
@@ -213,7 +212,7 @@ void EepromSamples_SampleThree(void)
 
 void EepromSamples_SampleFour(void)
 {
-	// Writing two bytes of the data to EEPROM
+	// Writing two bytes of the data to EEPROM address 46
 
 	uint16_t WordOfData;
 	WordOfData = 0x1232;	// 4658
@@ -226,7 +225,7 @@ void EepromSamples_SampleFour(void)
 
 void EepromSamples_SampleFive(void)
 {
-	// Read block of data
+	// Read block of data from EEPROM address 12
 
 	uint8_t StringOfData[10]; // 10 bytes
 	eeprom_read_block((void *)StringOfData, (const void *)12, 10);
@@ -234,7 +233,7 @@ void EepromSamples_SampleFive(void)
 
 void EepromSamples_SampleSix(void)
 {
-	// Write block of data
+	// Write block of data EEPROM address 12
 
 	char StringOfData[10] = "TEST";
 	eeprom_update_block((const void *)StringOfData, (void *)12, 10);
@@ -263,48 +262,75 @@ uint8_t EEMEM SomeVariable = 12;
 
 #pragma endregion
 
-
 // Read a single byte from the given address
-unsigned char EEPROM_read( unsigned int eeprom_addr ) {
-	// Spin-lock until EEPROM finishes prev write
-	while (EECR & (1<<EEPE)) ;
+uint8_t EepromSamples_ManualReadUtility(const uint8_t address)
+{
+	// Spin-lock until EEPROM finishes previous write
+	while (EECR & (1<<EEPE));
+	
 	// Setup address register
-	EEAR = eeprom_addr;
+	EEAR = address;
+	
 	// Start read
 	EECR |= (1<<EERE);
+	
 	// Finishes right away
 	return EEDR;
 }
 
-// Write a single byte to the given address
-// Duplicate checking, no error checking.
-void EEPROM_write (unsigned int eeprom_addr, unsigned char eeprom_data) {
+// Write a single byte to the given address. Duplicate checking, no error checking.
+void EepromSamples_ManualWriteUtility(const uint8_t address, uint8_t value)
+{
 	// Save a needless write and spinlock on busy EEPROM
-	if (eeprom_data == EEPROM_read(eeprom_addr))
-	return;
-	// Setup addr and data registers
-	EEAR = eeprom_addr;
-	EEDR = eeprom_data;
+	if (value == EepromSamples_ManualReadUtility(address))
+	{
+		return;
+	}
+	
+	// Setup address and data registers
+	EEAR = address;
+	EEDR = value;
+	
 	// Enable EEPROM write
 	EECR |= (1<<EEMPE);
+	
 	// Start EEPROM write
 	EECR |= (1<<EEPE);
+}
+
+void EepromSamples_Manual(void)
+{
+	UsartInitialize();
+	
+	uint8_t write = 66;
+	uint8_t address = 0;
+	
+	EepromSamples_ManualWriteUtility(address, write);
+	uint8_t read = EepromSamples_ManualReadUtility(address);
+	
+	while(1)
+	{
+		UsartWriteChar(read);
+		UsartWriteChar('\n');
+		
+		_delay_ms(1000);
+	}
 }
 
 void EepromSamples_WriteFirstAndLastByte()
 {
 	UsartInitialize();
 	
-	unsigned int eeprom_StartAddress=0x00;
-	unsigned int eeprom_EndAddress=0x3ff;
+	unsigned int eeprom_StartAddress = 0x00;	// 0
+	unsigned int eeprom_EndAddress = 0x3ff;		// 1023
 	
 	// Write
-	eeprom_update_byte(eeprom_StartAddress, 5);
-	eeprom_update_byte(eeprom_StartAddress, 4);
+	eeprom_update_byte((uint8_t *)eeprom_StartAddress, 65);
+	eeprom_update_byte((uint8_t *)eeprom_EndAddress, 66);
 
 	// Read
-	uint8_t firstValue = eeprom_read_byte(eeprom_StartAddress);
-	uint8_t lastValue = eeprom_read_byte(eeprom_EndAddress);
+	uint8_t firstValue = eeprom_read_byte((uint8_t *)eeprom_StartAddress);
+	uint8_t lastValue = eeprom_read_byte((uint8_t *)eeprom_EndAddress);
 	
 	while (1)
 	{
@@ -321,18 +347,20 @@ void EepromSamples_WriteString()
 {
 	UsartInitialize();
 	
-	 unsigned int eeprom_address=0x00;
-	 unsigned char write_string[] = {"Hello World"}, read_string[15];
+	 unsigned int eeprom_address = 0x00;	// Address at 0
+	 unsigned char write_string[] = { "Hello World" }, read_string[15];
 	 
 	 while(1)
 	 {
-		 UsartWriteCharString("\n\rWrite : ");              // Print the message on UART
-		 UsartWriteCharString(write_string);                // Print the String to be written
-		 eeprom_write_byte(eeprom_address, write_string);	// Write the String at memory Location 0x00
+		 UsartWriteCharString("\n\rWrite : ");             
+		 UsartWriteCharString(write_string);                
+		 eeprom_update_block((const void *)write_string, (void *)eeprom_address, sizeof(write_string)); // Write
 		 
-		 UsartWriteCharString("\tRead : ");                 // Print the message on UART
-		 eeprom_read_block((void*)&read_string, (const void*)eeprom_address, sizeof(read_string));		// Read the String from memory Location 0x00
-		 UsartWriteCharString(read_string);                 // Print the read String
+		 UsartWriteCharString("\tRead : ");                 
+		 eeprom_read_block((void*)&read_string, (const void*)eeprom_address, sizeof(read_string));		// Read
+		 UsartWriteCharString(read_string);                 
+		
+		 _delay_ms(1000);
 	 }
 }
 
@@ -349,15 +377,74 @@ void EepromSamples_WriteNumbers(void)
 	#define num_16_address 0x00
 	#define num_32_address 0x02 // As num_16 takes two bytes, new address will start from +2 location
 	
-	eeprom_write_word((uint8_t *) num_16_address, writeNum_16);		// write 2-bytes of data(writeNum_16) at 0x00.
-	eeprom_write_dword((uint8_t *) num_32_address, writeNum_32);	// write 4-bytes of data(writeNum_32) at 0x02.
+	eeprom_update_word((uint16_t *)num_16_address, writeNum_16);	// write 2-bytes of data(writeNum_16) at 0x00.
+	eeprom_update_dword((uint32_t *)num_32_address, writeNum_32);	// write 4-bytes of data(writeNum_32) at 0x02.
 	
-	eeprom_read_word((uint16_t *)num_16_address);	// Read 2-bytes of data from 0x00 into readNum_16
-	eeprom_read_dword((uint32_t *)num_32_address);	// Read 4-bytes of data from 0x02 into readNum_32
+	readNum_16 = eeprom_read_word((uint16_t *)num_16_address);	// Read 2-bytes of data from 0x00 into readNum_16
+	readNum_32 = eeprom_read_dword((uint32_t *)num_32_address);	// Read 4-bytes of data from 0x02 into readNum_32
 	
-	//UART_Printf("num_16 = %5u    num_32=%8U",readNum_16,readNum_32);
+	while (1)
+	{
+		UsartPrintf("Num_16 = %5u, Num_32 = %8U",readNum_16, readNum_32);
+		UsartWriteChar('\n');
 
-	while (1);
+		_delay_ms(1000);
+	}
+}
+
+float EEMEM EEwriteFloat;
+
+void EepromSamples_WriteFloat()
+{
+	UsartInitialize();
+	
+	float x = 123.45;
+	eeprom_update_block((const void*)&x, (void*)&EEwriteFloat, sizeof(float));
+
+	float temp;
+	eeprom_read_block((void*)&temp, (const void*)&EEwriteFloat, sizeof(float));
+	
+	while(1)
+	{
+		UsartPrintf("%f", temp);
+		UsartWriteChar('\n');
+		
+		_delay_ms(1000);
+	}	
+}
+
+typedef struct StructSettings
+{
+	int8_t Int8;
+	int16_t Int16;
+	float Float;
+	char Char[10];
+} ST;
+
+ST EEMEM EEStructSettings;
+
+void EepromSamples_Struct()
+{
+	ST write;
+	ST read;
+	
+	// Init
+	write.Int8 = 10;
+	write.Int16 = 516;
+	write.Float = 123.45;
+	strcpy(write.Char, "Hi there!");
+	
+	// Write
+	eeprom_update_block((const void*)&write, (void*)&EEStructSettings, sizeof(ST));
+	eeprom_read_block((void*)&read, (const void*)&EEStructSettings, sizeof(ST));
+	
+	while(1)
+	{
+		UsartPrintf("Int8 = %d, Int16 = %d, Float = %f, Char = %s", read.Int8, read.Int16, read.Float, read.Char);
+		UsartWriteChar('\n');
+
+		_delay_ms(1000);
+	}
 }
 
 #endif

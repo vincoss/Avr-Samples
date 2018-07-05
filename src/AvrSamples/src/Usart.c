@@ -6,6 +6,7 @@
  */ 
 
 #include <avr/io.h>
+#include <stdarg.h>
 #include "Usart.h"
 
 //228 external cloclk
@@ -51,4 +52,36 @@ void UsartInterruptInitialize(void)
 {
 	UCSR0B |= (1 << RXEN0) | (1 << RXCIE0); // Enable the USART Receive Complete interrupt ( USART_RX )
 	sei(); // Enable the Global Interrupt Enable flag so that interrupts can be processed
+}
+
+void UsartPrintf(const char * argList, ...)
+{
+	va_list argp;
+	va_start(argp, argList);
+	
+	const char *ptr;
+	char *str;
+	char  ch;
+	
+	switch('ch')
+	{
+		case 'C':
+		case 'c':     /* Argument type is of char, hence read char data from the argp */
+		{
+			ch = va_arg(argp, int);
+			UsartWriteChar(ch);
+			break;
+		}
+		case  'S':
+		case 's': /* Argument type is of string, hence get the pointer to sting passed */
+		{
+			str = va_arg(argp, char *);
+			UsartWriteCharString(str);
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
 }

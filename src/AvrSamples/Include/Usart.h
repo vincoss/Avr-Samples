@@ -25,5 +25,6 @@ void UsartInterruptInitialize(void); // TODO: merge this with UsartInitialize
 void UsartWriteChar(unsigned char data);
 unsigned char UsartReadChar(void);
 void UsartWriteCharString(const unsigned char* stringPtr);
+void UsartPrintf(const char * str, ...);
 
 #endif /* USART_H_ */

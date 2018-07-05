@@ -32,7 +32,7 @@
 
 int main(void)
 {
-	SampleWriteAndReadEepromValue();
+	EepromSamples_WriteFloat();
 	
 	return 0;
 }
