@@ -1,7 +1,5 @@
 
 # Next
-	Find UART_Printf("num_16 = %5u    num_32=%8U",readNum_16,readNum_32);
-	EepromSamples.h
 	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
 

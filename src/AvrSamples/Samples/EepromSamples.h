@@ -8,17 +8,16 @@
 #ifndef EEPROM_SAMPLES_H_
 #define EEPROM_SAMPLES_H_
 
+#include <stdio.h>
 #include <avr/eeprom.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include "Eeprom.h"
 #include "Usart.h"
 
-// TODO: Review and clean following samples.
+
 /*
-	Add example for string and other types use each method provide in eeprom.h header
-	add a sample to fill whole eeprom
-	Check EESAVE
+	TODO: Check EESAVE
 	EepromSamples_WriteNumbers
 */
 
@@ -66,37 +65,7 @@ void EepromSamples_With_EEMEM_Keyword(void)
 	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 66); // Will update the value if changed
 	
 	// Read
-	uint8_t valueOut;
-	valueOut = eeprom_read_byte(&_sampleWithEEMEM_Keyword);
-
-	while (1)
-	{
-		UsartWriteChar(valueOut);
-		UsartWriteChar('\n');
-		
-		_delay_ms(1000);
-	}
-}
-
-// TODO: This method does not work. Need to figure out how to upload .eep file first.
-// Possible arduino uploader does not support it.
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex -U eeprom:w:main.eep:i
-// Read
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:r:main1.eep:i
-// Upload
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:w:main1.hex:i
-
-// TODO: grab the .eep file with default value, then upload that into the controller and read the value.
-uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 67;
-
-void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void);
-
-void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void)
-{
-	UsartInitialize();
-	
-	// Read
-	uint8_t valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);
+	uint8_t valueOut = eeprom_read_byte(&_sampleWithEEMEM_Keyword);
 
 	while (1)
 	{
@@ -281,7 +250,7 @@ uint8_t EepromSamples_ManualReadUtility(const uint8_t address)
 // Write a single byte to the given address. Duplicate checking, no error checking.
 void EepromSamples_ManualWriteUtility(const uint8_t address, uint8_t value)
 {
-	// Save a needless write and spinlock on busy EEPROM
+	// Save a needless write and spinlock on busy EEPROM (will not write if value is the same)
 	if (value == EepromSamples_ManualReadUtility(address))
 	{
 		return;
@@ -347,21 +316,21 @@ void EepromSamples_WriteString()
 {
 	UsartInitialize();
 	
-	 unsigned int eeprom_address = 0x00;	// Address at 0
-	 unsigned char write_string[] = { "Hello World" }, read_string[15];
+	unsigned int eeprom_address = 0x00;	// Address at 0
+	unsigned char write_string[] = { "Hello World" }, read_string[15];
 	 
-	 while(1)
-	 {
-		 UsartWriteCharString("\n\rWrite : ");             
-		 UsartWriteCharString(write_string);                
-		 eeprom_update_block((const void *)write_string, (void *)eeprom_address, sizeof(write_string)); // Write
+	while(1)
+	{
+		UsartWriteCharString("\n\rWrite : ");             
+		UsartWriteCharString(write_string);                
+		eeprom_update_block((const void *)write_string, (void *)eeprom_address, sizeof(write_string)); // Write
 		 
-		 UsartWriteCharString("\tRead : ");                 
-		 eeprom_read_block((void*)&read_string, (const void*)eeprom_address, sizeof(read_string));		// Read
-		 UsartWriteCharString(read_string);                 
+		UsartWriteCharString("\tRead : ");                 
+		eeprom_read_block((void*)&read_string, (const void*)eeprom_address, sizeof(read_string));		// Read
+		UsartWriteCharString(read_string);                 
 		
-		 _delay_ms(1000);
-	 }
+		_delay_ms(1000);
+	}
 }
 
 void EepromSamples_WriteNumbers(void)
@@ -383,9 +352,12 @@ void EepromSamples_WriteNumbers(void)
 	readNum_16 = eeprom_read_word((uint16_t *)num_16_address);	// Read 2-bytes of data from 0x00 into readNum_16
 	readNum_32 = eeprom_read_dword((uint32_t *)num_32_address);	// Read 4-bytes of data from 0x02 into readNum_32
 	
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Int16 = %d, Int32 = %ld", readNum_16, readNum_32);
+	
 	while (1)
 	{
-		UsartPrintf("Num_16 = %5u, Num_32 = %8U",readNum_16, readNum_32);
+		UsartWriteCharString(messageBuffer);
 		UsartWriteChar('\n');
 
 		_delay_ms(1000);
@@ -398,15 +370,18 @@ void EepromSamples_WriteFloat()
 {
 	UsartInitialize();
 	
-	float x = 123.45;
+	float x = 123.1415;
 	eeprom_update_block((const void*)&x, (void*)&EEwriteFloat, sizeof(float));
 
 	float temp;
 	eeprom_read_block((void*)&temp, (const void*)&EEwriteFloat, sizeof(float));
 	
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Float = %f", temp);
+	
 	while(1)
 	{
-		UsartPrintf("%f", temp);
+		UsartWriteCharString(messageBuffer);
 		UsartWriteChar('\n');
 		
 		_delay_ms(1000);
@@ -425,6 +400,8 @@ ST EEMEM EEStructSettings;
 
 void EepromSamples_Struct()
 {
+	UsartInitialize();
+	
 	ST write;
 	ST read;
 	
@@ -438,13 +415,46 @@ void EepromSamples_Struct()
 	eeprom_update_block((const void*)&write, (void*)&EEStructSettings, sizeof(ST));
 	eeprom_read_block((void*)&read, (const void*)&EEStructSettings, sizeof(ST));
 	
+	char messageBuffer[100];
+	snprintf(messageBuffer, sizeof(messageBuffer), "Int8 = %d, Int16 = %d, Float = %f, Char = %s" , read.Int8, read.Int16, read.Float, read.Char);
+	
 	while(1)
 	{
-		UsartPrintf("Int8 = %d, Int16 = %d, Float = %f, Char = %s", read.Int8, read.Int16, read.Float, read.Char);
+		UsartWriteCharString(messageBuffer);
 		UsartWriteChar('\n');
 
 		_delay_ms(1000);
 	}
 }
+
+// TODO: This method does not work. Need to figure out how to upload .eep file first.
+// Possible arduino uploader does not support it.
+// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex -U eeprom:w:main.eep:i
+// Read
+// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:r:main1.eep:i
+// Upload
+// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:w:main1.hex:i
+
+// TODO: grab the .eep file with default value, then upload that into the controller and read the value.
+uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 67;
+
+void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void);
+
+void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void)
+{
+	UsartInitialize();
+	
+	// Read
+	uint8_t valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);
+
+	while (1)
+	{
+		UsartWriteChar(valueOut);
+		UsartWriteChar('\n');
+		
+		_delay_ms(1000);
+	}
+}
+
 
 #endif

@@ -32,7 +32,7 @@
 
 int main(void)
 {
-	EepromSamples_WriteFloat();
+	EepromSamples_With_EEMEM_KeywordReadAndWriteValue();
 	
 	return 0;
 }
