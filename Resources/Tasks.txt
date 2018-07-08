@@ -1,5 +1,6 @@
 
 # Next
+	Search for TODO:
 	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
 
@@ -24,3 +25,12 @@ find definition for _SFR_IO8 register
 
 Fix this
 // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
+
+
+### Resources
+
+http://www.microchip.com/webdoc/AVRLibcReferenceManual/index.html
+https://www.electroschematics.com/tag/avr-tutorial/
+https://github.com/ExploreEmbedded
+http://exploreembedded.com/wiki/Permanent_Data_Storage_with_AVR_Internal_EEPROM
+https://sites.google.com/site/avrasmintro/home

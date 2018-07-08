@@ -10,24 +10,27 @@
 	 3. avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex
 	 4. avrdude -p atmega328p -c arduino -P COM6 -b 57600 -D -U flash:w:main.hex
 	 5. avrdude -p atmega328p -c arduino -P COM4 -b 57600 -D -U flash:w:main.hex
+	 
  */ 
+#include <avr/delay.h>
+#include <inttypes.h>
 
 #include "Adc.h"
 #include "Usart.h"
-#include <avr/delay.h>
 
 // Samples
 #include "AdcSamples.h"
 #include "UsartSamples.h"
 #include "BlinkingLedSamples.h"
+#include "ButtonSamples.h"
+#include "EepromSamples.h"
+
 #include "MemorySamples.h"
 //#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 //#include "TimeSample.h"
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
-#include <inttypes.h>
 #include "UnitTests.h"
-#include "EepromSamples.h"
 
 
 int main(void)

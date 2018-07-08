@@ -15,6 +15,7 @@
 #define BitEquals(Register, bit, val)( ( (Register & (1UL << (bit) ) ) == ( (val) << (bit) ) ) )
 uint8_t DirectPortManipulationDebounceButton(void);
 uint8_t IsBitSet(unsigned value, unsigned bitindex);
+uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo);
 
 // Basic button example without button debounce
 void ButtonSamples_HoldButtonToKeepLedOn(void)
@@ -167,7 +168,6 @@ void ButtonSamples_DebounceTwo(void)
 }
 
 // Better way with button debounce
-// TODO: the old value and new value should be used
 void ButtonSamples_DebounceThree(void)
 {
 	// Setup
@@ -187,7 +187,7 @@ void ButtonSamples_DebounceThree(void)
 	// Loop
 	while (1)
 	{
-		if (ButtonDebounce(&PIND, buttonPin) == 1)
+		if (ButtonDebounce(&PIND, buttonPin) == 1 && !(BitEquals(PIND, oldValue, 1)))
 		{
 			// Verify the button state
 			PORTB ^= (1 << PB5);    // This is the above mentioned XOR that toggles the led

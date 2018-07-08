@@ -17,14 +17,13 @@
 
 
 /*
-	TODO: Check EESAVE
-	EepromSamples_WriteNumbers
-*/
-
-/*
 	The ATmega32 contains 1024 bytes of data EEPROM memory. 
 	It is organized as a separate data space. The EEPROM data bytes are addressed linearly between 0 and 1023.
 	
+	# EESAVE
+	The EEPRPOM memory is preserved during Chip Erase if the EESAVE Fuse is programmed.
+	The default value is not programed so then the EEPROM will be cleared if 'EESAVE' is not programmed.
+		
 	#Resources:
 	https://www.avrfreaks.net/forum/tut-c-using-eeprom-memory-avr-gcc?page=all
 */
@@ -427,16 +426,16 @@ void EepromSamples_Struct()
 	}
 }
 
-// TODO: This method does not work. Need to figure out how to upload .eep file first.
-// Possible arduino uploader does not support it.
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -D -U flash:w:main.hex -U eeprom:w:main.eep:i
-// Read
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:r:main1.eep:i
-// Upload
-// avrdude -p atmega328p -c arduino -P COM3 -b 115200 -e -Ueeprom:w:main1.hex:i
-
-// TODO: grab the .eep file with default value, then upload that into the controller and read the value.
-uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 67;
+/*
+	Steps to write EEPROM with .eep file
+	1. Build
+	2. Write FLASH
+		avrdude -p atmega328p -c arduino -P COM4 -b 57600 -D -U flash:w:main.hex
+	3. Write EEPROM
+		avrdude -p atmega328p -c arduino -P COM4 -b 57600 -D -U eeprom:w:main.eep
+	4. Check for output
+*/
+uint8_t EEMEM _sampleWith_EEMEM_KeywordReadAndWriteValue = 66; // B character
 
 void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void);
 

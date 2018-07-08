@@ -14,11 +14,3 @@ avrdude -p atmega328p -c arduino -P COM5 -b 57600 -D -U flash:w:main.hex
 
 1. Error fix avrdude: stk500_getsync(): not in sync: resp=0x00
 	Solution: Try to change the UART speed to 57600 or another
-
-### Resources
-
-http://www.microchip.com/webdoc/AVRLibcReferenceManual/index.html
-https://www.electroschematics.com/tag/avr-tutorial/
-https://github.com/ExploreEmbedded
-http://exploreembedded.com/wiki/Permanent_Data_Storage_with_AVR_Internal_EEPROM
-https://sites.google.com/site/avrasmintro/home

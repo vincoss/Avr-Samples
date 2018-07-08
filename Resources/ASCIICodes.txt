@@ -1,7 +1,7 @@
 Complete List of ASCii codes
 						
 		symbol				
-ascii code	0	NULL	(Null character)			
+ascii code	0	NULL (Null character)			
 ascii code	1	SOH	(Start of Header)			
 ascii code	2	STX	(Start of Text)			
 ascii code	3	ETX	(End of Text)			
