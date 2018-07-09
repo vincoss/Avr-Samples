@@ -21,7 +21,7 @@
 
 void Usart_WriteCharSample(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	while (1)
 	{
@@ -40,7 +40,7 @@ void Usart_WriteCharSample(void)
 
 void Usart_WriteStringSample(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	char string[] = "Hello AVR World!!!\n";
 
@@ -55,7 +55,7 @@ void Usart_WriteStringSample(void)
 
 void Usart_WriteStringItoaSample(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	char buffer[5];
 	int count = 0;
@@ -82,7 +82,7 @@ void Usart_WriteStringItoaSample(void)
 // Sample USART and interrupt. Use serial port to send a char or a string
 void Usart_InterrupSample(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	UCSR0B = (1 << TXEN0) | (1 << RXEN0) | (1 << RXCIE0); // And enable interrupts
 

@@ -35,7 +35,7 @@
 
 int main(void)
 {
-	EepromSamples_With_EEMEM_KeywordReadAndWriteValue();
+	Usart_WriteCharSample();
 	
 	return 0;
 }
@@ -57,7 +57,7 @@ int main(void)
 // NOTE: Uncomment to run unit tests.
 int main(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	while(1)
 	{

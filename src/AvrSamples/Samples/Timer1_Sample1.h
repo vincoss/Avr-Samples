@@ -32,7 +32,7 @@ void Timer1_Sample1_Initialize(void);
 void Timer1_Sample1_Main()
 {
 	Timer1_Sample1_Initialize();
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	while(1)
 	{

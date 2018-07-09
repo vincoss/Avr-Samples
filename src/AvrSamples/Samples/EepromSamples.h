@@ -34,7 +34,7 @@ void EepromSamples_WriteAndReadEepromValue(void);
 
 void EepromSamples_WriteAndReadEepromValue(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	// Write
 	uint8_t valueIn = 65;
@@ -59,7 +59,7 @@ void EepromSamples_With_EEMEM_Keyword(void);
 
 void EepromSamples_With_EEMEM_Keyword(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	eeprom_update_byte(&_sampleWithEEMEM_Keyword, 66); // Will update the value if changed
 	
@@ -80,7 +80,7 @@ void EepromSamples_WithAddressConstants(void);
 
 void EepromSamples_WithAddressConstants(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	#define ADDRESS_1 46  // This could be anything from 0 to the highest EEPROM address
 	#define ADDRESS_2 52  // This could be anything from 0 to the highest EEPROM address
@@ -125,7 +125,7 @@ void EepromSamples_WithStruct(void);
 
 void EepromSamples_WithStruct(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	EL write;
 	EL read;
@@ -268,7 +268,7 @@ void EepromSamples_ManualWriteUtility(const uint8_t address, uint8_t value)
 
 void EepromSamples_Manual(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	uint8_t write = 66;
 	uint8_t address = 0;
@@ -287,7 +287,7 @@ void EepromSamples_Manual(void)
 
 void EepromSamples_WriteFirstAndLastByte()
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	unsigned int eeprom_StartAddress = 0x00;	// 0
 	unsigned int eeprom_EndAddress = 0x3ff;		// 1023
@@ -313,7 +313,7 @@ void EepromSamples_WriteFirstAndLastByte()
 
 void EepromSamples_WriteString()
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	unsigned int eeprom_address = 0x00;	// Address at 0
 	unsigned char write_string[] = { "Hello World" }, read_string[15];
@@ -334,7 +334,7 @@ void EepromSamples_WriteString()
 
 void EepromSamples_WriteNumbers(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	uint16_t writeNum_16 = 12345;
 	uint32_t writeNum_32 = 12345678;
@@ -367,7 +367,7 @@ float EEMEM EEwriteFloat;
 
 void EepromSamples_WriteFloat()
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	float x = 123.1415;
 	eeprom_update_block((const void*)&x, (void*)&EEwriteFloat, sizeof(float));
@@ -399,7 +399,7 @@ ST EEMEM EEStructSettings;
 
 void EepromSamples_Struct()
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	ST write;
 	ST read;
@@ -441,7 +441,7 @@ void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void);
 
 void EepromSamples_With_EEMEM_KeywordReadAndWriteValue(void)
 {
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	// Read
 	uint8_t valueOut = eeprom_read_byte(&_sampleWith_EEMEM_KeywordReadAndWriteValue);

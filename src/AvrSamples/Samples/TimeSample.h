@@ -67,7 +67,7 @@ ISR(TIMER1_COMPA_vect)
 void TimeSample_Main(void)
 {
 	TimeSample_Initialize(); // Initialize time
-	UsartInitialize();
+	UsartInitialize(9600);
 	
 	int ledPin = 5; // pin 13
 	DDRB |= (1 << ledPin); // sets the digital pin as output

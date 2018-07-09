@@ -195,7 +195,7 @@ void ButtonSamples_DebounceThree(void)
 	}
 }
 
-// TODO: move into lib when done...
+// NOTE: move into lib when done...
 uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo)
 {
 	// If the button was pressed delay a bit

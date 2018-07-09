@@ -9,17 +9,31 @@
 #include <stdarg.h>
 #include "Usart.h"
 
-//228 external cloclk
-void UsartInitialize(void)
+//	PAGE: 228 external cloclk
+void UsartInitialize(uint32_t baudRate)
 {
-	// Load upper 8- bits of the baud rate value into the high byte of the UBRR register
-	UBRR0H = (uint8_t)(USART_BAUD_PRESCALLER >> 8);
-	// Load lower 8- bits of the baud rate value into the low byte of the UBRR register
-	UBRR0L = (uint8_t)(USART_BAUD_PRESCALLER);
 	// Enable receiver and transmitter
 	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 	/* Set frame format: 8data, 2stop bit */
 	UCSR0C = ((1 << UCSZ00) | (1 << UCSZ01));
+	UsartSetBaudRate(baudRate);
+}
+
+void UsartSetBaudRate(uint32_t baudRate)
+{
+	uint16_t registerValue;
+
+	if((baudRate >= USART_MIN_BAUDRATE) && (baudRate <= USART_MAX_BAUDRATE))
+	{
+		registerValue = USART_BAUD_PRESCALLER(baudRate);
+	}
+	else
+	{
+		registerValue = USART_BAUD_PRESCALLER(USART_DEFAULT_BAUDRATE);
+	}
+
+	UBRR0L = (uint8_t)registerValue;		// Load lower 8- bits of the baud rate value into the low byte of the UBRR register
+	UBRR0H = (uint8_t)registerValue >> 8;	// Load upper 8- bits of the baud rate value into the high byte of the UBRR register
 }
 
 void UsartWriteChar(unsigned char data)
@@ -54,7 +68,7 @@ void UsartInterruptInitialize(void)
 	sei(); // Enable the Global Interrupt Enable flag so that interrupts can be processed
 }
 
-void UsartPrintf(const char * argList, ...)
+void UsartPrintf(const char * argList, ...) // TODO: comeplete this one
 {
 	va_list argp;
 	va_start(argp, argList);

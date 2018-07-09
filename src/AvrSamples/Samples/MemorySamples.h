@@ -32,7 +32,7 @@ void MemorySamples_Main(void)
 	uint8_t *_tester;
 	char buffer[100];
 	
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	while(1) 
 	{

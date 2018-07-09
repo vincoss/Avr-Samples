@@ -80,7 +80,7 @@ void AdcSamples_WriteToUsart(void);
 void AdcSamples_WriteToUsart(void)
 {
 	AdcInitialize();
-	UsartInitialize();
+	UsartInitialize(9600);
 
 	unsigned char buffer[5];
 

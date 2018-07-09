@@ -1,6 +1,8 @@
 
 # Next
 	Search for TODO:
+	Update Usart.h and .c
+	See Uart vs Usart
 	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
 
