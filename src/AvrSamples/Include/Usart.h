@@ -23,7 +23,7 @@
 
 void UsartInitialize(uint32_t baudRate);
 void UsartSetBaudRate(uint32_t baudRate);
-void UsartInterruptInitialize(void); // TODO: merge this with UsartInitialize
+void UsartInterruptInitialize(void);
 
 void UsartWriteChar(unsigned char data);
 unsigned char UsartReadChar(void);

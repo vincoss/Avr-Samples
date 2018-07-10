@@ -1,10 +1,22 @@
 
 # Next
 	Search for TODO:
-	Update Usart.h and .c
 	See Uart vs Usart
 	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
+
+# Review completed
+	TimeSample.h
+	Timer1_Sample1.h
+	UsartSamples.h
+	EepromSamples.h
+	AdcSamples.h
+	BlinkingLedSamples.h
+	ButtonSamples.h
+	SN74HC595_Samples.h
+	SpiSamples.h
+	MemorySamples.h
+
 
 
 # task

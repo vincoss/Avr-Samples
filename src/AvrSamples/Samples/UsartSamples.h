@@ -84,7 +84,9 @@ void Usart_InterrupSample(void)
 {
 	UsartInitialize(9600);
 
-	UCSR0B = (1 << TXEN0) | (1 << RXEN0) | (1 << RXCIE0); // And enable interrupts
+	cli();	// Disable global interrupts
+	
+	UCSR0B |= (1 << RXCIE0); // Enable interrupts
 
 	sei(); // Enable the Global Interrupt Enable flag so that interrupts can be processed
 
@@ -101,6 +103,6 @@ ISR(USART_RX_vect)
 	UDR0 = ReceivedByte; // Echo
 }
 
-// TODO: Add sample for Usart and SPI (The USART can also be used in Master SPI mode.) page 254 in spec file
+// TODO: Add sample for Usart and SPI (The USART can also be used in Master SPI mode.) page 254 in spec file.
 
 #endif

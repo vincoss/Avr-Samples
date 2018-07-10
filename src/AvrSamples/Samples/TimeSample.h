@@ -17,6 +17,10 @@
 #ifndef TIME_SAMPLE_H_
 #define TIME_SAMPLE_H_
 
+#ifndef F_CPU
+# define F_CPU 16000000UL
+#endif
+
 #include <avr/interrupt.h>
 
 #pragma region Timer implementation

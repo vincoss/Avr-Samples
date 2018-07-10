@@ -35,7 +35,7 @@
 
 int main(void)
 {
-	Usart_WriteCharSample();
+	Usart_InterrupSample();	
 	
 	return 0;
 }
