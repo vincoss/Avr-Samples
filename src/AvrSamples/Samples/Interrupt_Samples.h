@@ -210,8 +210,13 @@ ISR(INT0_vect)
 	InterruptSamples_SwitchPressed();
 }
 
+/*
+	# Catch all interrupt
+*/
+
 ISR(BADISR_vect)
 {
+	// The BADISR_vect code (which by default restarts the application)
 	// This is a vector which is aliased to __vector_default, the vector executed when an ISR fires with no accompanying ISR handler. This may be used along with the ISR() macro to create a catch-all for undefined but used ISRs for debugging purposes.
 	
 	//flash warning lamp
@@ -219,5 +224,26 @@ ISR(BADISR_vect)
 	//set flag
 	//Bad_Interrupt_Occured = true;
 }
+
+/* 
+	# Manually defined ISRs
+*/
+
+//ISR(USART_RX_vect, ISR_NAKED)
+//{
+	////PORTB |= _BV(0);  // results in SBI which does not affect SREG
+	//reti();
+//}
+
+/*
+	# Two vectors sharing the same code. ALIAS.
+*/
+
+//ISR(PCINT0_vect)
+//{
+	//// Code to handle the event.
+//}
+//
+//ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
 
 #endif
