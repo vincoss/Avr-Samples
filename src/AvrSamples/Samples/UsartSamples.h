@@ -19,6 +19,36 @@
 # define F_CPU 16000000UL
 #endif
 
+/*
+
+	USART:	A Universal Synchronous/Asynchronous Receiver/Transmitter.
+	UART:	A Universal Asynchronous Receiver/Transmitter.
+
+*/
+
+void UsartSamples_Configuration()
+{
+	// These are required
+	#define LOCAL_F_CPU 16000000UL
+	#define LOCAL_BAUDRATE 9600
+	#define LOCAL_BAUD_PRESCALLER (((LOCAL_F_CPU / (LOCAL_BAUDRATE * 16UL))) - 1)
+	
+	// Usart configuration
+	UBRR0H = (uint8_t)(LOCAL_BAUD_PRESCALLER>>8);
+	UBRR0L = (uint8_t)(LOCAL_BAUD_PRESCALLER);
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
+	UCSR0C = ((1 << UCSZ00) | (1 << UCSZ01));
+
+	UCSR0B |= (1 << RXCIE0); // Enable receive interrupts
+	
+	sei(); // Enable the Global Interrupt Enable flag so that interrupts can be processed
+	
+	while(1)
+	{
+		// See: ISR(USART_RX_vect)
+	}
+}
+
 void Usart_WriteCharSample(void)
 {
 	UsartInitialize(9600);

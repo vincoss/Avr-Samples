@@ -24,7 +24,7 @@
 #include "BlinkingLedSamples.h"
 #include "ButtonSamples.h"
 #include "EepromSamples.h"
-
+//#include "Interrupt_Samples.h"
 #include "MemorySamples.h"
 //#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 //#include "TimeSample.h"
@@ -35,7 +35,7 @@
 
 int main(void)
 {
-	Usart_InterrupSample();	
+	UsartSamples_Configuration();	
 	
 	return 0;
 }

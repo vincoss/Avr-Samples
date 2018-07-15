@@ -1,9 +1,9 @@
 
 # Next
 	Search for TODO:
-	See Uart vs Usart
 	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
+	add comments for µS, nS
 
 # Review completed
 	TimeSample.h

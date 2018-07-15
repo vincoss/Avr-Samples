@@ -61,6 +61,7 @@ void TimeSample_Initialize(void)
 }
 
 // ISR is fired whenever a match occurs
+// NOTE: Remember, inside an ISR interrupts are disabled. Thus hoping that the time returned by millis() function calls will change, will lead to disappointment.
 ISR(TIMER1_COMPA_vect)
 {
 	TimeSample_Ticks++;
