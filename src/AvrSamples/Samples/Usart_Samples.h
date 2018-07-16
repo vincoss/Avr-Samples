@@ -49,7 +49,7 @@ void UsartSamples_Configuration()
 	}
 }
 
-void Usart_WriteCharSample(void)
+void UsartSamples_WriteCharSample(void)
 {
 	UsartInitialize(9600);
 
@@ -68,7 +68,7 @@ void Usart_WriteCharSample(void)
 	}
 }
 
-void Usart_WriteStringSample(void)
+void UsartSamples_WriteStringSample(void)
 {
 	UsartInitialize(9600);
 
@@ -83,7 +83,7 @@ void Usart_WriteStringSample(void)
 	}
 }
 
-void Usart_WriteStringItoaSample(void)
+void UsartSamples_WriteStringItoaSample(void)
 {
 	UsartInitialize(9600);
 
@@ -109,8 +109,25 @@ void Usart_WriteStringItoaSample(void)
 	}
 }
 
+void UsartSamples_ReadWithLoopEcho(void)
+{
+	UsartInitialize(9600);
+	char ReceivedByte;
+	
+	while(1)
+	{
+		while (( UCSR0A & (1 << RXC0 )) == 0) {}; // Do nothing until data have been received and is ready to be read from UDR
+			
+		ReceivedByte = UDR0 ; // Fetch the received byte value into the variable " ByteReceived "
+		
+		while (( UCSR0A & (1 << UDRE0 )) == 0) {}; // Do nothing until UDR is ready for more data to be written to it
+		
+		UDR0 = ReceivedByte; // Echo back the received byte back to the computer
+	}
+}
+
 // Sample USART and interrupt. Use serial port to send a char or a string
-void Usart_InterrupSample(void)
+void UsartSamples_InterrupSample(void)
 {
 	UsartInitialize(9600);
 
@@ -127,6 +144,13 @@ void Usart_InterrupSample(void)
 
 ISR(USART_RX_vect)
 {
+	/*
+		NOTE:
+		When interrupt-driven data reception is used, the receive complete routine must read
+		the received data from UDR in order to clear the RXC Flag, otherwise a new interrupt
+		will occur once the interrupt routine terminates.
+	*/
+	
 	// Code to be executed when the USART receives a byte here
 	char ReceivedByte;
 	ReceivedByte = UDR0; // Fetch the received byte value into the variable "ByteReceived"

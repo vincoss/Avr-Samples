@@ -20,11 +20,11 @@
 
 // Samples
 #include "AdcSamples.h"
-//#include "UsartSamples.h"
+#include "Usart_Samples.h"
 #include "BlinkingLedSamples.h"
 #include "ButtonSamples.h"
 #include "EepromSamples.h"
-#include "Interrupt_Samples.h"
+//#include "Interrupt_Samples.h"
 #include "MemorySamples.h"
 //#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 //#include "TimeSample.h"
@@ -35,7 +35,7 @@
 
 int main(void)
 {
-	
+	UsartSamples_ReadWithLoopEcho();	
 	return 0;
 }
 

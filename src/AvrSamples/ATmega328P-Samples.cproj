@@ -199,7 +199,7 @@
     <Compile Include="Samples\TimeSample.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\UsartSamples.h">
+    <Compile Include="Samples\Usart_Samples.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\Watchdog_Samples.h">

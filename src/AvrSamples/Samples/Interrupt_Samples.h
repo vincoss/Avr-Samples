@@ -202,7 +202,7 @@ void InterruptSamples_SwitchPressed()
 	PORTB ^= (1 << PB5);    // XOR that toggles the led
 }
 
-ISR(USART_RX_vect)
+ISR(USART_RX_vect, ISR_BLOCK)
 {
 	// Code to be executed when the USART receives a byte here
 	char ReceivedByte;
