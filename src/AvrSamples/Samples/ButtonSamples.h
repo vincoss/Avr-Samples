@@ -174,9 +174,7 @@ void ButtonSamples_DebounceThree(void)
 	uint8_t ledPin = PB5;		// Port 13	- Decimal: 5,	Binary: 00100000
 	uint8_t buttonPin = PD7;	// Port 7	- Decimal: 128, Binary: 10000000
 
-	uint8_t currentValue = 0;	// used to store the state of the input pin
 	uint8_t oldValue = 0;		// stores the previous value of "val"
-	char state = 0;				// 0 = LED off and 1 = LED on
 
 	DDRB |= (1 << ledPin);		// Output pinMode(LED, OUTPUT); // tell Arduino LED is an output
 	PORTB &= ~(1 << ledPin);	// Set it to low, just to be safe

@@ -2,7 +2,6 @@
 # Next
 	Search for TODO:
 	Review all warnings
-	Interrupt_Samples.h see BADISR_vect
 	usart write all as string
 	add comments for µS, nS
 

@@ -29,7 +29,6 @@ void MemorySamples_Main(void);
 
 void MemorySamples_Main(void)
 {
-	uint8_t *_tester;
 	char buffer[100];
 	
 	UsartInitialize(9600);

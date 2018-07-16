@@ -69,8 +69,8 @@
 	
 	# Resources
 	https://en.wikipedia.org/wiki/Interrupt
-	https://www.microchip.com/webdoc/AVRLibcReferenceManual/porting_1iar_porting_isr.html
 	https://gammon.com.au/interrupts
+	https://www.microchip.com/webdoc/AVRLibcReferenceManual/porting_1iar_porting_isr.html
 	https://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
 */
 
@@ -110,6 +110,11 @@ void IntrruptSamples_EnableDisableWithSreg()
 	cli();
 	value = 1111;
 	SREG = oldSREG;
+	
+	if(value > 0) // Just example
+	{
+		// do something	
+	}
 }
 
 void InterruptSamples_ExternalInterruptClear()
