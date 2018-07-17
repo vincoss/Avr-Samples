@@ -1,5 +1,5 @@
 /*
- * AdcSamples.h
+ * Interrupt_Samples.h
  *
  * Created: 13/07/2018 10:08:17 PM
  *  Author: Ferdinand Lukasak
@@ -14,13 +14,13 @@
 /*
 	# Enable or disable global interrupts
 	
-	sei, which SEts the global Interrupt
-	cli, which CLears the global Interrupt
+	sei(), which SEts the global Interrupt
+	cli(), which CLears the global Interrupt
 	
 	# When writing an Interrupt Service Routine (ISR):
 
 	- Keep it short
-	- Don't use delay ()
+	- Don't use delay
 	- Don't do serial prints
 	- Make variables shared with the main code volatile
 	- Variables shared with main code may need to be protected by "critical sections" (see below)
@@ -79,6 +79,7 @@
 	TODO:
 	attachInterrupt (0, switchPressed, CHANGE);    // that is, for pin D2
 	attachInterrupt (digitalPinToInterrupt (2), switchPressed, CHANGE);
+	C:\_Data\GitHub\Arduino\hardware\arduino\avr\cores\arduino\WInterrupts.c
 
 */
 
@@ -99,7 +100,7 @@ void InterruptSample_EnableDisable()
 void IntrruptSamples_EnableDisableWithSreg()
 {
 	unsigned long long value;
-	uint8_t oldSREG = SREG;
+	uint8_t oldSREG = SREG;	// Get original SREG register
 	
 	/*
 		Disable interrupts while reading multiple bytes or we might get an
@@ -109,7 +110,7 @@ void IntrruptSamples_EnableDisableWithSreg()
 	*/
 	cli();
 	value = 1111;
-	SREG = oldSREG;
+	SREG = oldSREG;	// Restore the original SREG register
 	
 	if(value > 0) // Just example
 	{
@@ -163,9 +164,6 @@ void InterruptSamples_Usart()
 	}
 }
 
-const int Interrupt_Samples_LED		= 5;
-const int Interrupt_Samples_BUTTON	= 2;
-
 /*
 	This example shows how, even though the main loop is doing nothing, 
 	you can turn the LED on pin 13 on or off, if the switch on pin D2 is pressed.
@@ -175,6 +173,10 @@ const int Interrupt_Samples_BUTTON	= 2;
 	When grounded, it becomes LOW. 
 	The change in the pin is detected by a CHANGE interrupt, which causes the Interrupt Service Routine (ISR) to be called.
 */
+
+const int Interrupt_Samples_LED		= 5;
+const int Interrupt_Samples_BUTTON	= 2;
+
 void InterruptSamples_ButtonD2()
 {
 	// Setup
@@ -193,7 +195,7 @@ void InterruptSamples_ButtonD2()
 	
 	while(1)
 	{
-		
+		// See: ISR(INT0_vect)
 	}
 }
 
