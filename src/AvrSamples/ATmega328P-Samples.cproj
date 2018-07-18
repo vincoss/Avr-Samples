@@ -181,6 +181,9 @@
     <Compile Include="Samples\DelayTCNT0_Sample.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\DirectPortManipulation_Samples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\EepromSamples.h">
       <SubType>compile</SubType>
     </Compile>

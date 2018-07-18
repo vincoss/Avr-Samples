@@ -1,26 +1,40 @@
-#include <avr/io.h>			// This is our usual include
-#define F_CPU 16000000UL    // This says to the compiler at what frequency our Atmega is running, in this case its 16Mhz
-#include <util/delay.h>     // The delay functions/routines
-#include "SerialUSART.h"
+/*
+ * DirectPortManipulation_Samples.h
+ *
+ * Created: 18/07/2018 5:40:58 PM
+ * Author: Ferdinand Lukasak
+ */ 
 
 /*
-Direct port manipulation, using the digital ports.
+	Direct port manipulation, using the digital ports.
 
-Well, to begin there is a dedicated register for each PORT that defines if each pin is a input or an output, 
-that register is the DDRx, where x is the letter from the PORT that we want to configure, 
-in the case of the Arduino there is DDRB, DDRC and DDRD. As every logic value, 
-each bit in the DDRx registers can be either 1 or 0, 
-being that putting a specific bit of DDRx at 1 configures the pin as output and putting it at 0 will configure the pin as an input.
+	Well, to begin there is a dedicated register for each PORT that defines if each pin is a input or an output,
+	that register is the DDRx, where x is the letter from the PORT that we want to configure,
+	in the case of the Arduino there is DDRB, DDRC and DDRD. As every logic value,
+	each bit in the DDRx registers can be either 1 or 0,
+	being that putting a specific bit of DDRx at 1 configures the pin as output and putting it at 0 will configure the pin as an input.
 */
 
-void DirectPortManipulationOverview(void)
-void DirectPortManipulationOne(void);
-uint8_t DirectPortManipulationDebounceButton(void);
-void DirectPortManipulationTwo(void);
+
+#ifndef DIRECTPORTMANIPULATION_SAMPLES_H
+#define DIRECTPORTMANIPULATION_SAMPLES_H
+
+#ifndef F_CPU
+	#define F_CPU 16000000UL
+#endif
+
+#include <avr/io.h>			
+#include <util/delay.h>     
+#include "Usart.h"
+
+void DirectPortManipulation_Samples_Overview(void);
+void DirectPortManipulation_Samples_One(void);
+static uint8_t DirectPortManipulation_Samples_DebounceButton(void);
+void DirectPortManipulation_Samples_Two(void);
 
 #define BitEquals(REG, bit, val)( ( (REG & (1UL << (bit) ) ) == ( (val) << (bit) ) ) )
 
-void DirectPortManipulationOverview()
+void DirectPortManipulation_Samples_Overview(void)
 {
 	// Configures pins 0,1,2,3 as digital inputs and pins 4,5,6,7 as digital outputs:
 	DDRD = 0b11110000;
@@ -47,15 +61,15 @@ void DirectPortManipulationOverview()
 	uint8_t my_var = 0;		// Create a variable to store the data read from PORTD
 	my_var = PIND;			// Read the PORTD and put the values in the variable
 
-	DDRD = (1 << PD2);		// Pin 2 of portd is an output 000100
-	PORTD = (1 << PD2);     // Pin 2 of portd as now the logic value 1
+	DDRD |= (1 << PD2);		// Pin 2 of PORTD is an output 000100
+	PORTD |= (1 << PD2);     // Pin 2 of PORTD as now the logic value 1 HIGH
 
 	// Or reading a button value:
-	DDRD = 0b11111101;      // Pin 1 of PORTD is an input, all others are outputs
-	my_var = 0;				// Create a variable to store the data read from PORTD
-	my_var = (PIND & (1 << PD1));    // Read the PORTD pin 1 value and put it in the variable
+	DDRD = 0b11111101;				// Pin 1 of PORTD is an input, all others are outputs
+	my_var = 0;						// Create a variable to store the data read from PORTD
+	my_var = (PIND & (1 << PD1));   // Read the PORTD pin 1 value and put it in the variable
 
-	DDRD = 0b11111100;        // Portd pins 0 and 1 are inputs, all the others are outputs
+	DDRD = 0b11111100;				// PORTD pins 0 and 1 are inputs, all the others are outputs
 	if (PIND & ((1 << PD0) | (1 << PD1))) 
 	{
 		// Code inside the if() statement will be executed when both buttons are high
@@ -67,9 +81,9 @@ void DirectPortManipulationOverview()
 	my_var = PIND;			// Read the PORTD and put the values in the variable
 }
 
-void DirectPortManipulationOne(void)
+void DirectPortManipulation_Samples_One(void)
 {
-	USART_Initialize();
+	UsartInitialize(9600);
 
 	DDRD &= ~(1 << PD2);	// Configure PORTD pin 2 as an input
 	PORTD |= (1 << PD2);    // Activate pull-ups in PORTD pin 2
@@ -79,7 +93,7 @@ void DirectPortManipulationOne(void)
 	{
 		_delay_ms(1000);
 
-		USART_WriteChar(PIND);
+		UsartWriteChar(PIND);
 
 		if (BitEquals(PIND, PD2, 1)) // If button is pressed
 		{
@@ -87,12 +101,12 @@ void DirectPortManipulationOne(void)
 			_delay_ms(1000);		// Delay
 
 			PORTB &= ~(1 << PC5);	// Turns OFF LED
-			_delay_ms(1000);		// Delay
+			_delay_ms(500);		// Delay
 		}
 	}
 }
 
-void DirectPortManipulationTwo(void)
+void DirectPortManipulation_Samples_Two(void)
 {
 	DDRD &= ~(1 << PD2);    // Configure PORTD pin 2 as an input
 	PORTD |= (1 << PD2);	// Activate pull-ups in PORTD pin 2
@@ -100,7 +114,7 @@ void DirectPortManipulationTwo(void)
 
 	while (1) 
 	{               
-		if (DirectPortManipulationDebounceButton() == 1)
+		if (DirectPortManipulation_Samples_DebounceButton() == 1)
 		{        
 			// Verify the button state
 			PORTB ^= (1 << PB5);    // This is the above mentioned XOR that toggles the led
@@ -109,7 +123,7 @@ void DirectPortManipulationTwo(void)
 	}
 }
 
-uint8_t DirectPortManipulationDebounceButton(void)
+uint8_t DirectPortManipulation_Samples_DebounceButton(void)
 {
 	// If the button was pressed delay a bit
 	if (BitEquals(PIND, PD2, 1))
@@ -129,3 +143,5 @@ uint8_t DirectPortManipulationDebounceButton(void)
 		return 0;
 	}
 }
+
+#endif

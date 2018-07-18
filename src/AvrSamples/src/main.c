@@ -33,11 +33,12 @@
 #include "SN74HC595_Samples.h"
 #include "UnitTests.h"
 #include "DelayTCNT0_Sample.h"
+#include "DirectPortManipulation_Samples.h"
 
 
 int main(void)
 {
-		return 0;
+	return 0;
 }
 
 /*
