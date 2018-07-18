@@ -178,6 +178,9 @@
     <Compile Include="Samples\ButtonSamples.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\DelayTCNT0_Sample.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\EepromSamples.h">
       <SubType>compile</SubType>
     </Compile>

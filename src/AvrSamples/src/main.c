@@ -32,6 +32,7 @@
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
 #include "UnitTests.h"
+#include "DelayTCNT0_Sample.h"
 
 
 int main(void)
