@@ -2,7 +2,7 @@
 # Next
 	Search for TODO:
 	Review all warnings
-
+	GPIOPorts_Samples.h run each sample
 	see Serial.begin
 	usart write all as string
 	add comments for µS, nS
