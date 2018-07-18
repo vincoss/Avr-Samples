@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtTiny85-Samples", "src\AtTiny85-Samples\AtTiny85-Samples.cproj", "{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccBoardProject", "src\Default_GccBoardProject\Default_GccBoardProject.cproj", "{2BC55D3A-468B-45FC-9A1C-0923627BE12D}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccStaticLibraryProject", "src\Default_GccStaticLibraryProject\Default_GccStaticLibraryProject.cproj", "{8E299462-0895-431D-BD04-AE59BE5E5643}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -42,11 +46,21 @@ Global
 		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Debug|AVR.Build.0 = Debug|AVR
 		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Release|AVR.ActiveCfg = Release|AVR
 		{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}.Release|AVR.Build.0 = Release|AVR
+		{2BC55D3A-468B-45FC-9A1C-0923627BE12D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2BC55D3A-468B-45FC-9A1C-0923627BE12D}.Debug|AVR.Build.0 = Debug|AVR
+		{2BC55D3A-468B-45FC-9A1C-0923627BE12D}.Release|AVR.ActiveCfg = Release|AVR
+		{2BC55D3A-468B-45FC-9A1C-0923627BE12D}.Release|AVR.Build.0 = Release|AVR
+		{8E299462-0895-431D-BD04-AE59BE5E5643}.Debug|AVR.ActiveCfg = Debug|AVR
+		{8E299462-0895-431D-BD04-AE59BE5E5643}.Debug|AVR.Build.0 = Debug|AVR
+		{8E299462-0895-431D-BD04-AE59BE5E5643}.Release|AVR.ActiveCfg = Release|AVR
+		{8E299462-0895-431D-BD04-AE59BE5E5643}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9AEEC27B-E505-4A19-BDAB-0E2638E7B373} = {A2DDAF61-48C2-4566-8F85-CEE963ECB555}
+		{2BC55D3A-468B-45FC-9A1C-0923627BE12D} = {A2DDAF61-48C2-4566-8F85-CEE963ECB555}
+		{8E299462-0895-431D-BD04-AE59BE5E5643} = {A2DDAF61-48C2-4566-8F85-CEE963ECB555}
 	EndGlobalSection
 EndGlobal
