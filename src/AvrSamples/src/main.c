@@ -15,16 +15,17 @@
 #include <avr/delay.h>
 #include <inttypes.h>
 
+// Lib
 #include "Adc.h"
 #include "Usart.h"
 
-// Samples
+// Samples NOTE: Some samples are commented since the interrupt handlers are duplicated.
 #include "AdcSamples.h"
-#include "Usart_Samples.h"
+//#include "Usart_Samples.h"
 #include "BlinkingLedSamples.h"
 #include "ButtonSamples.h"
 #include "EepromSamples.h"
-//#include "Interrupt_Samples.h"
+#include "Interrupt_Samples.h"
 #include "MemorySamples.h"
 //#include "Timer1_Sample1.h" // ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 //#include "TimeSample.h"
@@ -35,8 +36,7 @@
 
 int main(void)
 {
-	UsartSamples_ReadWithLoopEcho();	
-	return 0;
+		return 0;
 }
 
 /*

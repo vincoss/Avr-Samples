@@ -199,7 +199,7 @@ void InterruptSamples_ButtonD2()
 	}
 }
 
-void InterruptSamples_SwitchPressed()
+static void InterruptSamples_SwitchPressed()
 {
 	PORTB ^= (1 << PB5);    // XOR that toggles the led
 }
