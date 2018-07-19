@@ -1,14 +1,26 @@
+/*
+ * TIMER_Sample1.h
+ *
+ * Created: 19/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_SAMPLES1_H_
+#define TIMER_SAMPLES1_H_
+
 #ifndef F_CPU
-#define F_CPU 20000000UL	// or whatever may be your frequency
+	#define F_CPU 32000UL
 #endif
 
 #include <avr/io.h>
 
-// AVR TIMER0,TIMER1,TIMER2 basic timer counter overflow sample with counter reset, no prescaling
+/*
+	# AVR TIMER0,TIMER1,TIMER2 basic timer counter overflow sample with counter reset, no prescaling
 
-// Flash an LED every:	 6ms
-// CPU clock frequency:	 32kHz
-// Prescaler:			 1
+	Flash an LED every:		6ms
+	CPU clock frequency:	32kHz
+	Prescaler:				1
+*/
 
 void TIMER0_Sample1_Run(void);
 
@@ -96,3 +108,5 @@ void TIMER2_Sample1_Run(void)
 		}
 	}
 }
+
+#endif

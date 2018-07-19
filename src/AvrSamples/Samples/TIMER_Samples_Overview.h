@@ -1,9 +1,25 @@
+/*
+ * TIMER_Samples_Overview.h
+ *
+ * Created: 20/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_SAMPLES_OVERVIEW_H_
+#define TIMER_SAMPLES_OVERVIEW_H_
+
 #ifndef F_CPU
-#define F_CPU 20000000UL	// or whatever may be your frequency
+	#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+
+/*
+	# AVR TIMER0,TIMER1,TIMER2 basic timer counter overflow sample with counter reset, no prescaling
+	
+	NOTE: Not runnable samples.
+*/
 
 // this code sets up a timer0 for 1ms @ 16Mhz clock cycle
 // in order to function as a time delay at the begining of the main loop
@@ -145,3 +161,5 @@ ISR(TIMER2_COMPA_vect)
 {
 	// action to be done every 250 usec
 }
+
+#endif

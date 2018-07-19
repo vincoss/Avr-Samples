@@ -34,11 +34,14 @@
 #include "UnitTests.h"
 #include "DelayTCNT0_Sample.h"
 #include "GPIOPorts_Samples.h"
+#include "TIMER_Sample1.h"
+#include "TIMER_Sample2.h"
+#include "TIMER_Sample3.h"
 
 
 int main(void)
 {
-	GPIOPortsSamples_Two();
+	TIMER0_Sample3_Run();
 	return 0;
 }
 

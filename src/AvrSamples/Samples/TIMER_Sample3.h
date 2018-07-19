@@ -1,15 +1,27 @@
+/*
+ * TIMER_Sample3.h
+ *
+ * Created: 19/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_SAMPLES3_H_
+#define TIMER_SAMPLES3_H_
+
 #ifndef F_CPU
-#define F_CPU 20000000UL	// or whatever may be your frequency
+	#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-// AVR TIMER0 basic timer counter overflow and prescaler, interupt sample with counter reset
+/*
+	# AVR TIMER0 basic timer counter overflow and prescaler, interupt sample with counter reset
 
-// Flash an LED every:	 50ms
-// CPU clock frequency:	 16MHz
-// Prescaler:			 256
+	Flash an LED every:		50ms
+	CPU clock frequency:	16MHz
+	Prescaler:				256
+*/
 
 // global variable to count the number of overflows
 volatile uint8_t TIMER_Sample3_clockOverflowCount;
@@ -56,7 +68,7 @@ void TIMER0_Sample3_Run()
 			{
 				PORTB ^= (1 << PB5);    // Toggle the led state
 				TCNT0 = 0;				// Reset the timer value
-				TIMER_Sample3_clockOverflowCount = 0; // reset overflow counter
+				TIMER_Sample3_clockOverflowCount = 0; // reset overflow counter. TODO: possible use ATOMIC
 			}
 		}
 	}
@@ -108,7 +120,7 @@ void TIMER2_Sample3_Run()
 			{
 				PORTB ^= (1 << PB5);    // Toggle the led state
 				TCNT2 = 0;				// Reset the timer value
-				TIMER_Sample3_clockOverflowCount = 0; // reset overflow counter
+				TIMER_Sample3_clockOverflowCount = 0; // reset overflow counter // TODO: possible use ATOMIC
 			}
 		}
 	}
@@ -119,3 +131,5 @@ ISR(TIMER2_OVF_vect)
 	// keep a track of number of overflows
 	TIMER_Sample3_clockOverflowCount++;
 }
+
+#endif

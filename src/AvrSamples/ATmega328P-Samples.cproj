@@ -199,7 +199,22 @@
     <Compile Include="Samples\SpiSamples.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Samples\Timer1_Sample1.h">
+    <Compile Include="Samples\TIMER1_Samples2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER1_Samples1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_Sample1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_Sample2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_Sample3.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_Samples_Overview.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\TimeSample.h">

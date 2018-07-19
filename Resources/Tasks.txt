@@ -3,23 +3,10 @@
 	Search for TODO:
 	Review all warnings
 	GPIOPorts_Samples.h run each sample
+	review TIMER samples
 	see Serial.begin
 	usart write all as string
 	add comments for µS, nS
-
-# Review completed
-	TimeSample.h
-	Timer1_Sample1.h
-	UsartSamples.h
-	EepromSamples.h
-	AdcSamples.h
-	BlinkingLedSamples.h
-	ButtonSamples.h
-	SN74HC595_Samples.h
-	SpiSamples.h
-	MemorySamples.h
-
-
 
 # task
 // TODO: review https://github.com/johnnyb/Shifty
@@ -33,14 +20,8 @@ Jack Crenshaw's "Implementing CRCs"
 
 - check AVR lib .o and .a files
 
--- Review those samples
-SN74HC595_Samples.h
-SpiSamples.h
-
 find definition for _SFR_IO8 register
 
-Fix this
-// ISR is duplicated so this is commented out ISR(TIMER1_COMPA_vect)
 
 
 ### Resources
