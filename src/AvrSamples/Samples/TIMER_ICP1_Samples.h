@@ -1,5 +1,15 @@
+/*
+ * TIMER_ICP1_Samples.h
+ *
+ * Created: 26/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_ICP1_SAMPLES_H_
+#define TIMER_ICP1_SAMPLES_H_
+
 #ifndef F_CPU
-#define F_CPU 20000000UL	// or whatever may be your frequency
+	#define F_CPU 16000000UL
 #endif
 
 #include <stdio.h>
@@ -14,7 +24,9 @@
 
 // AVR Timers – TIMER1 ICP1 sample
 	
-#define ICP PINB0
+// TODO: to test this use second board to simulate pulse every second.
+	
+#define ICP PINB0 // ICP - Input Capture Unit (ICP1) See specification.
 
 volatile uint16_t revTick;  // Ticks per revolution
 volatile uint16_t revCtr;   // Total elapsed revolutions
@@ -92,3 +104,5 @@ void IcmpSample()
 	}
 
 }
+
+endif

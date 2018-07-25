@@ -16,9 +16,7 @@
 #include <avr/interrupt.h>
 
 /*
-	# AVR TIMER0,TIMER1,TIMER2 basic timer counter overflow sample with counter reset, no prescaling
-	
-	NOTE: Not runnable samples.
+	# AVR TIMER0,TIMER1,TIMER2 basic timer samples. Not runnable samples.
 */
 
 // this code sets up a timer0 for 1ms @ 16Mhz clock cycle
@@ -74,7 +72,7 @@ void TIMER0_COMPA_Sample(void)
 
 ISR(TIMER0_COMPA_vect)  // timer0 overflow interrupt
 {
-	//event to be exicuted every 4ms here
+	//event to be executed every 4ms here
 }
 
 // this code sets up timer1 for a 1s  @ 16Mhz Clock (mode 4)
@@ -83,18 +81,14 @@ void TIMER1_COMPA_Sample(void)
 {
 	OCR1A = 0x3D08; // 15624
 
-	TCCR1B |= (1 << WGM12);
-	// Mode 4, CTC on OCR1A
+	TCCR1B |= (1 << WGM12); // Mode 4, CTC on OCR1A
 
-	TIMSK1 |= (1 << OCIE1A);
-	//Set interrupt on compare match
+	TIMSK1 |= (1 << OCIE1A); //Set interrupt on compare match
 
-	TCCR1B |= (1 << CS12) | (1 << CS10);
-	// set prescaler to 1024 and start the timer
+	TCCR1B |= (1 << CS12) | (1 << CS10); // set prescaler to 1024 and start the timer
 
 	sei();
 	// enable interrupts
-
 
 	while (1)
 	{
@@ -112,17 +106,13 @@ void TIMER1_COMPA_Sample1(void)
 {
 	ICR1 = 0x30D3; // 12499
 
-	TCCR1B |= (1 << WGM12);
-	// Mode 4, CTC on OCR1A
+	TCCR1B |= (1 << WGM12); // Mode 4, CTC on OCR1A
 
-	TIMSK1 |= (1 << ICIE1);
-	//Set interrupt on compare match
+	TIMSK1 |= (1 << ICIE1); //Set interrupt on compare match
 
-	TCCR1B |= (1 << CS12);
-	// set prescaler to 256 and starts the timer
+	TCCR1B |= (1 << CS12); // set prescaler to 256 and starts the timer
 
-	sei();
-	// enable interrupts
+	sei(); // enable interrupts
 
 	while (1)
 	{
@@ -130,26 +120,19 @@ void TIMER1_COMPA_Sample1(void)
 	}
 }
 
- //this code sets up timer2 for a 250us  @ 16Mhz Clock
-
-#include <avr/io.h>
-#include <avr/interrupt.h>
+//this code sets up timer2 for a 250us  @ 16Mhz Clock
 
 void TIMER2_Sample(void)
 {
 	OCR2A = 62; // 3D in hex
 
-	TCCR2A |= (1 << WGM21);
-	// Set to CTC Mode
+	TCCR2A |= (1 << WGM21); // Set to CTC Mode
 
-	TIMSK2 |= (1 << OCIE2A);
-	//Set interrupt on compare match
+	TIMSK2 |= (1 << OCIE2A); //Set interrupt on compare match
 
-	TCCR2B |= (1 << CS21);
-	// set prescaler to 64 and starts PWM
+	TCCR2B |= (1 << CS21); // set prescaler to 64 and starts PWM
 
-	sei();
-	// enable interrupts
+	sei(); // enable interrupts
 
 	while (1)
 	{
@@ -159,7 +142,7 @@ void TIMER2_Sample(void)
 
 ISR(TIMER2_COMPA_vect)
 {
-	// action to be done every 250 usec
+	// action to be done every 250us
 }
 
 #endif

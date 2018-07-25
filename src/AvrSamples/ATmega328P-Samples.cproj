@@ -205,6 +205,9 @@
     <Compile Include="Samples\TIMER1_Samples1.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\TIMER_ICP1_Samples.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\TIMER_Sample1.h">
       <SubType>compile</SubType>
     </Compile>
