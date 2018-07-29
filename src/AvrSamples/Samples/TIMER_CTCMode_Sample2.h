@@ -1,21 +1,33 @@
+/*
+ * TIMER_CTCMode_Sample2.h
+ *
+ * Created: 27/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_CTCMODE_SAMPLE2_H_
+#define TIMER_CTCMODE_SAMPLE2_H_
+
 #ifndef F_CPU
-#define F_CPU 16000000UL	// or whatever may be your frequency
+	#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-// CTC - This mode is called Clear Timer on Compare Match, or CTC. 
-// TIMER1 - Using Interrupts with CTC Mode.
-// There are three kinds of interupt: overflow, compare and capture
+/*
+	# AVR CTC - This mode is called Clear Timer on Compare Match, or CTC.
+	TIMER1 - Using Interrupts with CTC Mode.
+	There are three kinds of interupt: overflow, compare and capture
 
-// Delay:			100ms
-// CPU Frequency:	16MHz
-// Prescaler:		64
+	Flash an LED every:		100ms
+	CPU clock frequency:	16MHz
+	Prescaler:				64
+*/
 
-void TimerCTCMode_Sample2_Run();
+void TimerCTCMode_Sample2_One();
 
-void TimerCTCMode_Sample2_Run()
+void TimerCTCMode_Sample2_One()
 {
 	// Set PB5 as output 13
 	DDRB = (1 << PB5);
@@ -57,3 +69,5 @@ ISR(TIMER1_COMPA_vect)
 {
 	PORTB ^= (1 << PB5);    // Toggle the led state
 }
+
+#endif

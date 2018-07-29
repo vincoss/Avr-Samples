@@ -147,7 +147,6 @@
   <ItemGroup>
     <Folder Include="Include" />
     <Folder Include="Samples" />
-    <Folder Include="Samples\Review" />
     <Folder Include="Src\" />
   </ItemGroup>
   <ItemGroup>
@@ -190,7 +189,43 @@
     <Compile Include="Samples\Interrupt_Samples.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Samples\Mcp425xSamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\Mcp4xxx.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\Mcp4xxx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\McpSn74hc595.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Samples\MemorySamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_PWM_Samples2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_PWM_Sample1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_PWM_Samples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\RelaySamples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\SN74HC595.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\SN74HC595DaiseyChain.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\SN74HC595NoSpi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\SN74HC595_ReadWriteExample.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\SN74HC595_Samples.h">
@@ -203,6 +238,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\TIMER1_Samples1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_CTCMode_Sample4.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_CTCMode_Sample3.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_CTCMode_Sample2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Samples\TIMER_CTCMode_Sample1.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Samples\TIMER_ICP1_Samples.h">

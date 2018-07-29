@@ -1,6 +1,0 @@
-
-/*
-
-	Terminal Control (TCON) Register
-
-*/

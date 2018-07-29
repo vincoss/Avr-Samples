@@ -1,21 +1,32 @@
+/*
+ * TIMER_CTCMode_Sample1.h
+ *
+ * Created: 27/07/2018 10:08:17 PM
+ *  Author: Ferdinand Lukasak
+ */ 
+
+#ifndef TIMER_CTCMODE_SAMPLE1_H_
+#define TIMER_CTCMODE_SAMPLE1_H_
+
 #ifndef F_CPU
-#define F_CPU 20000000UL	// or whatever may be your frequency
+	#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>  
 
-// CTC - This mode is called Clear Timer on Compare Match, or CTC. 
-// TIMER1 - Clear Timer on Compare (CTC) Mode.
+/*
+	# AVR CTC - This mode is called Clear Timer on Compare Match, or CTC. TIMER1 - Clear Timer on Compare (CTC) Mode.
 
-// Delay:			100ms
-// CPU Frequency:	16MHz
-// Prescaler:		64
+	Flash an LED every:		100ms
+	CPU clock frequency:	16MHz
+	Prescaler:				64
+*/
 
-void TimerCTCMode_Sample1_Run(void);
+void TimerCTCMode_Sample1_One(void);
 
-void TimerCTCMode_Sample1_Run(void)
+void TimerCTCMode_Sample1_One(void)
 {
 	// Set PB5 as output 13
 	DDRB = (1 << PB5);
@@ -23,7 +34,7 @@ void TimerCTCMode_Sample1_Run(void)
 	// Set it to low, just to be safe
 	PORTB &= ~(1 << PB5);
 
-	// Set entire register to 0, (as we do not know the initial  values) 
+	// Set entire register to 0, (as we do not know the initial values) 
 	TCCR1A = 0; 
 	TCCR1B = 0;
 
@@ -51,13 +62,13 @@ void TimerCTCMode_Sample1_Run(void)
 	}
 }
 
-#define green_led_on()  PORTC |= _BV(0)
-#define green_led_off()  PORTC &= ~_BV(0)
-#define green_led_is_on() bit_is_set(PORTC,0)
+#define green_led_on()		PORTC |= _BV(0)
+#define green_led_off()		PORTC &= ~_BV(0)
+#define green_led_is_on()	bit_is_set(PORTC,0)
 
-void TimerCTCMode_SampleTwo_Run(void);
+void TimerCTCMode_Sample1_Two(void);
 
-void TimerCTCMode_SampleTwo_Run(void)
+void TimerCTCMode_Sample1_Two(void)
 {
 	DDRC = 0b01111111;   // All outputs (Although we will just use PC0 )
 
@@ -73,6 +84,7 @@ void TimerCTCMode_SampleTwo_Run(void)
 	}
 }
 
+// NOTE Commented out since vectors are duplicated.
 //ISR(TIMER1_COMPA_vect)
 //{
 //	if (green_led_is_on())
@@ -85,12 +97,12 @@ void TimerCTCMode_SampleTwo_Run(void)
 //	}
 //}
 
-#define green_led_on()  PORTC |= _BV(0)
-#define green_led_off()  PORTC &= ~_BV(0)
+#define green_led_on()		PORTC |= _BV(0)
+#define green_led_off()		PORTC &= ~_BV(0)
 
-int TimerCTCMode_SampleThree_Run(void);
+int TimerCTCMode_Sample1_Three(void);
 
-int TimerCTCMode_SampleThree_Run(void)
+int TimerCTCMode_Sample1_Three(void)
 {
 	DDRC = 0b01111111;   // All outputs (Although we will just use PC0 )
 
@@ -116,3 +128,5 @@ ISR(TIMER1_COMPB_vect)
 {
 	green_led_on();
 }
+
+#endif

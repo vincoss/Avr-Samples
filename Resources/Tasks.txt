@@ -1,10 +1,16 @@
 
 # Next
+	
+http://maxembedded.com/2012/01/avr-timers-pwm-mode-part-ii/
+https://sites.google.com/site/qeewiki/books/avr-guide
+http://www.atmel.com/webdoc/avrlibcreferencemanual/group__util__delay.html
+https://en.wikipedia.org/wiki/Boolean_algebra
 	TIMER_ICP1_Samples.h
+	TIMER_CTCMode_Sample1
 	Search for TODO:
 	Review all warnings
 	GPIOPorts_Samples.h run each sample
-	review TIMER samples
+	review All TIMER samples
 	see Serial.begin
 	usart write all as string
 	add comments for µS, nS
@@ -23,6 +29,9 @@ Jack Crenshaw's "Implementing CRCs"
 
 find definition for _SFR_IO8 register
 
+# Samples
+	Add Terminal Control (TCON) Register samples
+
 
 
 ### Resources
@@ -32,3 +41,46 @@ https://www.electroschematics.com/tag/avr-tutorial/
 https://github.com/ExploreEmbedded
 http://exploreembedded.com/wiki/Permanent_Data_Storage_with_AVR_Internal_EEPROM
 https://sites.google.com/site/avrasmintro/home
+
+
+
+### Clean
+
+
+PWM sample as potentiometer
+motor speed control with PWM
+chapter 6 page 81 reimplement that Keyboard.begin(); with USB read write. and create calculator with buttons. then use the small joystic and use it as mouse. review examples for chapter 6
+
+review arduion samples 4 and create C code samples
+see bookmarks for ShiftRegister folder
+
+
+
+#### Ohm law
+
+R (resistance) = V (voltage) / I (current)
+V = R * I
+I = V / R
+
+#### Resources
+
+http://avrbeginners.net/
+https://learn.sparkfun.com/tutorials/how-to-read-a-schematic
+http://www.atmel.com/webdoc/avrlibcreferencemanual/index.html
+http://www.ohmslawcalculator.com/led-resistor-calculator
+
+Shift register sample
+http://www.ermicro.com/blog/?p=1050
+https://protostack.com.au/2010/05/introduction-to-74hc595-shift-register-controlling-16-leds/
+
+#Serial Communication
+http://maxembedded.com/2013/09/serial-communication-introduction/
+
+#SPI
+http://www.gammon.com.au/forum/?id=10892
+https://sites.google.com/site/qeewiki/books/avr-guide/spi
+http://www.rocketnumbernine.com/2009/04/26/using-spi-on-an-avr-1
+https://www.tablix.org/~avian/blog/archives/2012/06/spi_interrupts_versus_polling/
+
+#Bit_banging
+https://en.wikipedia.org/wiki/Bit_banging

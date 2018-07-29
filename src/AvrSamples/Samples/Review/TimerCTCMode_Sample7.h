@@ -1,1 +1,0 @@
-// TODO: Async T2 timer
