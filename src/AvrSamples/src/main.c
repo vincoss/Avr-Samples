@@ -41,7 +41,7 @@
 
 int main(void)
 {
-	TIMER0_Sample3_Run();
+	AdcSamples_CompleteConfig_Led();
 	return 0;
 }
 

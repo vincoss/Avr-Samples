@@ -45,14 +45,16 @@ void AdcSamples_CompleteConfig_Led()
 	// Set it to low, just to be safe
 	PORTB &= ~(1 << PB5);
 
-	// Setup the ADC use Port C / A0
-	ADCSRA |= ((1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0)); // Prescaler at 128 so we have an 125Khz clock source
-	ADMUX |= (1 << REFS0);	// Analog port Port 0
-	ADMUX &= ~(1 << REFS1); // Avcc(+5v) as voltage reference
-
-	// ADCSRB register
-	ADCSRB &= ~((1 << ADTS2) | (1 << ADTS1) | (1 << ADTS0));    // Analog Comparator, Free Running mode
-
+	// Prescaler at 128 so we have an 125Khz clock source
+	ADCSRA |= ((1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0));
+	
+	// All reset
+	ADMUX &= 0x00;
+	
+	// Voltage Reference Selection
+	ADMUX |= (1 << REFS0);	// (AREF, Internal Vref turned off)
+	ADMUX |= (1 << MUX0);	// Channel 0;
+	
 	// ADCSRA register
 	ADCSRA |= (1 << ADATE); // Bit 5 – ADATE: ADC Auto Trigger Enable
 	ADCSRA |= (1 << ADEN);  // Bit 7 – ADEN: ADC Enable
@@ -72,6 +74,8 @@ void AdcSamples_CompleteConfig_Led()
 		{
 			PORTB &= ~(1 << PB5); // Else turn led off
 		}
+		
+		_delay_ms(1000);
 	}
 }
 
@@ -93,7 +97,7 @@ void AdcSamples_WriteToUsart(void)
 		UsartWriteCharString(buffer);
 		UsartWriteChar('\n');
 
-		_delay_ms(500);
+		_delay_ms(2000);
 	}
 }
 
@@ -114,7 +118,7 @@ void AdcSamples_Led(void)
 		
 		if (adcValue > 512)
 		{
-			PORTB |= (1 << PB5); //I f ADC value is above 512 turn led on
+			PORTB |= (1 << PB5); // I f ADC value is above 512 turn led on
 		}
 		else
 		{

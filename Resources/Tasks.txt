@@ -1,6 +1,7 @@
 
 # Next
-	
+	Review samples from top: NOTE: Must test each sample.
+		AdcSamples.h
 http://maxembedded.com/2012/01/avr-timers-pwm-mode-part-ii/
 https://sites.google.com/site/qeewiki/books/avr-guide
 http://www.atmel.com/webdoc/avrlibcreferencemanual/group__util__delay.html
@@ -32,7 +33,10 @@ find definition for _SFR_IO8 register
 # Samples
 	Add Terminal Control (TCON) Register samples
 
-
+# Review completed
+Adc.h
+Adc.c
+AdcSamples.h
 
 ### Resources
 
