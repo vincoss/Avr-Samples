@@ -32,7 +32,7 @@
 #include "SpiSamples.h"
 #include "SN74HC595_Samples.h"
 #include "UnitTests.h"
-#include "DelayTCNT0_Sample.h"
+#include "TIMER_DelayTCNT0_Sample.h"
 #include "GPIOPorts_Samples.h"
 #include "TIMER_Sample1.h"
 #include "TIMER_Sample2.h"

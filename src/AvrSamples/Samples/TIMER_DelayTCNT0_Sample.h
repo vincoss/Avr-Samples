@@ -1,5 +1,5 @@
 /*
- * DelayTCNT0_Sample.h
+ * TIMER_DelayTCNT0_Sample.h
  *
  * Created: 18/07/2018 5:40:58 PM
  * Author: Ferdinand Lukasak
@@ -14,8 +14,8 @@
 */
 
 
-#ifndef DELAYTCNT0_SAMPLE_H
-#define DELAYTCNT0_SAMPLE_H
+#ifndef TIMER_DELAYTCNT0_SAMPLE_H
+#define TIMER_DELAYTCNT0_SAMPLE_H
 
 #ifndef F_CPU
 # define F_CPU 16000000UL
@@ -27,15 +27,15 @@
 
 // Basic delay implementation with TIMER0 and Compare interrupt
 
-static volatile uint64_t _delayTCNT0_Sample_millisecondTick = 0;
+static volatile uint64_t _TIMER_DelayTCNT0_Sample_millisecondTick = 0;
 
-uint64_t DelayTCNT0_Sample_GetMillis(void);
-void DelayTCNT0_Sample_Initialize(void);
+uint64_t TIMER_DelayTCNT0_Sample_GetMillis(void);
+void TIMER_DelayTCNT0_Sample_Initialize(void);
 
-void DelayTCNT0_Sample_Initialize(void)
+void TIMER_DelayTCNT0_Sample_Initialize(void)
 {
 	// Reset the counter.
-	_delayTCNT0_Sample_millisecondTick = 0;
+	_TIMER_DelayTCNT0_Sample_millisecondTick = 0;
 	
 	// Set whole register to 0
 	TCCR0A = 0;
@@ -59,25 +59,25 @@ void DelayTCNT0_Sample_Initialize(void)
 
 ISR(TIMER0_COMPA_vect)  // timer0 compare interrupt
 {
-	_delayTCNT0_Sample_millisecondTick++;
+	_TIMER_DelayTCNT0_Sample_millisecondTick++;
 }
 
 // Returns elapsed time in milliseconds.
-uint64_t DelayTCNT0_Sample_GetMillis()
+uint64_t TIMER_DelayTCNT0_Sample_GetMillis()
 {
-	return _delayTCNT0_Sample_millisecondTick;
+	return _TIMER_DelayTCNT0_Sample_millisecondTick;
 }
 
-void DelayTCNT0_Sample_Main(void)
+void TIMER_DelayTCNT0_Sample_Main(void)
 {
 	UsartInitialize(9600);
-	DelayTCNT0_Sample_Initialize();
+	TIMER_DelayTCNT0_Sample_Initialize();
 
 	unsigned long startTime = 0;
 
 	while (1)
 	{
-		int delay = DelayTCNT0_Sample_GetMillis();
+		int delay = TIMER_DelayTCNT0_Sample_GetMillis();
 
 		if ((delay - startTime) >= 500)
 		{
