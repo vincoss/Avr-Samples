@@ -12,10 +12,9 @@
 #include <util/delay.h>			// The delay functions and routines
 
 
-#define BitEquals(Register, bit, val)( ( (Register & (1UL << (bit) ) ) == ( (val) << (bit) ) ) )
-uint8_t DirectPortManipulationDebounceButton(void);
-uint8_t IsBitSet(unsigned value, unsigned bitindex);
-uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo);
+#define ButtonSamples_BitEquals(Register, bit, val)( ( (Register & (1UL << (bit) ) ) == ( (val) << (bit) ) ) )
+uint8_t ButtonSamples_IsBitSet(unsigned value, unsigned bitindex);
+uint8_t ButtonSamples_ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo);
 
 // Basic button example without button debounce
 void ButtonSamples_HoldButtonToKeepLedOn(void)
@@ -90,7 +89,7 @@ void ButtonSamples_DebounceOne(void)
 	uint8_t ledPin = PB5;		// Port 13	- Decimal: 5,	Binary: 00100000
 	uint8_t buttonPin = PD7;	// Port 7	- Decimal: 128, Binary: 10000000
 
-	uint8_t currentValue = 0;	// sed to store the state of the input pin
+	uint8_t currentValue = 0;	// used to store the state of the input pin
 	uint8_t oldValue = 0;		// stores the previous value of "val"
 	char state = 0;				// 0 = LED off and 1 = LED on
 
@@ -105,7 +104,7 @@ void ButtonSamples_DebounceOne(void)
 		// Read value
 		uint8_t currentValue = PIND;
 
-		if (IsBitSet(currentValue, buttonPin) == 1 && IsBitSet(oldValue, buttonPin) == 0)
+		if (ButtonSamples_IsBitSet(currentValue, buttonPin) == 1 && ButtonSamples_IsBitSet(oldValue, buttonPin) == 0)
 		{
 			state = 1 - state;
 			_delay_ms(25);
@@ -148,7 +147,7 @@ void ButtonSamples_DebounceTwo(void)
 		currentValue = PIND;
 
 		//// check if there was a transition
-		if (BitEquals(PIND, buttonPin, 1) == 1 && !(BitEquals(PIND, oldValue, 1)))
+		if (ButtonSamples_BitEquals(PIND, buttonPin, 1) == 1 && !(ButtonSamples_BitEquals(PIND, oldValue, 1)))
 		{
 			state = 1 - state;
 			_delay_ms(25);
@@ -185,7 +184,7 @@ void ButtonSamples_DebounceThree(void)
 	// Loop
 	while (1)
 	{
-		if (ButtonDebounce(&PIND, buttonPin) == 1 && !(BitEquals(PIND, oldValue, 1)))
+		if (ButtonSamples_ButtonDebounce(&PIND, buttonPin) == 1 && !(ButtonSamples_BitEquals(PIND, oldValue, 1)))
 		{
 			// Verify the button state
 			PORTB ^= (1 << PB5);    // This is the above mentioned XOR that toggles the led
@@ -194,16 +193,16 @@ void ButtonSamples_DebounceThree(void)
 }
 
 // NOTE: move into lib when done...
-uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo)
+uint8_t ButtonSamples_ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo)
 {
 	// If the button was pressed delay a bit
-	if (BitEquals(*registerAddress, pinNo, 1))
+	if (ButtonSamples_BitEquals(*registerAddress, pinNo, 1))
 	{
 		_delay_ms(25);
 	}
 
 	// Debounce the read value
-	if (BitEquals(*registerAddress, pinNo, 1))  //Verify that the value is the same that what was read
+	if (ButtonSamples_BitEquals(*registerAddress, pinNo, 1))  //Verify that the value is the same that what was read
 	{
 		return 1;
 	}
@@ -215,7 +214,7 @@ uint8_t ButtonDebounce(volatile uint8_t * registerAddress, uint8_t pinNo)
 	}
 }
 
-uint8_t IsBitSet(unsigned value, unsigned bitindex)
+uint8_t ButtonSamples_IsBitSet(unsigned value, unsigned bitindex)
 {
 	return ((value & (1 << bitindex)) != 0) ? 1 : 0;
 }

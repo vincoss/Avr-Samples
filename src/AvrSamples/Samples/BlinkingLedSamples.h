@@ -49,7 +49,7 @@ void BlinkingLedSamples_LightSensorAnalogWriteAndAdc(void);
 	PB5
 	P = Pin
 	B = Port digital pins 8 to 13
-	5 = decimal value (convert decimal 32 or binary 100000)
+	5 = decimal value (convert decimal 32 or binary 00100000)
  
  */
 
@@ -237,6 +237,7 @@ void BlinkingLedSamples_PwmFadeLed(void)
 	}
 }
 
+// NOTE: Might use potentiometer instead of light sensor.
 void BlinkingLedSamples_LightSensor(void)
 {
 	AdcInitialize();

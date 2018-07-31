@@ -12,7 +12,6 @@
 #include <avr/eeprom.h>
 #include <avr/io.h>
 #include <util/delay.h>
-#include "Eeprom.h"
 #include "Usart.h"
 
 

@@ -153,9 +153,6 @@
     <Compile Include="Include\Adc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\Eeprom.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Include\MinUnit.h">
       <SubType>compile</SubType>
     </Compile>

@@ -12,7 +12,7 @@ void MinUnitSetup(void);							// For all tests
 void MinUnitAssert(int test, const char * message);	// Assert test
 void MinUnitRun(void callback(void));				// Run test
 void MinUnitTestInitialize(void);					// Initialize or reset values, called for each test
-void MinUnitRunAll(void);							// Run tests
+void MinUnitRunAll(void);							// Run all tests
 void MinUnitLogMessage(const char * str);			// Print error message
 
 extern int MinUnitTestsRun;
