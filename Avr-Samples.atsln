@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Atmel Studio Solution File, Format Version 11.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "MakeFileSample", "src\MakeFileSample\MakeFileSample.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_MakeFileSample", "src\AtmelStudio_MakeFileSample\AtmelStudio_MakeFileSample.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ATmega328P-Samples", "src\AvrSamples\ATmega328P-Samples.cproj", "{355ABBEE-38D6-4028-8DFC-F592D093E720}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_ATmega328P-Samples", "src\AtmelStudio_AvrSamples\AtmelStudio_ATmega328P-Samples.cproj", "{355ABBEE-38D6-4028-8DFC-F592D093E720}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Default", "Default", "{A2DDAF61-48C2-4566-8F85-CEE963ECB555}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccCExecutableProject", "src\Default_GccCExecutableProject\Default_GccCExecutableProject.cproj", "{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_Default_GccCExecutableProject", "src\AtmelStudio_Default_GccCExecutableProject\AtmelStudio_Default_GccCExecutableProject.cproj", "{9AEEC27B-E505-4A19-BDAB-0E2638E7B373}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{27A3A8FD-40F5-44C7-A0D1-6419879FBAD2}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		Resources\Timers.txt = Resources\Timers.txt
 	EndProjectSection
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtTiny85-Samples", "src\AtTiny85-Samples\AtTiny85-Samples.cproj", "{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_AtTiny85-Samples", "src\AtmelStudio_AtTiny85-Samples\AtmelStudio_AtTiny85-Samples.cproj", "{4FEF945F-AB9B-4D51-B110-4A3B6AFA9F7D}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccBoardProject", "src\Default_GccBoardProject\Default_GccBoardProject.cproj", "{2BC55D3A-468B-45FC-9A1C-0923627BE12D}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_Default_GccBoardProject", "src\AtmelStudio_Default_GccBoardProject\AtmelStudio_Default_GccBoardProject.cproj", "{2BC55D3A-468B-45FC-9A1C-0923627BE12D}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Default_GccStaticLibraryProject", "src\Default_GccStaticLibraryProject\Default_GccStaticLibraryProject.cproj", "{8E299462-0895-431D-BD04-AE59BE5E5643}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AtmelStudio_Default_GccStaticLibraryProject", "src\AtmelStudio_Default_GccStaticLibraryProject\AtmelStudio_Default_GccStaticLibraryProject.cproj", "{8E299462-0895-431D-BD04-AE59BE5E5643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>{355abbee-38d6-4028-8dfc-f592d093e720}</ProjectGuid>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
     <avrdevice>ATmega328P</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>AvrSamples</AssemblyName>
-    <Name>ATmega328P-Samples</Name>
-    <RootNamespace>AvrSamples</RootNamespace>
+    <AssemblyName>MakeFileSample</AssemblyName>
+    <Name>AtmelStudio_MakeFileSample</Name>
+    <RootNamespace>MakeFileSample</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -40,19 +40,34 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
-    <avrtool>custom</avrtool>
+    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
     <avrtoolserialnumber />
     <avrdeviceexpectedsignature>0x1E950F</avrdeviceexpectedsignature>
     <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
+    <avrtoolinterface />
+    <com_atmel_avrdbg_tool_simulator>
       <ToolOptions xmlns="">
         <InterfaceProperties>
         </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
       </ToolOptions>
-      <ToolType xmlns="">custom</ToolType>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
       <ToolNumber xmlns="">
       </ToolNumber>
-      <ToolName xmlns="">Custom Programming Tool</ToolName>
-    </custom>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -113,8 +128,6 @@
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
             <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
-            <Value>%24(ProjectDir)\Include</Value>
-            <Value>%24(ProjectDir)\samples</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -122,13 +135,11 @@
         <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
         <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
         <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-        <avrgcc.linker.general.UseVprintfLibrary>True</avrgcc.linker.general.UseVprintfLibrary>
         <avrgcc.linker.libraries.Libraries>
           <ListValues>
             <Value>libm</Value>
           </ListValues>
         </avrgcc.linker.libraries.Libraries>
-        <avrgcc.linker.miscellaneous.LinkerFlags>-Wl,-u,vfscanf -lprintf_flt -lscanf_flt</avrgcc.linker.miscellaneous.LinkerFlags>
         <avrgcc.assembler.general.IncludePaths>
           <ListValues>
             <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.150\include</Value>
@@ -139,153 +150,15 @@
     </ToolchainSettings>
     <OutputFileName>main</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
-    <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory />
-    <BuildTarget>all</BuildTarget>
-    <CleanTarget>clean</CleanTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Include" />
-    <Folder Include="Samples" />
-    <Folder Include="Src\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Include\Adc.h">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\MinUnit.h">
+    <Compile Include="Utility.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\UnitTests.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\Usart.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\Utility.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\AdcSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\BlinkingLedSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\ButtonSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_DelayTCNT0_Sample.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\EepromSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\GPIOPorts_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Interrupt_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Mcp425xSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Mcp4xxx.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Mcp4xxx.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\McpSn74hc595.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\MemorySamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_PWM_Samples2.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_PWM_Sample1.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_PWM_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\RelaySamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595DaiseyChain.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595NoSpi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595_ReadWriteExample.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SN74HC595_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\SpiSamples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER1_Samples2.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER1_Samples1.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_CTCMode_Sample4.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_CTCMode_Sample3.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_CTCMode_Sample2.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_CTCMode_Sample1.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_ICP1_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_Sample1.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_Sample2.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_Sample3.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TIMER_Samples_Overview.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\TimeSample.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Usart_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Samples\Watchdog_Samples.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\Adc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\UnitTests.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\Usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Src\Utility.c">
+    <Compile Include="Utility.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
