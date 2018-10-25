@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\AvrSamples\Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\AtmelStudio_AvrSamples\Include;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -100,7 +100,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\AvrSamples\Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\AtmelStudio_AvrSamples\Include;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -127,14 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\AvrSamples\Src\UnitTests.c" />
-    <ClCompile Include="..\AvrSamples\Src\Utility.c" />
+    <ClCompile Include="..\AtmelStudio_AvrSamples\Src\UnitTests.c" />
+    <ClCompile Include="..\AtmelStudio_AvrSamples\Src\Utility.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AvrSamples\Include\MinUnit.h" />
-    <ClInclude Include="..\AvrSamples\Include\UnitTests.h" />
-    <ClInclude Include="..\AvrSamples\Include\Utility.h" />
+    <ClInclude Include="..\AtmelStudio_AvrSamples\Include\MinUnit.h" />
+    <ClInclude Include="..\AtmelStudio_AvrSamples\Include\UnitTests.h" />
+    <ClInclude Include="..\AtmelStudio_AvrSamples\Include\Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
