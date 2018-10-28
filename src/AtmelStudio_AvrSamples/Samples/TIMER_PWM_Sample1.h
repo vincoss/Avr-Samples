@@ -6,6 +6,8 @@
 #include <avr/interrupt.h>
 #include <stdlib.h>
 
+// TODO: remove of fix
+
 // On an Uno, analogWrite() works only with pins 3, 5, 6, 9, 10, and 11,
 
 // We need to generate a 50 Hz PWM signal having 45% duty cycle.

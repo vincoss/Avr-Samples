@@ -24,7 +24,8 @@
 	
 	NOTE:
 	If you set CS10 and CS12 using: TCCR1B |= (1 << CS10); and TCCR1B |= (1 << CS12);, the clock source is divided by 1024.
-	This gives a timer resolution of 1/(16*106 / 1024), or 0.000064 seconds (15625 Hz). Now the timer will overflow every (65535 * 6.4*10-5s), or 4.194s.
+	This gives a timer resolution of 1/(16*106 / 1024), or 0.000064 seconds (15625 Hz). 
+	Now the timer will overflow every (65535 * 6.4*10-5s), or 4.194s.
 
 	If you would set only CS12 using TCCR1B |=(1<<CS12); (or just TCCR1B=4), the clock source is divided by 256.
 	This gives a timer resolution of 1/(16*106/256), or 0.000016 sec (62500 Hz) and the timer will overflow every (65535 *0.000016=) 1.04856 sec.

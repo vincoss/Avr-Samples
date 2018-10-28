@@ -7,6 +7,8 @@
 #include <math.h>
 #include <avr/interrupt.h>
 
+// TODO: clean and fix this or remove
+
 // inverted or outverted.
 
 void PwmSamples_TIMER0_FastPwmMode();
